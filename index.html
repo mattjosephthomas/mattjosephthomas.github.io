@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matthew Hardy Thomas</title>
+<meta name="description" content="I build businesses that connect people to places. CEO of Parkbus, Co-founder of Whereabouts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --ink: #1A1A18;
+    --ink-light: #4A4A45;
+    --ink-faint: #8A8A82;
+    --terracotta: #C4704B;
+    --terracotta-light: #D4896A;
+    --forest: #3A5A40;
+    --forest-light: #4A7A52;
+    --sand: #E8DFD0;
+    --rule: #D4CFC4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 18px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--terracotta);
+    color: var(--warm-white);
+  }
+
+  /* ââ NAV ââ */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 248, 244, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  nav.scrolled {
+    border-bottom-color: var(--rule);
+  }
+
+  nav .logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav ul a {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 400;
+  }
+
+  nav ul a:hover { color: var(--terracotta); }
+
+  /* ââ HERO ââ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--terracotta);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-intro {
+    font-size: 1.1rem;
+    max-width: 600px;
+    color: var(--ink-light);
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--terracotta);
+    margin: 2.5rem 0;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+
+  .hero-meta-item {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+  }
+
+  .hero-meta-item strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 0.88rem;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 0.2rem;
+  }
+
+  /* ââ SECTIONS ââ */
+  section {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  section h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  section p {
+    color: var(--ink-light);
+    max-width: 620px;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ââ FULL-WIDTH BAND ââ */
+  .band {
+    background: var(--cream);
+    padding: 5rem 2rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .band-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ââ WORK CARDS ââ */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .work-card {
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .work-card:hover {
+    border-color: var(--terracotta-light);
+    transform: translateY(-2px);
+  }
+
+  .work-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .work-card .card-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--forest);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    display: inline-block;
+  }
+
+  .work-card p {
+    font-size: 0.92rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+    max-width: none;
+  }
+
+  /* ââ LINKS / FIND ME ââ */
+  .links-list {
+    list-style: none;
+    margin-top: 1.5rem;
+  }
+
+  .links-list li {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .links-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 0;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 400;
+    transition: color 0.2s, padding-left 0.3s;
+  }
+
+  .links-list a:hover {
+    color: var(--terracotta);
+    padding-left: 0.5rem;
+  }
+
+  .links-list .link-arrow {
+    font-size: 1.2rem;
+    color: var(--ink-faint);
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .links-list a:hover .link-arrow {
+    color: var(--terracotta);
+    transform: translateX(4px);
+  }
+
+  /* ââ BOOKSHELF ââ */
+  .shelf {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .shelf h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .book-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .book-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .book-title {
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .book-author {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  .book-dot {
+    color: var(--terracotta);
+    font-size: 0.6rem;
+    flex-shrink: 0;
+    position: relative;
+    top: -1px;
+  }
+
+  /* ââ CURRENTLY ââ */
+  .currently-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .currently-card {
+    padding: 1.5rem;
+    border-left: 2px solid var(--terracotta);
+    background: rgba(196, 112, 75, 0.04);
+  }
+
+  .currently-card .card-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .currently-card .card-content {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  .currently-card .card-detail {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin-top: 0.3rem;
+    font-style: italic;
+  }
+
+  /* ââ PERSONAL ââ */
+  .personal-note {
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 2.5rem;
+    margin-top: 2rem;
+    border: 1px solid var(--rule);
+  }
+
+  .personal-note p {
+    font-size: 1.05rem;
+    color: var(--ink-light);
+    max-width: none;
+    line-height: 1.8;
+  }
+
+  /* ââ FOOTER ââ */
+  footer {
+    padding: 4rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--rule);
+  }
+
+  footer p {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    max-width: none;
+    margin: 0 auto;
+  }
+
+  footer .footer-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  footer .footer-quote {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-light);
+    margin-bottom: 0.5rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  footer .footer-attr {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ââ ANIMATIONS ââ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ââ RESPONSIVE ââ */
+  @media (max-width: 700px) {
+    html { font-size: 16px; }
+    .work-grid, .currently-grid { grid-template-columns: 1fr; }
+    .hero-meta { gap: 1.5rem; }
+    nav ul { gap: 1.2rem; }
+    .hero { padding-top: 6rem; }
+    section, .band { padding: 3.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">MHT</a>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#find">Find Me</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Ontario, Canada</div>
+  <h1>I build businesses<br>that connect people<br>to <em>places</em>.</h1>
+  <p class="hero-intro">I'm Matthew Hardy Thomas, entrepreneur, father, and someone who believes the best things in life happen when you leave your front door. For the past decade I've been building infrastructure that gets people outside and into the communities and landscapes that shape&nbsp;them.</p>
+  <div class="hero-rule"></div>
+  <div class="hero-meta">
+    <div class="hero-meta-item">Role<strong>CEO, Parkbus</strong></div>
+    <div class="hero-meta-item">Also<strong>Co-founder, Whereabouts</strong></div>
+    <div class="hero-meta-item">Education<strong>MDes, Strategic Foresight &amp; Innovation &mdash; OCAD&nbsp;U</strong></div>
+  </div>
+</header>
+
+<!-- WORK -->
+<div class="band" id="work">
+  <div class="band-inner">
+    <div class="section-label reveal">What I Do</div>
+    <h2 class="reveal">Two companies, one&nbsp;throughline.</h2>
+    <p class="reveal">Everything I build comes back to the same idea: make it easier for people to reach the places that matter. I take the boring infrastructure (both physical and digital) very&nbsp;seriously.</p>
+    <div class="work-grid">
+      <div class="work-card reveal">
+        <div class="card-tag">Outdoor Transportation &amp; Experiences</div>
+        <h3>Parkbus</h3>
+        <p>Canada's national outdoor transportation company, operating from Toronto, Vancouver, Calgary, Edmonton, Halifax, and Ottawa. Express rides, guided ActiveDays, and overnight trips into nature. We recently signed MOUs with VIA Rail and Parks Canada, paving the way for a new era for the&nbsp;business.</p>
+      </div>
+      <div class="work-card reveal">
+        <div class="card-tag">Tourism Technology</div>
+        <h3>Whereabouts</h3>
+        <p>A destination management platform purpose-built for tourism boards. Helping destinations manage stakeholder relationships and market their destinations with clarity and ease. Winner of Tourism Innovator of the Year at the Tourism Industry Association of Ontario&nbsp;Summit.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FIND ME -->
+<section id="find">
+  <div class="section-label reveal">Elsewhere</div>
+  <h2 class="reveal">Find me on the&nbsp;internet.</h2>
+  <p class="reveal">I'm most active on LinkedIn these days. If you're in tourism, outdoor recreation, or place-based business &mdash; let's&nbsp;talk.</p>
+  <ul class="links-list reveal">
+    <li><a href="https://www.linkedin.com/in/matthewhardythomas/" target="_blank" rel="noopener">LinkedIn <span class="link-arrow">&rarr;</span></a></li>
+    <li><a href="https://www.linkedin.com/in/matthewhardythomas/recent-activity/articles/" target="_blank" rel="noopener">Recent Articles <span class="link-arrow">&rarr;</span></a></li>
+    <li><a href="https://www.parkbus.ca" target="_blank" rel="noopener">Parkbus <span class="link-arrow">&rarr;</span></a></li>
+    <li><a href="https://www.tourism.tech" target="_blank" rel="noopener">Whereabouts <span class="link-arrow">&rarr;</span></a></li>
+    <li><a href="mailto:matthew@poweredbytourism.com">Email Me <span class="link-arrow">&rarr;</span></a></li>
+  </ul>
+</section>
+
+<!-- ABOUT -->
+<div class="band" id="about">
+  <div class="band-inner">
+    <div class="section-label reveal">About</div>
+    <h2 class="reveal">Beyond the&nbsp;bio.</h2>
+
+    <div class="personal-note reveal">
+      <p>Being a father is easily the most fulfilling part of my life. I'm engaged to my fianc&eacute;e Andrea, and the family we're building together is the thing I'm proudest of. I'm based in Ontario, Canada, and I've spent the past decade and a half working in and around the Canadian tourism industry. I've taught at Fanshawe College and Western University, and I hold a Master's in Strategic Foresight &amp; Innovation from OCAD University and a certificate in Cultural Planning from&nbsp;UBC.</p>
+      <p style="margin-top: 1rem;">When I'm not working, I enjoy taking photos with my really old and trusty Canon 5D Classic (15 years old and still going strong), heading to the sauna, hot tub, or spa, swimming, or otherwise doing other Pisces-type activities. I love running, reluctantly lift weights, and try to leave the house as much as&nbsp;possible.</p>
+    </div>
+
+    <!-- BOOKSHELF -->
+    <div class="shelf reveal">
+      <h3>Must-Reads for Business</h3>
+      <p style="color: var(--ink-light); margin-bottom: 1.2rem; font-size: 0.95rem;">I've read a lot of business books over the years. These are the only ones worth checking&nbsp;out.</p>
+      <ul class="book-list">
+        <li><span class="book-dot">&#9679;</span> <span class="book-title">The Company of One</span> <span class="book-author">Paul Jarvis</span></li>
+        <li><span class="book-dot">&#9679;</span> <span class="book-title">MC24</span> <span class="book-author">Bruce Mau</span></li>
+        <li><span class="book-dot">&#9679;</span> <span class="book-title">Made to Stick: Why Some Ideas Survive and Others Die</span> <span class="book-author">Chip Heath &amp; Dan Heath</span></li>
+        <li><span class="book-dot">&#9679;</span> <span class="book-title">How to Fail at Almost Everything and Still Win Big</span> <span class="book-author">Scott Adams</span></li>
+        <li><span class="book-dot">&#9679;</span> <span class="book-title">Small Is Beautiful</span> <span class="book-author">E.F. Schumacher</span></li>
+        <li><span class="book-dot">&#9679;</span> <span class="book-title">City Quitters</span> <span class="book-author">Karen Rosenkranz</span></li>
+        <li><span class="book-dot">&#9679;</span> <span class="book-title">Rework</span> <span class="book-author">Jason Fried &amp; David Heinemeier Hansson</span></li>
+      </ul>
+    </div>
+
+    <!-- CURRENTLY -->
+    <div class="section-label reveal">Right Now</div>
+    <div class="currently-grid">
+      <div class="currently-card reveal">
+        <div class="card-label">Reading</div>
+        <div class="card-content">Even the Good Girls Will Cry</div>
+        <div class="card-detail">Melissa Auf der Maur &mdash; a 90s rock memoir</div>
+      </div>
+      <div class="currently-card reveal">
+        <div class="card-label">Watching</div>
+        <div class="card-content">Forensic Files</div>
+        <div class="card-detail">I think I'm just nostalgic for the 90s.</div>
+      </div>
+      <div class="currently-card reveal">
+        <div class="card-label">Running</div>
+        <div class="card-content">Gearing up for a half marathon</div>
+        <div class="card-detail">Just ran a 5K race. Training for this summer.</div>
+      </div>
+      <div class="currently-card reveal">
+        <div class="card-label">Building</div>
+        <div class="card-content">Visit Canada Parks</div>
+        <div class="card-detail">The next chapter for Parkbus &mdash; overnight trips into nature.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-label">Words to Live By</div>
+  <div class="footer-quote">&ldquo;A master in the art of living draws no sharp distinction between his work and his play; his labor and his leisure; his mind and his body; his education and his recreation. He hardly knows which is which. He simply pursues his vision of excellence through whatever he is doing, and leaves others to determine whether he is working or playing. To himself, he always appears to be doing&nbsp;both.&rdquo;</div>
+  <div class="footer-attr">&mdash; L.P. Jacks</div>
+  <p>&copy; 2026 Matthew Hardy Thomas</p>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
