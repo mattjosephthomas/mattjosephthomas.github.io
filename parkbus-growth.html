@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How We Grew Profit by 37% at a Canadian Tourism Company — Matthew Hardy Thomas</title>
+<meta name="description" content="A year of growing revenue by 21%, profit by nearly 37%, and return ridership by almost 30% at Parkbus. Here's the playbook.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --ink: #1A1A18;
+    --ink-light: #4A4A45;
+    --ink-faint: #8A8A82;
+    --terracotta: #C4704B;
+    --terracotta-light: #D4896A;
+    --forest: #3A5A40;
+    --forest-light: #4A7A52;
+    --sand: #E8DFD0;
+    --rule: #D4CFC4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 18px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--terracotta);
+    color: var(--warm-white);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  nav.scrolled {
+    border-color: var(--rule);
+  }
+
+  .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .logo:hover { color: var(--terracotta); }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav ul a {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink-light);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease;
+  }
+
+  nav ul a:hover { color: var(--terracotta); }
+
+  nav ul a.active { color: var(--terracotta); }
+
+  /* ── ARTICLE HERO ── */
+  .article-hero {
+    padding: 8rem 2.5rem 4rem;
+    max-width: 760px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .article-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--terracotta);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .article-hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .article-byline {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-weight: 400;
+  }
+
+  .article-byline .byline-author {
+    color: var(--ink-light);
+    font-weight: 500;
+  }
+
+  .byline-dot {
+    width: 3px;
+    height: 3px;
+    background: var(--rule);
+    border-radius: 50%;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3.5rem 2.5rem 6rem;
+  }
+
+  .article-body p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .article-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .article-body h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-body hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+
+  .article-body strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .article-body em {
+    font-style: italic;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+  }
+
+  .pull-quote p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 0;
+  }
+
+  /* Numbered section heading */
+  .numbered-heading {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--terracotta);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-top: 3.5rem;
+  }
+
+  /* ── BACK LINK ── */
+  .back-bar {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2.5rem 2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 400;
+  }
+
+  .back-link:hover { color: var(--terracotta); }
+
+  .back-link .arrow { font-size: 0.9rem; }
+
+  /* ── ARTICLE NAV ── */
+  .article-nav {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem 3rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .article-nav-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .article-nav a {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .article-nav a:hover { color: var(--terracotta); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--ink-faint);
+    padding: 2.5rem;
+    text-align: center;
+    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  footer a {
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+
+  footer a:hover { color: var(--warm-white); }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── BIO CARD ── */
+  .bio-card {
+    border-left: 2px solid var(--terracotta);
+    padding: 0.1rem 0 0.1rem 1.5rem;
+    margin: 2.5rem 0 0;
+  }
+
+  .bio-card p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    html { font-size: 16px; }
+    nav ul { gap: 1.2rem; }
+    .article-hero { padding: 7rem 1.5rem 3rem; }
+    .article-body { padding: 2.5rem 1.5rem 5rem; }
+    .back-bar { padding: 0 1.5rem 2rem; }
+    .article-nav { padding: 2rem 1.5rem 3rem; }
+    .pull-quote { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="logo">MHT</a>
+  <ul>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#find">Find Me</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="articles.html" class="active">Articles</a></li>
+  </ul>
+</nav>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="article-label reveal">Articles</div>
+  <h1 class="reveal">How We Grew Profit by 37% at a Canadian Tourism Company <em>(And Didn&rsquo;t Burn It Down)</em></h1>
+  <div class="article-byline reveal">
+    <span class="byline-author">Matthew Thomas</span>
+    <span class="byline-dot"></span>
+    <span>February 2026</span>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p class="reveal">Last January, I was sitting in a Tim Hortons parking lot in Barrie, Ontario, staring at a spreadsheet on my phone and trying to figure out if we could afford to spend $100,000 on Facebook ads.</p>
+
+  <p class="reveal">I run Parkbus, Canada&rsquo;s national outdoor experience company. We connect people to national and provincial parks, trail systems, and outdoor adventures across the country. It&rsquo;s exactly as glamorous as it sounds.</p>
+
+  <p class="reveal">A year later, we&rsquo;d grown revenue by 21%, profit by nearly 37%, and return ridership by almost 30%. Not bad for a company most people associate with buses. I want to tell you how we did it&mdash;not because I&rsquo;m trying to impress you, but because someone did the same for me once, and it changed everything.</p>
+
+  <hr>
+
+  <h2 class="reveal">First, Some Context</h2>
+
+  <p class="reveal">Years ago, I was running a fledgling company called Beach Bus. We were scrappy, figuring things out as we went, and&mdash;if I&rsquo;m being honest&mdash;kind of winging it. The whole time, I kept watching Parkbus from a distance. Alex and Boris, the founders, were doing things the real way. They&rsquo;d figured out problems I hadn&rsquo;t even identified yet. They were a few steps ahead of me in almost every direction, and they were incredibly generous about sharing what they&rsquo;d learned&mdash;laying out their entire playbook over coffee without a second thought.</p>
+
+  <p class="reveal">That generosity shaped how I think about business. Eventually, I got the chance to buy into Parkbus and become CEO&mdash;which felt a bit like the kid who&rsquo;d been pressing his face against the window finally getting invited inside. By that point, I had about ten years in the tourism industry under my belt&mdash;mostly working with destination marketing organizations, consulting, and through my software company, Whereabouts.</p>
+
+  <p class="reveal">I came in with a back-of-the-napkin plan. Nothing crazy&mdash;I wasn&rsquo;t trying to triple revenue or reinvent the wheel. The goal was simple: increase profit and revenue by 20% year over year. We did it. Now I&rsquo;m telling you how.</p>
+
+  <div class="pull-quote reveal">
+    <p>The honest truth is that most of what worked for us in 2025 wasn&rsquo;t genius. It was just doing the obvious things that everyone talks about but few actually execute on.</p>
+  </div>
+
+  <p class="reveal">So here&rsquo;s the playbook. Steal it. I mean it.</p>
+
+  <hr>
+
+  <span class="numbered-heading reveal">01</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">We Finally Measured What Mattered</h2>
+
+  <p class="reveal">I&rsquo;m going to start with the least sexy thing we did, because it was probably the most important.</p>
+
+  <p class="reveal">For years, we knew Parkbus was &ldquo;doing well&rdquo; because the trip numbers were going up and the bank account looked healthy. Which is a bit like saying you&rsquo;re a good driver because you haven&rsquo;t crashed yet while driving without headlights.</p>
+
+  <p class="reveal">This year, we got intentional about our KPIs. We built a dashboard. We tracked revenue per route, profit margins, return ridership, average seats per trip, cost per acquisition. For the first time, we could actually see what was working and what wasn&rsquo;t, in close to real time.</p>
+
+  <p class="reveal">It sounds basic, and it is. But the difference between &ldquo;I think that route is profitable&rdquo; and &ldquo;I can see that route is profitable&rdquo; is enormous. And even more valuable is when the dashboard tells you &ldquo;why the hell are we even running this route?&rdquo; Every other decision we made this year was better because of this one.</p>
+
+  <hr>
+
+  <span class="numbered-heading reveal">02</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">Meta Ads&mdash;The Thing That Made Us Sweat</h2>
+
+  <p class="reveal">Okay, the Tim Hortons parking lot story.</p>
+
+  <p class="reveal">We had never put serious money into digital advertising. The idea of committing $100,000 to Meta ads was, frankly, terrifying. That&rsquo;s a massive line item when you&rsquo;re an outdoor experience company. If it doesn&rsquo;t work, that&rsquo;s money you could&rsquo;ve spent on, you know, actual experiences.</p>
+
+  <p class="reveal">But we&rsquo;d been experimenting on a small scale and the numbers were promising. So we made a bet. We started scaling our spend, testing creative, running retargeting campaigns, and slowly dialing up the budget. The early days were nerve-wracking&mdash;you&rsquo;re watching money leave your account and hoping the bookings follow.</p>
+
+  <p class="reveal">They did.</p>
+
+  <p class="reveal">Once we got our cost per acquisition down to a number we were comfortable with, the question flipped from &ldquo;can we afford to do this?&rdquo; to &ldquo;what&rsquo;s the most money we can throw at this before it stops working?&rdquo; We kept pushing until it made us sweat, and it kept paying off.</p>
+
+  <div class="pull-quote reveal">
+    <p>The lesson: Meta ads and retargeting still work remarkably well for tourism. The trick is starting small enough that failure won&rsquo;t kill you, testing obsessively, and then having the stomach to scale when the numbers tell you to. Most people stop at the &ldquo;testing&rdquo; phase. Don&rsquo;t.</p>
+  </div>
+
+  <hr>
+
+  <span class="numbered-heading reveal">03</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">Partnerships&mdash;Show Up, Shake Hands, Follow Up</h2>
+
+  <p class="reveal">I&rsquo;m a regular face at tourism industry events across Canada. The Impact Sustainability Conference in Victoria. The Hospitality and Tourism conference in Newfoundland. Tourism Industry Association of Canada. Destinations Canada in Ottawa. Tourism Industry Association of Ontario. If there&rsquo;s a conference and tourism people are there, I&rsquo;m probably in the room somewhere, nursing a bad coffee and looking for someone interesting to talk to.</p>
+
+  <p class="reveal">Here&rsquo;s what I&rsquo;ve learned: don&rsquo;t be afraid to walk up to literally the most impressive person with the most impressive job title in the room. Seriously. The worst that happens is you have a slightly awkward two-minute conversation. The best that happens is what happened to me&mdash;I started conversations with senior people at Parks Canada. Those conversations led to a Memorandum of Understanding between Parks Canada and VIA Rail. Now I&rsquo;m on regular board calls with them.</p>
+
+  <p class="reveal">That didn&rsquo;t happen because I&rsquo;m some kind of networking genius. It happened because I showed up, I wasn&rsquo;t afraid to introduce myself, and I followed up. Partnerships with VIA Rail, Parks Canada, accommodation providers, and other tourism businesses were a major driver of our growth this year. None of them came from cold emails. All of them came from being in the room.</p>
+
+  <hr>
+
+  <span class="numbered-heading reveal">04</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">Community&mdash;Your Most Valuable Customers Are Already Talking to Each Other</h2>
+
+  <p class="reveal">Parkbus has a community called ActiveDays&mdash;it&rsquo;s a Facebook group. I know, Facebook groups, very cutting-edge, very 2016. But here&rsquo;s the thing: it works incredibly well.</p>
+
+  <p class="reveal">I&rsquo;d seen the success that companies like Wee Road had with building online communities, and we already had the bones of one. This year, we got serious about it. We started really getting to know our members, what makes them tick, what trips they want, what they loved and what frustrated them.</p>
+
+  <p class="reveal">What we discovered is that these community members are our most valuable customers&mdash;and not just because they book a lot of trips. We can communicate with them directly, share new routes, get feedback, run promotions&mdash;without paying a cent to Meta for the privilege. Compare that to our email list, which costs money to maintain and has declining open rates. The Facebook group is more engaged, more responsive, and more valuable by almost every measure.</p>
+
+  <p class="reveal">But the best part isn&rsquo;t the marketing efficiency. It&rsquo;s the stories. People have made lifelong friendships on these trips. There&rsquo;s something genuinely special about connecting strangers with the outdoors and watching friendships form. That&rsquo;s the kind of thing that makes the work worth doing and that makes people come back.</p>
+
+  <hr>
+
+  <span class="numbered-heading reveal">05</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">Play to Your Strengths (And Promote for Your Weaknesses)</h2>
+
+  <p class="reveal">I&rsquo;ll be honest: I am not an operations person. I know this about myself. I&rsquo;m the &ldquo;big idea, new partnership, let&rsquo;s test this wild idea&rdquo; guy. The person who makes sure everything actually runs on time and on budget? That&rsquo;s not me.</p>
+
+  <p class="reveal">So we promoted an integrator. Rebecca is incredible at operations and has a genuine passion for the outdoors and sustainable tourism. Finding someone who&rsquo;s both operationally excellent and mission-aligned was a game-changer. It freed me up to focus on the things I&rsquo;m actually good at&mdash;strategy, partnerships, growth&mdash;while knowing the day-to-day was in far more capable hands than mine.</p>
+
+  <div class="pull-quote reveal">
+    <p>If you&rsquo;re a founder and operations isn&rsquo;t your strength, stop pretending it is. Find your Rebecca.</p>
+  </div>
+
+  <hr>
+
+  <span class="numbered-heading reveal">06</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">Low-Hanging Fruit Is Still Hanging</h2>
+
+  <p class="reveal">I want to close with the thing that might be most useful to other tourism businesses: a lot of what drove our growth was just fixing stuff that should&rsquo;ve been fixed a long time ago.</p>
+
+  <p class="reveal">Our booking system had friction points. We smoothed them out. Our online presence was inconsistent. We cleaned it up. We weren&rsquo;t retargeting website visitors. We started. We weren&rsquo;t actively cultivating partnerships. We began.</p>
+
+  <p class="reveal">None of these things are revolutionary. All of them made a real difference. The compounding effect of fixing ten small things is often bigger than the one big strategic bet everyone&rsquo;s looking for.</p>
+
+  <hr>
+
+  <h2 class="reveal">So, Why Am I Telling You This?</h2>
+
+  <p class="reveal">Because Alex and Boris were generous with their playbook when I needed it. Because this industry is small enough that a rising tide actually does lift all boats. And because I genuinely believe that if Canadian tourism businesses elevate their game&mdash;get more profitable, get more disciplined, get more ambitious&mdash;we can put Canada on the global radar in a way it deserves to be.</p>
+
+  <p class="reveal">We have some of the most spectacular outdoor experiences on the planet, and too many of the businesses behind them are running on gut feel and good intentions. That&rsquo;s not enough. If you&rsquo;re running a tourism business in Canada and you&rsquo;re wondering whether the basics actually work&mdash;they do. Relentlessly.</p>
+
+  <p class="reveal">If any of this was useful, or if you want to swap war stories, I&rsquo;m easy to find. I&rsquo;m probably at the next conference looking for interesting people in the room.</p>
+
+  <div class="bio-card reveal">
+    <p>Matthew Thomas is CEO of Parkbus, Canada&rsquo;s national outdoor experience company, and co-founder of Whereabouts. He&rsquo;s spent over a decade in Canadian tourism and was named Innovator of the Year at the Ontario Tourism Summit.</p>
+  </div>
+
+</div>
+
+<!-- ARTICLE NAV -->
+<div class="article-nav">
+  <div class="article-nav-label">Previous Article</div>
+  <a href="the-patron-effect.html">The Patron Effect: The Uncomfortable Truth About How Destinations Actually Get Made &rarr;</a>
+</div>
+
+<!-- BACK LINK -->
+<div class="back-bar">
+  <a href="index.html" class="back-link"><span class="arrow">&larr;</span> Back to matthewhardythomas.com</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Matthew Hardy Thomas &mdash; Ontario, Canada &mdash; <a href="mailto:matthew@poweredbytourism.com">matthew@poweredbytourism.com</a></p>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
