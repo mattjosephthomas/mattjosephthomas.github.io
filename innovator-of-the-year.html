@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Making Innovation Real: Whereabouts and the 2024 Tourism Innovator of the Year — Matthew Hardy Thomas</title>
+<meta name="description" content="Tourism Technology Company won the 2024 Tourism Innovator of the Year from TIAO. Here's the story of how Whereabouts came to be.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --ink: #1A1A18;
+    --ink-light: #4A4A45;
+    --ink-faint: #8A8A82;
+    --terracotta: #C4704B;
+    --terracotta-light: #D4896A;
+    --forest: #3A5A40;
+    --forest-light: #4A7A52;
+    --sand: #E8DFD0;
+    --rule: #D4CFC4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 18px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--terracotta);
+    color: var(--warm-white);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  nav.scrolled {
+    border-color: var(--rule);
+  }
+
+  .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .logo:hover { color: var(--terracotta); }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav ul a {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink-light);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease;
+  }
+
+  nav ul a:hover { color: var(--terracotta); }
+
+  nav ul a.active { color: var(--terracotta); }
+
+  /* ── ARTICLE HERO ── */
+  .article-hero {
+    padding: 8rem 2.5rem 4rem;
+    max-width: 760px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .article-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--terracotta);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .article-hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .article-byline {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-weight: 400;
+  }
+
+  .article-byline .byline-author {
+    color: var(--ink-light);
+    font-weight: 500;
+  }
+
+  .byline-dot {
+    width: 3px;
+    height: 3px;
+    background: var(--rule);
+    border-radius: 50%;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3.5rem 2.5rem 6rem;
+  }
+
+  .article-body p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .article-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .article-body h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-body hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+
+  .article-body strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .article-body em {
+    font-style: italic;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+  }
+
+  .pull-quote p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 0;
+  }
+
+  /* ── BACK LINK ── */
+  .back-bar {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2.5rem 2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 400;
+  }
+
+  .back-link:hover { color: var(--terracotta); }
+
+  .back-link .arrow { font-size: 0.9rem; }
+
+  /* ── ARTICLE NAV ── */
+  .article-nav {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem 3rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .article-nav-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .article-nav a {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .article-nav a:hover { color: var(--terracotta); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--ink-faint);
+    padding: 2.5rem;
+    text-align: center;
+    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  footer a {
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+
+  footer a:hover { color: var(--warm-white); }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── BIO CARD ── */
+  .bio-card {
+    border-left: 2px solid var(--terracotta);
+    padding: 0.1rem 0 0.1rem 1.5rem;
+    margin: 2.5rem 0 0;
+  }
+
+  .bio-card p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    html { font-size: 16px; }
+    nav ul { gap: 1.2rem; }
+    .article-hero { padding: 7rem 1.5rem 3rem; }
+    .article-body { padding: 2.5rem 1.5rem 5rem; }
+    .back-bar { padding: 0 1.5rem 2rem; }
+    .article-nav { padding: 2rem 1.5rem 3rem; }
+    .pull-quote { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="logo">MHT</a>
+  <ul>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#find">Find Me</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="articles.html" class="active">Articles</a></li>
+  </ul>
+</nav>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="article-label reveal">Articles</div>
+  <h1 class="reveal">Making Innovation Real: Whereabouts and the 2024 Tourism Innovator of the Year</h1>
+  <div class="article-byline reveal">
+    <span class="byline-author">Matthew Thomas</span>
+    <span class="byline-dot"></span>
+    <span>2024</span>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p class="reveal">Tourism Technology Company, the company behind Whereabouts, was awarded the <strong>2024 Tourism Innovator of the Year</strong> by the Tourism Industry Association of Ontario (TIAO). It&rsquo;s a recognition that means a great deal to me, not just for what it says about our work, but for how unlikely the whole journey has been.</p>
+
+  <p class="reveal">I&rsquo;m one of four co-founders of TTC. Mike Jacobs, who runs an excellent tourism marketing company called The New Business, and two other partners. Together we&rsquo;ve built Whereabouts into something we&rsquo;re proud of: a platform that gives destination marketing organizations the CRM, data, booking, and itinerary tools they need to actually support their local tourism businesses, not just promote them from a distance.</p>
+
+  <hr>
+
+  <h2 class="reveal">Finding the Sleeping Giants</h2>
+
+  <p class="reveal">The idea for Whereabouts first took shape while I was doing my Master&rsquo;s in Strategic Foresight and Innovation at OCAD University. I was studying the tourism system, this enormous interconnected web of businesses, governments, travellers, and communities, and I kept coming back to the same question: <em>What are these DMOs? They seem like sleeping giants in the industry. What can I do to wake them up?</em></p>
+
+  <p class="reveal">DMOs sit at the centre of it all. They run the campaigns that get people dreaming about a destination. But when a traveller is finally ready to book, the journey falls apart. They get redirected off the DMO site, they land on an OTA like Expedia, and up to 30% of the revenue leaves the community. The DMO did the work, but someone else cashed the cheque. I thought there had to be a better way. Thankfully, I found co-founders who agreed.</p>
+
+  <hr>
+
+  <h2 class="reveal">Innovation with Your Head in the Clouds</h2>
+
+  <p class="reveal">My whole time at OCAD was wonderful. Stimulating, expansive, full of big ideas about systems thinking and design and futures. But I could feel, the entire time, that my head was securely in the clouds. Maybe even a little further up than that. The programme was incredible, but &ldquo;strategic foresight&rdquo; doesn&rsquo;t pay the bills unless you can make the innovation <em>real</em>.</p>
+
+  <p class="reveal">One of the books that inspired me was Scott Adams&rsquo; <em>How to Fail at Almost Everything and Still Win Big</em>. The core idea stuck with me: you don&rsquo;t need a single grand plan. You need a system, and you need to keep trying things. So I did. LondonFuse. Beach Bus. Parkbus. City Proper. Always connected to tourism in some way, and each one taught me something new about how the industry actually works. I like to think of myself as a designer of systems, and each of those ventures gave me a clearer picture of the system I wanted to design.</p>
+
+  <hr>
+
+  <h2 class="reveal">Finding My Sandbox</h2>
+
+  <p class="reveal">For my personality type, at least, the best thing I could do was find a sandbox with some nice tall walls that let me play inside it. Tourism turned out to be that sandbox. There&rsquo;s real room for improvement in the industry, but it&rsquo;s also wonderfully well-connected and full of great people.</p>
+
+  <p class="reveal">With Whereabouts, I finally got the canvas. We built a CRM that gives destination managers real tools to collaborate with their businesses and stakeholders. We built booking technology that keeps revenue in the community instead of leaking it to OTAs. We built interactive itinerary tools that turn &ldquo;just looking&rdquo; into actual trips. In one pilot with Northeastern Ontario Tourism, a new accommodation business generated $10,000 in bookings in its first week through our platform. Our itinerary tool increased engagement by 78% compared to traditional pages.</p>
+
+  <hr>
+
+  <h2 class="reveal">What the Award Means</h2>
+
+  <p class="reveal">Getting recognized with this award is meaningful because it comes from the industry itself. These are the people I&rsquo;ve worked alongside for over a decade. Tourism is a community before it&rsquo;s an industry, and being recognized by your community is something that stays with you. It was nice to be there in person.</p>
+
+  <p class="reveal">We&rsquo;re just getting started. If you&rsquo;re a destination manager curious about what Whereabouts can do, I&rsquo;d love to hear from you.</p>
+
+  <div class="bio-card reveal">
+    <p>Matthew Thomas is co-founder of Tourism Technology Company (Whereabouts) and CEO of Parkbus, Canada&rsquo;s national outdoor experience company. He holds a Master&rsquo;s in Strategic Foresight and Innovation from OCAD University and was named Innovator of the Year at the 2024 Ontario Tourism Summit.</p>
+  </div>
+
+</div>
+
+<!-- ARTICLE NAV -->
+<div class="article-nav">
+  <div class="article-nav-label">Next Article</div>
+  <a href="parkbus-growth.html">How We Grew Profit by 37% at a Canadian Tourism Company (And Didn&rsquo;t Burn It Down) &rarr;</a>
+</div>
+
+<!-- BACK LINK -->
+<div class="back-bar">
+  <a href="index.html" class="back-link"><span class="arrow">&larr;</span> Back to matthewhardythomas.com</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Matthew Hardy Thomas &mdash; Ontario, Canada &mdash; <a href="mailto:matthew@poweredbytourism.com">matthew@poweredbytourism.com</a></p>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
