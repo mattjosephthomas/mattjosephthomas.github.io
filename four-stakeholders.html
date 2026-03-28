@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Four Stakeholders of Destination Design — Matthew Hardy Thomas</title>
+<meta name="description" content="A framework for how tourism communities actually get built. Identifying the pioneers, local leaders, innovators, and master planners every destination needs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF8F4;
+    --ink: #1A1A18;
+    --ink-light: #4A4A45;
+    --ink-faint: #8A8A82;
+    --terracotta: #C4704B;
+    --terracotta-light: #D4896A;
+    --forest: #3A5A40;
+    --forest-light: #4A7A52;
+    --sand: #E8DFD0;
+    --rule: #D4CFC4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 18px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--terracotta);
+    color: var(--warm-white);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  nav.scrolled {
+    border-color: var(--rule);
+  }
+
+  .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .logo:hover { color: var(--terracotta); }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav ul a {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink-light);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease;
+  }
+
+  nav ul a:hover { color: var(--terracotta); }
+
+  nav ul a.active { color: var(--terracotta); }
+
+  /* ── ARTICLE HERO ── */
+  .article-hero {
+    padding: 8rem 2.5rem 4rem;
+    max-width: 760px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .article-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--terracotta);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .article-hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .article-byline {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-weight: 400;
+  }
+
+  .article-byline .byline-author {
+    color: var(--ink-light);
+    font-weight: 500;
+  }
+
+  .byline-dot {
+    width: 3px;
+    height: 3px;
+    background: var(--rule);
+    border-radius: 50%;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3.5rem 2.5rem 6rem;
+  }
+
+  .article-body p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .article-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .article-body h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-body hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+
+  .article-body strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .article-body em {
+    font-style: italic;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+  }
+
+  .pull-quote p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 0;
+  }
+
+  /* Numbered section heading */
+  .numbered-heading {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--terracotta);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-top: 3.5rem;
+  }
+
+  /* Bullet list */
+  .article-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .article-body ul li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--ink);
+    font-weight: 300;
+    margin-bottom: 0.6rem;
+  }
+
+  .article-body ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    width: 5px;
+    height: 5px;
+    background: var(--terracotta);
+    border-radius: 50%;
+  }
+
+  /* Stakeholder callout */
+  .stakeholder-callout {
+    border-left: 2px solid var(--terracotta);
+    padding: 0.1rem 0 0.1rem 1.5rem;
+    margin: 1.8rem 0;
+  }
+
+  .stakeholder-callout p {
+    margin-bottom: 0.5rem;
+    color: var(--ink-light);
+  }
+
+  .stakeholder-callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .stakeholder-callout .callout-label {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--terracotta);
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+  }
+
+  /* Framework table */
+  .framework-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0 2.5rem;
+    font-size: 0.92rem;
+  }
+
+  .framework-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--terracotta);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0.8rem 1rem;
+    border-bottom: 2px solid var(--rule);
+    font-weight: 400;
+  }
+
+  .framework-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.6;
+    vertical-align: top;
+  }
+
+  .framework-table td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+
+  /* ── BIO CARD ── */
+  .bio-card {
+    border-left: 2px solid var(--terracotta);
+    padding: 0.1rem 0 0.1rem 1.5rem;
+    margin: 2.5rem 0 0;
+  }
+
+  .bio-card p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* ── ARTICLE NAV ── */
+  .article-nav {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem 3rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .article-nav-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .article-nav a {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .article-nav a:hover { color: var(--terracotta); }
+
+  /* ── BACK LINK ── */
+  .back-bar {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2.5rem 2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 400;
+  }
+
+  .back-link:hover { color: var(--terracotta); }
+
+  .back-link .arrow { font-size: 0.9rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--ink-faint);
+    padding: 2.5rem;
+    text-align: center;
+    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  footer a {
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+
+  footer a:hover { color: var(--warm-white); }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    html { font-size: 16px; }
+    nav ul { gap: 1.2rem; }
+    .article-hero { padding: 7rem 1.5rem 3rem; }
+    .article-body { padding: 2.5rem 1.5rem 5rem; }
+    .back-bar { padding: 0 1.5rem 2rem; }
+    .article-nav { padding: 2rem 1.5rem 3rem; }
+    .pull-quote { padding: 1.5rem; }
+    .framework-table { font-size: 0.82rem; }
+    .framework-table th, .framework-table td { padding: 0.6rem 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="logo">MHT</a>
+  <ul>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#find">Find Me</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="articles.html" class="active">Articles</a></li>
+  </ul>
+</nav>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="article-label reveal">Articles</div>
+  <h1 class="reveal">The Four Stakeholders of Destination Design <em>A Framework for How Tourism Communities Actually Get Built</em></h1>
+  <div class="article-byline reveal">
+    <span class="byline-author">Matthew Thomas</span>
+    <span class="byline-dot"></span>
+    <span>Destination Development</span>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p class="reveal">Access is something few people think about&mdash;until they have no access at all. I certainly didn&rsquo;t, not until I found myself stranded on a beach at the Great Lakes.</p>
+
+  <p class="reveal">It was a perfect summer day in a town called Grand Bend. The kind of place that comes alive in warm weather&mdash;until the sheer number of visitors brings everything to a standstill. Every parking lot and patch of pavement had been claimed. A hand-painted sign on someone&rsquo;s front lawn read &ldquo;Parking $100&rdquo;, and sure enough, an SUV sat in the spot.</p>
+
+  <p class="reveal">That&rsquo;s when it hit me: this place didn&rsquo;t need more parking&mdash;it needed a beach bus.</p>
+
+  <div class="pull-quote reveal">
+    <p>The honest truth? Beach Bus scratched my own itch. I wanted to go to the beach, have a drink at the bars, and not worry about driving home.</p>
+  </div>
+
+  <p class="reveal">So the next summer, my team and I stood in that same parking lot, slipping bright yellow flyers under windshield wipers. They were designed to look just like parking tickets, but instead of a fine, they delivered a message: &ldquo;Bet you wish you&rsquo;d taken the bus.&rdquo;</p>
+
+  <p class="reveal">I was scrappy. Embarrassingly so. At the time, I was working a full-time job while trying to get Beach Bus off the ground. On my first day at my corporate job, the IT guy handed me a brand-new iPhone. &ldquo;It&rsquo;s got unlimited data,&rdquo; he said.</p>
+
+  <p class="reveal">I put it to the test, streaming hours of YouTube without ever connecting to Wi-Fi. Not a single warning. That&rsquo;s when I got an idea. I logged into the Beach Bus social media account and proudly announced: &ldquo;We now have free Wi-Fi on all trips.&rdquo;</p>
+
+  <p class="reveal">On the next trip, I turned on my company phone&rsquo;s hotspot and let the passengers connect. My phone overheated. It felt like it might catch fire. But it mostly worked. So I did it again. And again. All summer long, I ran &ldquo;free Wi-Fi&rdquo; off a phone that wasn&rsquo;t even mine.</p>
+
+  <p class="reveal">Eventually, my conscience caught up with me. But by then, the bus was rolling and the bookings were growing. You prove the concept with your own hands, and eventually, the system catches up. Beach Bus became the instinct that eventually led to Parkbus, which now takes thousands of travellers to national and provincial parks across Canada.</p>
+
+  <p class="reveal">As Parkbus grew, this is when I started working directly with Destination Marketing Organizations (DMOs). I began to really understand what they do, and I found my place in the broader ecosystem of creating destinations.</p>
+
+  <p class="reveal">But through that work, I also realized a fundamental truth: my scrappy, rule-bending energy wasn&rsquo;t enough on its own. I saw that there were three other distinct types of stakeholders needed to make a destination truly successful. Most destination managers focus on one or two of these groups and wonder why things stall. The destinations that break through&mdash;Fogo Island, Prince Edward County, Bilbao&mdash;got all four working together, whether they planned to or not.</p>
+
+  <p class="reveal">Here is the framework for identifying who&rsquo;s who in your community, what each group needs, and what happens when one is missing.</p>
+
+  <hr>
+
+  <span class="numbered-heading reveal">01</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">Pioneers</h2>
+
+  <p class="reveal"><strong>Who they are:</strong> The people who build the future of your destination before anyone asks them to. They create new experiences, solve their own problems, and invent products that don&rsquo;t exist yet&mdash;not because they see a market opportunity, but because they have an itch they need to scratch.</p>
+
+  <p class="reveal"><strong>Their defining trait:</strong> They act before the market is ready. They&rsquo;re building tomorrow&rsquo;s tourism product today, often with duct tape and audacity.</p>
+
+  <p class="reveal"><strong>How to spot them:</strong> Pioneers are already doing interesting things in your community&mdash;usually outside your strategic plan. They&rsquo;re the chef running pop-up dinners in a barn. The kayak guide who built her own booking system because nothing on the market worked.</p>
+
+  <p class="reveal">MIT researcher Eric von Hippel coined the term &ldquo;lead user&rdquo; to describe this specific kind of pioneer. His research consistently shows that many of the most successful commercial products were actually invented by users, not producers. In a study of kayak equipment innovators, the reasons for creating something new broke down like this:</p>
+
+  <ul class="reveal">
+    <li>Personal need for the innovation: 55%</li>
+    <li>Enjoyment of creating it: 21%</li>
+    <li>Desire to help others: 12%</li>
+    <li>Learning from creating it: 7%</li>
+    <li>Profit: just 2%</li>
+  </ul>
+
+  <p class="reveal">This matters for DMOs because it means pioneers aren&rsquo;t motivated by the same incentives you might assume. They don&rsquo;t need grant programs or marketing support as their first priority. They need someone to notice what they&rsquo;re doing and take it seriously.</p>
+
+  <p class="reveal"><strong>What they need from you:</strong></p>
+
+  <ul class="reveal">
+    <li><strong>Recognition, not direction:</strong> Watch what they&rsquo;re building and ask: could this be the future of our destination?</li>
+    <li><strong>Small, fast support:</strong> Quick-turnaround micro-funding, permits, introductions. Remove friction from their path.</li>
+    <li><strong>A seat at the table:</strong> Invite them into your planning process to challenge your strategy with what they&rsquo;re seeing on the ground.</li>
+  </ul>
+
+  <hr>
+
+  <span class="numbered-heading reveal">02</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">Local Leaders</h2>
+
+  <p class="reveal"><strong>Who they are:</strong> The community figures who provide visible, trusted leadership that makes transformation feel safe. They&rsquo;re not necessarily building tourism products&mdash;they&rsquo;re creating the conditions under which tourism can thrive without tearing the community apart.</p>
+
+  <p class="reveal"><strong>Their defining trait:</strong> Legitimacy. When a Local Leader supports an initiative, the community follows. They bridge the gap between outside ambition and local trust.</p>
+
+  <p class="reveal">In Geoffrey Moore&rsquo;s technology adoption framework, <em>Crossing the Chasm</em>, visionaries (pioneers) get excited about breakthrough possibilities. But the mainstream majority wants proof that something is safe and endorsed by people they trust. Local Leaders are the bridge across that chasm.</p>
+
+  <div class="stakeholder-callout reveal">
+    <span class="callout-label">Zita Cobb and Fogo Island</span>
+    <p>Zita Cobb is the defining example of a Local Leader. An eighth-generation Fogo Islander, she left for a successful career, then returned home to found Shorefast. What makes Cobb a Local Leader rather than a pioneer is how she built Fogo Island Inn. She didn&rsquo;t impose a vision from outside; she started community-wide conversations. The result: Fogo Island Inn earned three Michelin Keys, families are choosing to live on the island again, and the local economy has been revitalized.</p>
+  </div>
+
+  <p class="reveal"><strong>What they need from you:</strong></p>
+
+  <ul class="reveal">
+    <li><strong>Partnership, not management:</strong> Your strategic plan should reflect their vision for the community, not the other way around.</li>
+    <li><strong>Data and context:</strong> Equip them with the visitor data and economic impact numbers that help them make the case to the broader community.</li>
+    <li><strong>Protection from scale creep:</strong> When outside developers push for more volume, Local Leaders need DMOs who will back them up on right-sizing.</li>
+  </ul>
+
+  <hr>
+
+  <span class="numbered-heading reveal">03</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">Innovators</h2>
+
+  <p class="reveal"><strong>Who they are:</strong> The people who take what pioneers have proven and turn it into a commercially viable, repeatable tourism product.</p>
+
+  <p class="reveal"><strong>Their defining trait:</strong> They see the commercial potential in what pioneers have built and have the operational skill to scale it. It is crucial to understand that Innovators aren&rsquo;t just copycats stealing ideas from scrappy locals. They bring capital, operational rigor, and market access. They absorb the financial risk of taking a niche idea and making it scalable.</p>
+
+  <div class="stakeholder-callout reveal">
+    <span class="callout-label">Jeff Stober and Drake Devonshire, Prince Edward County</span>
+    <p>Prince Edward County already had pioneers: winemakers who planted vines when nobody was paying attention and small B&amp;B owners who saw potential. Jeff Stober and Drake Hotel Properties saw what those pioneers had created and built something that connected it to a larger market. Drake Devonshire took a tired bed and breakfast and transformed it into a 13-room boutique inn that brought Toronto&rsquo;s urban audience to a place most had never visited. Innovators don&rsquo;t create the destination&rsquo;s identity&mdash;they create the product that makes the identity accessible to a wider audience.</p>
+  </div>
+
+  <p class="reveal"><strong>What they need from you:</strong></p>
+
+  <ul class="reveal">
+    <li><strong>Market intelligence:</strong> Innovators are making commercial bets. They need visitor data, trend analysis, and competitive context.</li>
+    <li><strong>Streamlined regulatory paths:</strong> DMOs can advocate with municipal governments to create faster, clearer paths for tourism-related development.</li>
+    <li><strong>Connection to pioneers:</strong> The pioneer&rsquo;s instinct plus the Innovator&rsquo;s business acumen is where breakthrough tourism products come from.</li>
+  </ul>
+
+  <hr>
+
+  <span class="numbered-heading reveal">04</span>
+  <h2 class="reveal" style="margin-top: 0.5rem;">Master Planners</h2>
+
+  <p class="reveal"><strong>Who they are:</strong> The institutional leaders&mdash;typically DMOs, municipal planners, economic development officers, and government agencies&mdash;who create the strategic framework, infrastructure, and coordination that allows everything else to work.</p>
+
+  <p class="reveal"><strong>Their defining trait:</strong> They think in systems. While pioneers create, Local Leaders legitimize, and Innovators commercialize, Master Planners ensure the whole ecosystem is connected, sustainable, and moving in a coherent direction.</p>
+
+  <div class="stakeholder-callout reveal">
+    <span class="callout-label">Cautionary Example: The Bilbao Temptation</span>
+    <p>Every Master Planner knows the myth of Bilbao: build a spectacular Guggenheim Museum, and tourism transforms the economy. It&rsquo;s seductive, but dangerous. The reality is that Bilbao&rsquo;s success depended on comprehensive, coordinated planning that connected infrastructure (a new metro system, a new airport), placemaking, and cultural investment. The &ldquo;just add art&rdquo; approach rarely works on its own.</p>
+  </div>
+
+  <p class="reveal">Most destinations don&rsquo;t need a $100 million flagship. They need a Master Planner who can identify the pioneers, connect them with Innovators, secure the endorsement of Local Leaders, and build the supporting infrastructure.</p>
+
+  <p class="reveal"><strong>What great Master Planners actually do:</strong></p>
+
+  <ul class="reveal">
+    <li><strong>Scout for pioneers:</strong> They spend time in their community discovering what&rsquo;s emerging&mdash;not at their desk writing reports.</li>
+    <li><strong>Convene the four types:</strong> They bring pioneers, Local Leaders, and Innovators into the same room and create the context for collaboration.</li>
+    <li><strong>Calibrate the scale of the response:</strong> They match the scale of the intervention to the scale of the opportunity.</li>
+    <li><strong>Show the data:</strong> They measure what matters, present it clearly, and use data to build the case for continued investment.</li>
+  </ul>
+
+  <hr>
+
+  <h2 class="reveal">How the Four Types Work Together</h2>
+
+  <p class="reveal">The sequence matters. The pattern is remarkably consistent across the communities that break through:</p>
+
+  <div class="pull-quote reveal">
+    <p>Pioneers go first. Local Leaders legitimize. Innovators commercialize. Master Planners coordinate.</p>
+  </div>
+
+  <p class="reveal"><strong>1. Pioneers go first.</strong> They create something new and prove there&rsquo;s demand.</p>
+  <p class="reveal"><strong>2. Local Leaders legitimize.</strong> Their endorsement turns a fringe experiment into a community project.</p>
+  <p class="reveal"><strong>3. Innovators commercialize.</strong> They take the proven concept and build a scalable product.</p>
+  <p class="reveal"><strong>4. Master Planners coordinate.</strong> They connect the dots and ensure the growth serves the community.</p>
+
+  <p class="reveal">When one is missing, the whole system stalls:</p>
+
+  <table class="framework-table reveal">
+    <thead>
+      <tr>
+        <th>Missing Type</th>
+        <th>What Goes Wrong</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>No Pioneers</td>
+        <td>Nothing new gets created. The destination runs on legacy products.</td>
+      </tr>
+      <tr>
+        <td>No Local Leaders</td>
+        <td>Community resists tourism. Pioneer ideas can&rsquo;t gain mainstream support.</td>
+      </tr>
+      <tr>
+        <td>No Innovators</td>
+        <td>Interesting things happen but never reach the market. The destination stays a &ldquo;hidden gem&rdquo; forever.</td>
+      </tr>
+      <tr>
+        <td>No Master Planners</td>
+        <td>Growth is uncoordinated. Infrastructure lags. Nobody makes the case for investment.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="reveal">The DMO leader&rsquo;s most important job isn&rsquo;t to be all four types at once. It&rsquo;s to identify which types are present in their community, which are missing, and how to cultivate or attract the ones that aren&rsquo;t there yet.</p>
+
+  <hr>
+
+  <h2 class="reveal">A Diagnostic for Your Destination</h2>
+
+  <p class="reveal">Ask yourself:</p>
+
+  <ul class="reveal">
+    <li><strong>Who are my pioneers?</strong> Who is already creating new visitor experiences without waiting for permission or funding?</li>
+    <li><strong>Who are my Local Leaders?</strong> Have I brought them into the conversation as genuine partners?</li>
+    <li><strong>Who are my Innovators?</strong> Am I connecting them to the pioneers who are generating the raw material?</li>
+    <li><strong>Am I being a great Master Planner?</strong> Am I spending enough time in the field spotting patterns, or am I stuck at my desk?</li>
+  </ul>
+
+  <div class="pull-quote reveal">
+    <p>The destinations that thrive in the next decade won&rsquo;t be the ones with the biggest budgets or the flashiest campaigns. They&rsquo;ll be the ones where all four stakeholders are present, connected, and working in the same direction.</p>
+  </div>
+
+  <p class="reveal"><strong>Your job is to make that happen.</strong></p>
+
+  <div class="bio-card reveal">
+    <p>Matthew Thomas is the CEO of Parkbus, Canada&rsquo;s national outdoor experience company, and co-founder of Whereabouts, the CRM built for destination marketing organizations. He has spent over a decade in Canadian tourism and was named Innovator of the Year at the Ontario Tourism Summit.</p>
+  </div>
+
+</div>
+
+<!-- ARTICLE NAV -->
+<div class="article-nav">
+  <div class="article-nav-label">Previous Article</div>
+  <a href="parkbus-growth.html">How We Grew Profit by 37% at a Canadian Tourism Company &rarr;</a>
+</div>
+
+<!-- BACK LINK -->
+<div class="back-bar">
+  <a href="index.html" class="back-link"><span class="arrow">&larr;</span> Back to matthewhardythomas.com</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Matthew Hardy Thomas &mdash; Ontario, Canada &mdash; <a href="mailto:matthew@poweredbytourism.com">matthew@poweredbytourism.com</a></p>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
