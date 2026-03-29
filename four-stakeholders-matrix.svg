@@ -34,46 +34,45 @@
 
   <!-- ═══ TOP-LEFT: INNOVATORS ═══ -->
   <text x="250" y="92" text-anchor="middle" font-family="'Instrument Serif', serif" font-size="22" fill="#1A1A18" font-weight="400">Innovators</text>
-  <!-- traits -->
-  <text x="250" y="128" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="400">Resourced</text>
-  <text x="250" y="150" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300">Professionals who spot opportunities</text>
+  <text x="250" y="128" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="400">Resourced &amp; connected</text>
+  <text x="250" y="150" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300">Opportunity spotters</text>
   <text x="250" y="172" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300">Calculated risk</text>
-  <text x="250" y="194" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300">Re-imagine, incubate space</text>
-  <text x="250" y="216" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300">Connection-building</text>
-  <text x="250" y="238" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300">Trend-aware &amp; experimental</text>
+  <text x="250" y="194" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300">Trend-aware &amp; experimental</text>
+  <text x="250" y="216" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300">Incubators &amp; reimaginers</text>
+  <text x="250" y="238" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300">Commercially minded</text>
   <text x="250" y="266" text-anchor="middle" font-size="12.5" fill="#4A3A20" font-weight="300" font-style="italic">Failure is a learning opportunity</text>
   <text x="250" y="294" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#6A5A3A" letter-spacing="0.05em">Creativity = Remixing ideas</text>
 
   <!-- ═══ TOP-RIGHT: MASTER PLANNERS ═══ -->
   <text x="634" y="92" text-anchor="middle" font-family="'Instrument Serif', serif" font-size="22" fill="#FAF8F4" font-weight="400">Master Planners</text>
-  <text x="634" y="128" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="400">Strategic plan</text>
-  <text x="634" y="150" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Alignment with other priorities</text>
-  <text x="634" y="172" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Structured &amp; hierarchical</text>
-  <text x="634" y="194" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Defined roles</text>
-  <text x="634" y="216" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Prescriptive &amp; polished</text>
-  <text x="634" y="238" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Replicates what works</text>
+  <text x="634" y="128" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="400">Strategic &amp; structured</text>
+  <text x="634" y="150" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Process-driven</text>
+  <text x="634" y="172" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Hierarchical &amp; role-defined</text>
+  <text x="634" y="194" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Prescriptive &amp; polished</text>
+  <text x="634" y="216" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Alignment-focused</text>
+  <text x="634" y="238" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300">Evidence-based</text>
   <text x="634" y="266" text-anchor="middle" font-size="12.5" fill="#D4CFC4" font-weight="300" font-style="italic">Failure is worst case</text>
   <text x="634" y="294" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#8A8A82" letter-spacing="0.05em">Creativity = Replicating what works</text>
 
   <!-- ═══ BOTTOM-LEFT: PIONEERS ═══ -->
   <text x="250" y="386" text-anchor="middle" font-family="'Instrument Serif', serif" font-size="22" fill="#FAF8F4" font-weight="400">Pioneers</text>
-  <text x="250" y="422" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="400">Trend setter &amp; tastemaker</text>
+  <text x="250" y="422" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="400">Trend setters &amp; tastemakers</text>
   <text x="250" y="444" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="300">First-movers</text>
   <text x="250" y="466" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="300">Risk takers</text>
   <text x="250" y="488" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="300">Gritty &amp; scrappy</text>
-  <text x="250" y="510" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="300">Steamroller approach</text>
-  <text x="250" y="532" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="300">Success is unexpected</text>
-  <text x="250" y="560" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="300" font-style="italic">An artist&apos;s vision made real</text>
-  <text x="250" y="588" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F0C8B0" letter-spacing="0.05em">Creativity = Vision made real</text>
+  <text x="250" y="510" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="300">Instinct-driven</text>
+  <text x="250" y="532" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="300">Self-funded</text>
+  <text x="250" y="560" text-anchor="middle" font-size="12.5" fill="#FAE8DC" font-weight="300" font-style="italic">Success is unexpected</text>
+  <text x="250" y="588" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F0C8B0" letter-spacing="0.05em">Creativity = A vision made real</text>
 
   <!-- ═══ BOTTOM-RIGHT: LOCAL LEADERS ═══ -->
   <text x="634" y="386" text-anchor="middle" font-family="'Instrument Serif', serif" font-size="22" fill="#FAF8F4" font-weight="400">Local Leaders</text>
-  <text x="634" y="422" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="400">Considered &amp; designed</text>
-  <text x="634" y="444" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Systems approach</text>
-  <text x="634" y="466" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Knows the rules</text>
-  <text x="634" y="488" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Plugged in to community</text>
-  <text x="634" y="510" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Bespoke &amp; authentic</text>
-  <text x="634" y="532" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Go big, or go home</text>
+  <text x="634" y="422" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="400">Community-rooted</text>
+  <text x="634" y="444" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Systems thinkers</text>
+  <text x="634" y="466" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Trust builders</text>
+  <text x="634" y="488" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Bespoke &amp; authentic</text>
+  <text x="634" y="510" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Vision-driven</text>
+  <text x="634" y="532" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300">Rule-aware</text>
   <text x="634" y="560" text-anchor="middle" font-size="12.5" fill="#C8E0CC" font-weight="300" font-style="italic">Failure has big consequences</text>
   <text x="634" y="588" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#90C098" letter-spacing="0.05em">Creativity = Scaling a vision</text>
 
