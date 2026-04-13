@@ -4,359 +4,317 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Articles — Matthew Hardy Thomas</title>
-<meta name="description" content="Writing about tourism, business building, and connecting people to places.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #F5F0E8;
-    --warm-white: #FAF8F4;
     --ink: #1A1A18;
     --ink-light: #4A4A45;
     --ink-faint: #8A8A82;
-    --terracotta: #C4704B;
-    --terracotta-light: #D4896A;
-    --forest: #3A5A40;
-    --forest-light: #4A7A52;
-    --sand: #E8DFD0;
+    --paper: #FAF8F4;
+    --moss: #3A5A40;
+    --rust: #C4704B;
+    --mist: #8a9a8e;
+    --cream: #F5F0E8;
+    --gold: #c9a84c;
     --rule: #D4CFC4;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html {
-    scroll-behavior: smooth;
-    font-size: 18px;
-  }
-
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 18px; }
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--warm-white);
+    background: var(--paper);
     color: var(--ink);
-    line-height: 1.7;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
-
   ::selection {
-    background: var(--terracotta);
-    color: var(--warm-white);
+    background: var(--rust);
+    color: var(--paper);
   }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 1.2rem 2.5rem;
-    background: rgba(250, 248, 244, 0.92);
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(250,248,244,0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s;
   }
-
   nav.scrolled {
-    border-color: var(--rule);
+    border-bottom-color: rgba(26,23,16,0.1);
   }
-
-  .logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
+  .nav-mark {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: var(--ink);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    opacity: 0.5;
+    transition: opacity 0.3s;
   }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; }
 
-  .logo:hover { color: var(--terracotta); }
-
-  nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  nav ul a {
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: var(--ink-light);
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: color 0.2s ease;
-  }
-
-  nav ul a:hover { color: var(--terracotta); }
-
-  nav ul a.active { color: var(--terracotta); }
-
-  /* ── PAGE HEADER ── */
+  /* PAGE HEADER */
   .page-header {
-    padding: 8rem 2.5rem 3.5rem;
-    max-width: 760px;
+    padding: 8rem 3rem 4rem;
+    max-width: 800px;
     margin: 0 auto;
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid rgba(26,23,16,0.1);
   }
-
-  .page-header-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--terracotta);
-    letter-spacing: 0.12em;
+  .page-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
+    color: var(--rust);
     margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.2s;
   }
-
   .page-header h1 {
-    font-family: 'Instrument Serif', serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
     margin-bottom: 1rem;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.4s;
   }
-
   .page-header p {
     font-size: 1rem;
-    color: var(--ink-light);
+    color: var(--ink);
+    opacity: 0.6;
     max-width: 540px;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.6s;
   }
 
-  /* ── ARTICLE LIST ── */
+  /* ARTICLES */
   .article-list {
-    max-width: 760px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 0 2.5rem 6rem;
+    padding: 0 3rem 6rem;
   }
-
   .article-item {
     display: block;
     padding: 2.5rem 0;
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid rgba(26,23,16,0.1);
     text-decoration: none;
     color: var(--ink);
-    transition: padding-left 0.3s ease;
+    transition: padding-left 0.3s;
   }
-
   .article-item:hover {
     padding-left: 0.8rem;
   }
-
-  .article-item:hover .article-item-title {
-    color: var(--terracotta);
+  .article-item:hover .article-title {
+    color: var(--rust);
   }
-
-  .article-item-meta {
+  .article-meta {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-bottom: 0.8rem;
   }
-
-  .article-item-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--terracotta);
-    letter-spacing: 0.08em;
+  .article-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    font-weight: 400;
+    color: var(--rust);
   }
-
-  .article-item-date {
-    font-size: 0.8rem;
-    color: var(--ink-faint);
-  }
-
   .meta-dot {
     width: 3px;
     height: 3px;
-    background: var(--rule);
+    background: var(--mist);
     border-radius: 50%;
   }
-
-  .article-item-title {
-    font-family: 'Instrument Serif', serif;
+  .article-date {
+    font-size: 0.8rem;
+    color: var(--mist);
+  }
+  .article-title {
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.4rem, 3vw, 1.7rem);
     font-weight: 400;
     line-height: 1.3;
     margin-bottom: 0.7rem;
-    transition: color 0.2s ease;
+    transition: color 0.2s;
   }
-
-  .article-item-excerpt {
+  .article-excerpt {
     font-size: 0.92rem;
-    color: var(--ink-light);
+    color: var(--ink);
+    opacity: 0.6;
     line-height: 1.7;
     max-width: 600px;
   }
-
-  .article-item-read {
+  .article-read {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
     margin-top: 1rem;
-    font-size: 0.82rem;
-    color: var(--ink-faint);
-    font-weight: 400;
-    transition: color 0.2s ease;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    transition: color 0.2s;
   }
-
-  .article-item:hover .article-item-read {
-    color: var(--terracotta);
+  .article-item:hover .article-read {
+    color: var(--rust);
   }
-
-  .article-item-read .arrow {
+  .article-read .arrow {
     font-size: 0.9rem;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s;
   }
-
-  .article-item:hover .article-item-read .arrow {
+  .article-item:hover .article-read .arrow {
     transform: translateX(4px);
   }
 
-  /* ── BACK LINK ── */
+  /* BACK LINK */
   .back-bar {
-    max-width: 760px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 0 2.5rem 2rem;
+    padding: 0 3rem 3rem;
   }
-
   .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.82rem;
-    color: var(--ink-faint);
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.4;
     text-decoration: none;
-    transition: color 0.2s ease;
-    font-weight: 400;
+    transition: opacity 0.3s;
   }
+  .back-link:hover { opacity: 1; color: var(--rust); }
 
-  .back-link:hover { color: var(--terracotta); }
-
-  .back-link .arrow { font-size: 0.9rem; }
-
-  /* ── FOOTER ── */
   footer {
     background: var(--ink);
-    color: var(--ink-faint);
-    padding: 2.5rem;
-    text-align: center;
-    font-size: 0.78rem;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.04em;
+    padding: 2.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.3;
+  }
   footer a {
-    color: var(--ink-faint);
+    color: var(--paper);
+    opacity: 0.5;
     text-decoration: none;
+    transition: opacity 0.3s;
   }
+  footer a:hover { opacity: 1; }
 
-  footer a:hover { color: var(--warm-white); }
-
-  /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   .reveal {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
-
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 700px) {
     html { font-size: 16px; }
-    nav ul { gap: 1.2rem; }
-    .page-header { padding: 7rem 1.5rem 3rem; }
-    .article-list { padding: 0 1.5rem 5rem; }
-    .back-bar { padding: 0 1.5rem 2rem; }
+    nav { padding: 1.5rem; }
+    .nav-links { display: none; }
+    .page-header, .article-list, .back-bar { padding-left: 1.5rem; padding-right: 1.5rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="nav">
-  <a href="index.html" class="logo">MHT</a>
-  <ul>
+  <a href="index.html" class="nav-mark">Matthew Hardy Thomas</a>
+  <ul class="nav-links">
     <li><a href="index.html#work">Work</a></li>
-    <li><a href="index.html#find">Find Me</a></li>
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#framework">Framework</a></li>
+    <li><a href="index.html#ventures">Ventures</a></li>
     <li><a href="articles.html" class="active">Articles</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- PAGE HEADER -->
 <div class="page-header">
-  <div class="page-header-label">Writing</div>
+  <p class="page-label">Writing</p>
   <h1>Articles</h1>
   <p>Thinking about tourism, business building, and connecting people to places.</p>
 </div>
 
-<!-- ARTICLE LIST -->
 <div class="article-list">
-
   <a href="four-stakeholders.html" class="article-item reveal">
-    <div class="article-item-meta">
-      <span class="article-item-tag">Destination Development</span>
-      <span class="meta-dot"></span>
-      <span class="article-item-date">March 2026</span>
+    <div class="article-meta">
+      <span class="article-tag">Destination Development</span>
+      <div class="meta-dot"></div>
+      <span class="article-date">March 2026</span>
     </div>
-    <div class="article-item-title">You Need Four Types of People to Build a Destination. Most Communities Have Two.</div>
-    <p class="article-item-excerpt">Most destination managers focus on one or two stakeholder groups and wonder why things stall. The destinations that break through got all four working together.</p>
-    <div class="article-item-read">Read article <span class="arrow">&rarr;</span></div>
+    <h2 class="article-title">You Need Four Types of People to Build a Destination. Most Communities Have Two.</h2>
+    <p class="article-excerpt">Most destination managers focus on one or two stakeholder groups and wonder why things stall. The destinations that break through got all four working together.</p>
+    <span class="article-read">Read article <span class="arrow">→</span></span>
   </a>
 
   <a href="the-patron-effect.html" class="article-item reveal">
-    <div class="article-item-meta">
-      <span class="article-item-tag">Destination Development</span>
-      <span class="meta-dot"></span>
-      <span class="article-item-date">2025</span>
+    <div class="article-meta">
+      <span class="article-tag">Destination Development</span>
+      <div class="meta-dot"></div>
+      <span class="article-date">2025</span>
     </div>
-    <div class="article-item-title">The Patron Effect: The Uncomfortable Truth About How Destinations Actually Get Made</div>
-    <p class="article-item-excerpt">Before Jeff Stober showed up, nobody was flying in from New York. Prince Edward County was on no one&rsquo;s top 10 list. One person, with wealth and vision, bets on a place before anyone else will.</p>
-    <div class="article-item-read">Read article <span class="arrow">&rarr;</span></div>
+    <h2 class="article-title">The Patron Effect: The Uncomfortable Truth About How Destinations Actually Get Made</h2>
+    <p class="article-excerpt">Before Jeff Stober showed up, nobody was flying in from New York. Prince Edward County was on no one's top 10 list. One person, with wealth and vision, bets on a place before anyone else will.</p>
+    <span class="article-read">Read article <span class="arrow">→</span></span>
   </a>
-
 </div>
 
-<!-- BACK LINK -->
 <div class="back-bar">
-  <a href="index.html" class="back-link"><span class="arrow">&larr;</span> Back to matthewhardythomas.com</a>
+  <a href="index.html" class="back-link"><span>←</span> Back home</a>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <p>Matthew Hardy Thomas &mdash; Ontario, Canada &mdash; <a href="mailto:matthew@poweredbytourism.com">matthew@poweredbytourism.com</a></p>
+  <p>&copy; 2026 Matthew Hardy Thomas</p>
+  <p><a href="mailto:matthew@poweredbytourism.com">matthew@poweredbytourism.com</a></p>
 </footer>
 
 <script>
-  // Nav scroll state
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 20);
+    nav.classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -367,8 +325,7 @@
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  reveals.forEach(el => observer.observe(el));
 </script>
 
 </body>

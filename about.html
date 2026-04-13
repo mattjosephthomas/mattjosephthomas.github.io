@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Matthew Hardy Thomas</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1A18;
+    --ink-light: #4A4A45;
+    --ink-faint: #8A8A82;
+    --paper: #FAF8F4;
+    --moss: #3A5A40;
+    --rust: #C4704B;
+    --mist: #8a9a8e;
+    --cream: #F5F0E8;
+    --gold: #c9a84c;
+    --rule: #D4CFC4;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 18px; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--rust);
+    color: var(--paper);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(250,248,244,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled {
+    border-bottom-color: rgba(26,23,16,0.1);
+  }
+  .nav-mark {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 8rem 3rem 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(26,23,16,0.1);
+  }
+  .page-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  .page-header h1 em { font-style: italic; color: var(--moss); }
+
+  /* CONTENT */
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+  }
+  .content p {
+    font-size: 1rem;
+    color: var(--ink);
+    opacity: 0.75;
+    margin-bottom: 1.5rem;
+    max-width: 620px;
+    line-height: 1.8;
+  }
+
+  /* SECTION DIVIDER */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 60px;
+    background: var(--rust);
+    opacity: 0.4;
+  }
+
+  /* BOOKS */
+  .shelf {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+  .shelf h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .shelf-intro {
+    font-size: 0.9rem;
+    color: var(--ink);
+    opacity: 0.5;
+    margin-bottom: 1.5rem;
+  }
+  .book-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .book-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+  }
+  .book-dot {
+    color: var(--rust);
+    font-size: 0.5rem;
+    flex-shrink: 0;
+    position: relative;
+    top: -1px;
+  }
+  .book-title {
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .book-author {
+    font-size: 0.85rem;
+    color: var(--mist);
+    font-style: italic;
+  }
+
+  /* CURRENTLY */
+  .currently-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .currently-card {
+    padding: 1.5rem;
+    border-left: 3px solid var(--rust);
+    background: rgba(196,112,75,0.04);
+  }
+  .card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.6rem;
+  }
+  .card-content {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .card-detail {
+    font-size: 0.78rem;
+    color: var(--mist);
+    margin-top: 0.4rem;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* PERSONAL NOTE */
+  .personal-note {
+    background: var(--cream);
+    border: 1px solid rgba(26,23,16,0.08);
+    padding: 2.5rem;
+    margin-top: 3rem;
+  }
+  .personal-note p {
+    font-size: 1rem;
+    color: var(--ink);
+    opacity: 0.7;
+    max-width: none;
+    line-height: 1.8;
+  }
+
+  /* QUOTE FOOTER */
+  .quote-section {
+    background: var(--moss);
+    padding: 5rem 3rem;
+    text-align: center;
+  }
+  .quote-section .quote-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+  .quote-section blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--paper);
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto 1rem;
+    opacity: 0.9;
+  }
+  .quote-section cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.4;
+    font-style: normal;
+  }
+
+  /* BACK LINK */
+  .back-bar {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 3rem;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.4;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 1; color: var(--rust); }
+
+  footer {
+    background: var(--ink);
+    padding: 2.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper);
+    opacity: 0.3;
+  }
+  footer a {
+    color: var(--paper);
+    opacity: 0.5;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  footer a:hover { opacity: 1; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 700px) {
+    html { font-size: 16px; }
+    nav { padding: 1.5rem; }
+    .nav-links { display: none; }
+    .page-header, .content, .back-bar { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .currently-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-mark">Matthew Hardy Thomas</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#framework">Framework</a></li>
+    <li><a href="index.html#ventures">Ventures</a></li>
+    <li><a href="articles.html">Articles</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="page-label">About</p>
+  <h1>Beyond the <em>bio.</em></h1>
+</div>
+
+<div class="back-bar">
+  <a href="index.html" class="back-link"><span>←</span> Back home</a>
+</div>
+
+<div class="content">
+  <p class="reveal">Being a father is easily the most fulfilling part of my life. I'm engaged to my fiancée Andrea, and the family we're building together is the thing I'm proudest of. I'm based in Ontario, Canada, and I've spent the past decade and a half working in and around the Canadian tourism industry.</p>
+
+  <p class="reveal">I've taught at Fanshawe College and Western University, and I hold a Master's in Strategic Foresight & Innovation from OCAD University and a certificate in Cultural Planning from UBC.</p>
+
+  <p class="reveal">When I'm not working, I enjoy taking photos with my really old and trusty Canon 5D Classic (20 years old and still going strong), heading to the sauna, hot tub, spa, swimming, or doing other Pisces-type activities. I enjoy running, reluctantly lift weights, and try to leave the house as much as possible.</p>
+
+  <p class="section-label reveal">Books That Shaped Me</p>
+
+  <div class="shelf reveal">
+    <p class="shelf-intro">These are the books that left a lasting impression.</p>
+    <ul class="book-list">
+      <li><span class="book-dot">●</span> <span class="book-title">Company of One</span> <span class="book-author">Paul Jarvis</span></li>
+      <li><span class="book-dot">●</span> <span class="book-title">MC24</span> <span class="book-author">Bruce Mau</span></li>
+      <li><span class="book-dot">●</span> <span class="book-title">Made to Stick</span> <span class="book-author">Chip Heath & Dan Heath</span></li>
+      <li><span class="book-dot">●</span> <span class="book-title">How to Fail at Almost Everything and Still Win Big</span> <span class="book-author">Scott Adams</span></li>
+      <li><span class="book-dot">●</span> <span class="book-title">Small Is Beautiful</span> <span class="book-author">E.F. Schumacher</span></li>
+      <li><span class="book-dot">●</span> <span class="book-title">City Quitters</span> <span class="book-author">Karen Rosenkranz</span></li>
+      <li><span class="book-dot">●</span> <span class="book-title">Rework</span> <span class="book-author">Jason Fried & David Heinemeier Hansson</span></li>
+    </ul>
+  </div>
+
+  <p class="section-label reveal">Right Now</p>
+
+  <div class="currently-grid">
+    <div class="currently-card reveal">
+      <p class="card-label">Reading</p>
+      <p class="card-content">Even the Good Girls Will Cry</p>
+      <p class="card-detail">Melissa Auf der Maur — a 90s rock memoir</p>
+    </div>
+    <div class="currently-card reveal">
+      <p class="card-label">Watching</p>
+      <p class="card-content">Forensic Files</p>
+      <p class="card-detail">I think I'm just nostalgic for the 90s.</p>
+    </div>
+    <div class="currently-card reveal">
+      <p class="card-label">Running</p>
+      <p class="card-content">Gearing up for a half marathon</p>
+      <p class="card-detail">Just ran a 5K race. Training for this summer.</p>
+    </div>
+    <div class="currently-card reveal">
+      <p class="card-label">Building</p>
+      <p class="card-content">Visit Canada Parks</p>
+      <p class="card-detail">The next chapter for Parkbus — overnight trips into nature.</p>
+    </div>
+  </div>
+</div>
+
+<section class="quote-section">
+  <p class="quote-label">Words to Live By</p>
+  <blockquote>"A master in the art of living draws no sharp distinction between his work and his play; his labor and his leisure; his mind and his body; his education and his recreation. He hardly knows which is which. He simply pursues his vision of excellence through whatever he is doing, and leaves others to determine whether he is working or playing. To himself, he always appears to be doing both."</blockquote>
+  <cite>— L.P. Jacks</cite>
+</section>
+
+<footer>
+  <p>&copy; 2026 Matthew Hardy Thomas</p>
+  <p><a href="mailto:matthew@poweredbytourism.com">matthew@poweredbytourism.com</a></p>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
