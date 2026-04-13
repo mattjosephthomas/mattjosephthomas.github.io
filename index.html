@@ -152,12 +152,28 @@
     border-top: 1px solid var(--rule);
   }
   .hero-trusted {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
     color: var(--ink);
-    opacity: 0.45;
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+  .hero-trusted strong {
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    color: var(--moss);
+  }
+  .algonquin-punchline {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(196,112,75,0.25);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--moss);
   }
   .btn-primary {
     display: inline-block;
@@ -197,7 +213,7 @@
   .manifesto {
     background: var(--moss);
     color: var(--paper);
-    padding: 8rem 3rem;
+    padding: 6rem 3rem;
     position: relative;
     overflow: hidden;
   }
@@ -223,9 +239,9 @@
   }
   .manifesto-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
     font-weight: 300;
-    line-height: 1.5;
+    line-height: 1.45;
     color: var(--paper);
   }
   .manifesto-text strong { font-weight: 600; font-style: italic; }
@@ -443,13 +459,13 @@
   .ventures-list { display: flex; flex-direction: column; }
   .venture-row {
     display: grid;
-    grid-template-columns: 2fr 3fr 1fr;
-    align-items: center;
+    grid-template-columns: 1fr 2fr auto;
+    align-items: start;
     padding: 2.5rem 0;
     border-top: 1px solid rgba(244,240,232,0.1);
     text-decoration: none;
     color: inherit;
-    gap: 2rem;
+    gap: 4rem;
     cursor: pointer;
     transition: padding-left 0.3s;
   }
@@ -457,27 +473,56 @@
   .venture-row:hover { padding-left: 0.5rem; }
   .venture-row:hover .venture-name { color: var(--gold); }
   .venture-row:hover .venture-arrow { opacity: 1; transform: translateX(6px); }
+  .venture-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .venture-infra-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+  }
   .venture-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     font-weight: 400;
+    line-height: 1;
     color: var(--paper);
     transition: color 0.3s;
   }
-  .venture-desc { font-size: 0.85rem; line-height: 1.7; color: var(--paper); opacity: 0.45; }
   .venture-url {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     letter-spacing: 0.1em;
-    color: var(--gold);
-    opacity: 0.5;
-    margin-top: 0.3rem;
+    color: var(--paper);
+    opacity: 0.4;
+    margin-top: 0.4rem;
+  }
+  .venture-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding-top: 0.5rem;
+  }
+  .venture-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--paper);
+    opacity: 0.6;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
   }
   .venture-arrow {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: var(--gold);
     opacity: 0.3;
     justify-self: end;
+    align-self: center;
     transition: opacity 0.3s, transform 0.3s;
   }
 
@@ -582,8 +627,9 @@
     .work-item:not(:first-child), .framework-item:not(:first-child) { padding-left: 0; }
     .proof-inner { grid-template-columns: 1fr; gap: 3rem; }
     .ventures-header, .framework-header { grid-template-columns: 1fr; gap: 1rem; }
-    .venture-row { grid-template-columns: 1fr 1fr; }
-    .venture-desc { display: none; }
+    .venture-row { grid-template-columns: 1fr auto; gap: 1.5rem; }
+    .venture-right { grid-column: 1 / -1; padding-top: 0; }
+    .venture-name { font-size: 1.8rem; }
     .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
     .prediction-inner { grid-template-columns: 1fr; gap: 1rem; }
     nav { padding: 1.5rem; }
@@ -599,7 +645,7 @@
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#framework">Framework</a></li>
-    <li><a href="#ventures">Ventures</a></li>
+    <li><a href="#ventures">Businesses</a></li>
     <li><a href="articles.html">Articles</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -616,21 +662,17 @@
   <div class="hero-body">
     <div>
       <p class="hero-sub">
-        Canada has some of the best outdoor spaces on the planet, and visitors from around the world want to experience them. Domestic tourism is booming. But the infrastructure that turns a place into a destination, the transportation access, the booking systems, the stakeholder partnerships, that's what actually builds a destination. That's what I do.
+        I build the infrastructure that gets people to places worth visiting. The buses that bring travellers from cities into the wild. The booking platforms that power 30+ destinations. The trip packages that turn world-class outdoor spaces into places you can actually visit. <strong style="color: var(--moss); font-weight: 500;">I don't advise. I build.</strong>
       </p>
-      <div class="hero-meta" style="margin-top: 2rem;">
-        <div class="hero-meta-item">Role <strong>Co-owner, Parkbus</strong></div>
-        <div class="hero-meta-item">Also <strong>Co-owner, Whereabouts</strong></div>
-        <div class="hero-meta-item">Education <strong>MDes, Strategic Foresight &amp; Innovation</strong></div>
-      </div>
     </div>
     <div class="hero-case">
       <p class="hero-case-label">Case in point: Algonquin Park</p>
-      <p>Over 800,000 people visit Algonquin every year, making it Canada's most iconic provincial park. The outfitters, lodges, and experience providers are world-class. The problem was never the product. <em>It was the missing infrastructure connecting them to the people who wanted to come.</em> I built that infrastructure: the transportation routes, the booking systems, and the overnight trip packages that now bring travellers from Toronto and beyond directly into Algonquin's economy.</p>
+      <p>Over 800,000 people visit Algonquin every year, making it Canada's most iconic provincial park. The outfitters, lodges, and experience providers are world-class. The problem was never the product. <em>It was the missing infrastructure connecting them to the people who wanted to come.</em> I built that infrastructure: the transportation routes, the booking systems, and the overnight trip packages that bring travellers from Toronto and beyond directly into Algonquin's economy.</p>
+      <p class="algonquin-punchline">Algonquin isn't unique. Most destinations don't have a demand problem. They have an access and coordination problem. That's the gap I close.</p>
     </div>
   </div>
   <div class="hero-bottom">
-    <p class="hero-trusted">Trusted by Parks Canada, Via Rail, and DMOs across Canada.</p>
+    <p class="hero-trusted">Trusted by <strong>Parks Canada</strong>, <strong>Via Rail</strong>, and tourism boards across the country.</p>
     <a href="#contact" class="btn-primary">Start a Conversation</a>
   </div>
 </section>
@@ -640,7 +682,7 @@
   <div class="manifesto-inner">
     <p class="manifesto-label reveal">Point of View</p>
     <p class="manifesto-text reveal">
-      Canada is one of the greatest destination-building projects in the world. We have extraordinary national parks, world-class wilderness, vibrant cities, and growing demand from both domestic and international travellers. The opportunity is massive. But most destinations spend 90% of their budget marketing a place that's missing the basic systems a traveller needs to actually get there, stay there, and come back. The transportation networks. The digital platforms. The stakeholder partnerships. <strong>That's tourism infrastructure, and that's what I build.</strong>
+      We've built a tourism industry obsessed with promotion and neglected the infrastructure that determines who can actually show up. <strong>Marketing without infrastructure is theatre.</strong> Canada has the parks, the wilderness, the cities. The world wants to come. What's missing is the physical and digital infrastructure to get them here.
     </p>
   </div>
 </section>
@@ -653,31 +695,31 @@
   </div>
 </section>
 
-<!-- WHAT I DO -->
+<!-- WHAT I BUILD -->
 <section class="work" id="work">
   <div class="work-inner">
-    <p class="section-label reveal">What I Do</p>
+    <p class="section-label reveal">What I Build</p>
     <div class="work-grid">
       <div class="work-item reveal">
         <p class="work-problem">"People can't visit what they can't reach."</p>
         <p class="work-number">01</p>
-        <h3 class="work-title">Physical<br><em>Infrastructure</em></h3>
-        <p class="work-desc">I build the physical systems that connect travellers to destinations: transportation routes, access points, and trip packages that turn a place on a map into somewhere you can actually get to. Through Parkbus, I've built Canada's largest outdoor transportation network, serving over 100 destinations coast to coast.</p>
-        <span class="work-tag">Transportation & Access</span>
+        <h3 class="work-title">Transportation<br><em>Infrastructure</em></h3>
+        <p class="work-desc">I build the buses, routes, and access systems that physically move travellers from cities to destinations. Through Parkbus, that's now over 100 destinations across Canada, served by the country's largest outdoor transportation network.</p>
+        <span class="work-tag">Parkbus</span>
       </div>
       <div class="work-item reveal">
-        <p class="work-problem">"Your destination needs systems, not just a website."</p>
+        <p class="work-problem">"A destination needs a system, not a website."</p>
         <p class="work-number">02</p>
         <h3 class="work-title">Digital<br><em>Infrastructure</em></h3>
-        <p class="work-desc">I build the digital infrastructure that powers tourism behind the scenes: destination management platforms, booking systems, and operational tools that help tourism organizations run smarter. Through Whereabouts, our technology systems power 30+ destinations across North America.</p>
-        <span class="work-tag">Technology & Platforms</span>
+        <p class="work-desc">I build the booking platforms, destination management software, and operational systems that power tourism behind the scenes. Through Whereabouts, our technology powers 30+ destinations across North America. Tourism Innovator of the Year.</p>
+        <span class="work-tag">Whereabouts</span>
       </div>
       <div class="work-item reveal">
-        <p class="work-problem">"The hardest infrastructure to build is between people."</p>
+        <p class="work-problem">"A destination is only as good as the trip you can buy."</p>
         <p class="work-number">03</p>
-        <h3 class="work-title">Stakeholder<br><em>Infrastructure</em></h3>
-        <p class="work-desc">The most important infrastructure in any destination isn't physical or digital. It's the partnerships. I know how to bring together the parks agencies, the transportation operators, the tourism boards, the local businesses, and the communities to make a destination actually function. That's where most tourism strategies fail, and it's where I've spent 15 years learning what works.</p>
-        <span class="work-tag">Partnerships & Strategy</span>
+        <h3 class="work-title">Experience<br><em>Infrastructure</em></h3>
+        <p class="work-desc">I build the packaged trips and overnight experiences that turn world-class outdoor spaces into places you can actually visit. Through Visit Canada Parks, in partnership with Parks Canada and Via Rail.</p>
+        <span class="work-tag">Visit Canada Parks</span>
       </div>
     </div>
   </div>
@@ -688,10 +730,10 @@
   <div class="framework-inner">
     <div class="framework-header">
       <div class="reveal">
-        <p class="section-label">Signature Framework</p>
+        <p class="section-label">How Destinations Get Built</p>
         <h2>The Four Stakeholders That Make a <em>Destination</em> Work</h2>
       </div>
-      <p class="reveal">Every destination that actually works has four types of stakeholders behind it. Most communities have one or two. Almost none have all four working together. Knowing how to identify, recruit, and coordinate these four groups is what separates destinations that thrive from ones that stall. This framework has guided my destination-building work across Canada.</p>
+      <p class="reveal">Every destination that actually works has four types of stakeholders behind it. Most communities have one or two. Almost none have all four working together. This is the lens I use to figure out who needs to be at the table for any destination-building project to actually succeed.</p>
     </div>
     <div class="framework-grid">
       <div class="framework-item reveal">
@@ -724,7 +766,7 @@
     <div class="proof-left reveal">
       <p class="section-label">By the Numbers</p>
       <h2>Fifteen years<br>building from <em>inside</em><br>the system.</h2>
-      <p>Not consulting from the sidelines. Building the physical systems, digital platforms, and stakeholder partnerships from inside the industry.</p>
+      <p>Not consulting from the sidelines. Building the buses, the booking systems, and the partnerships from inside the industry.</p>
     </div>
     <div class="proof-stats">
       <div class="stat reveal">
@@ -747,44 +789,56 @@
   </div>
 </section>
 
-<!-- VENTURES -->
+<!-- MY BUSINESSES -->
 <section class="ventures" id="ventures">
   <div class="ventures-inner">
     <div class="ventures-header">
-      <h2 class="reveal">Active<br><em>Ventures</em></h2>
-      <p class="reveal">The infrastructure I'm building, not just advising on. Each one is proof that the best destinations aren't just marketed. They're powered by the right systems.</p>
+      <h2 class="reveal">My<br><em>Businesses</em></h2>
+      <p class="reveal">Not ideas or proposals. Operating systems already in market, serving real travellers and real destinations every day.</p>
     </div>
     <div class="ventures-list">
       <a href="https://www.parkbus.ca" target="_blank" class="venture-row reveal">
-        <div>
+        <div class="venture-left">
+          <span class="venture-infra-tag">Transportation infrastructure</span>
           <span class="venture-name">Parkbus</span>
-          <div class="venture-url">parkbus.ca</div>
+          <span class="venture-url">parkbus.ca</span>
         </div>
-        <span class="venture-desc">Getting Canadians out of the city and into the wild since 2010.</span>
+        <div class="venture-right">
+          <span class="venture-desc">Getting Canadians out of the city and into the wild since 2010.</span>
+        </div>
         <span class="venture-arrow">→</span>
       </a>
       <a href="https://www.whereabouts.tech" target="_blank" class="venture-row reveal">
-        <div>
+        <div class="venture-left">
+          <span class="venture-infra-tag">Digital infrastructure</span>
           <span class="venture-name">Whereabouts</span>
-          <div class="venture-url">whereabouts.tech</div>
+          <span class="venture-url">whereabouts.tech</span>
         </div>
-        <span class="venture-desc">Destination management software. Tourism Innovator of the Year.</span>
+        <div class="venture-right">
+          <span class="venture-desc">Destination management software. Tourism Innovator of the Year.</span>
+        </div>
+        <span class="venture-arrow">→</span>
+      </a>
+      <a href="#" class="venture-row reveal">
+        <div class="venture-left">
+          <span class="venture-infra-tag">Experience infrastructure</span>
+          <span class="venture-name">Visit Canada Parks</span>
+          <span class="venture-url">visitcanadaparks.com</span>
+        </div>
+        <div class="venture-right">
+          <span class="venture-desc">Curated overnight experiences in partnership with Parks Canada and Via Rail.</span>
+        </div>
         <span class="venture-arrow">→</span>
       </a>
       <a href="https://www.poweredbytourism.com" target="_blank" class="venture-row reveal">
-        <div>
+        <div class="venture-left">
+          <span class="venture-infra-tag">Tools for tourism teams</span>
           <span class="venture-name">Powered by Tourism</span>
-          <div class="venture-url">poweredbytourism.com</div>
+          <span class="venture-url">poweredbytourism.com</span>
         </div>
-        <span class="venture-desc">Practical AI systems for tourism teams.</span>
-        <span class="venture-arrow">→</span>
-      </a>
-      <a href="articles.html" class="venture-row reveal">
-        <div>
-          <span class="venture-name">Visit Canada Parks</span>
-          <div class="venture-url">visitcanadaparks.com</div>
+        <div class="venture-right">
+          <span class="venture-desc">Practical AI systems for the people running tourism operations.</span>
         </div>
-        <span class="venture-desc">Curated overnight experiences in Canada's most extraordinary places. Built in partnership with Parks Canada and Via Rail.</span>
         <span class="venture-arrow">→</span>
       </a>
     </div>
@@ -806,7 +860,7 @@
         <span class="contact-item-value">I speak at tourism conferences and industry events across Canada on <em>"The Four Stakeholders That Make a Destination Work"</em> and <em>"Tourism Infrastructure: Why the best destinations are built, not marketed."</em></span>
       </div>
       <div class="contact-item">
-        <span class="contact-item-label">Consulting Engagements</span>
+        <span class="contact-item-label">Building Together</span>
         <span class="contact-item-value">Strategic infrastructure work with destinations and tourism businesses ready to move from overlooked to overbooked.</span>
       </div>
       <div class="contact-item">
