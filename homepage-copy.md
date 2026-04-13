@@ -36,7 +36,7 @@ Algonquin isn't unique. Most destinations don't have a demand problem. They have
 
 **(Tighter, fits the screen better, bridges directly to infrastructure)**
 
-We've built a tourism industry obsessed with promotion and neglected the infrastructure that determines who can actually show up. **Marketing without infrastructure is theatre.** Canada has the parks, the wilderness, the cities. The world wants to come. What's missing is the physical and digital infrastructure to get them here.
+As Canada invests in nation-building infrastructure, tourism is still treated as marketing. **Marketing without infrastructure is theatre.** Tourism is one of the country's largest economic engines, but we keep funding promotion while neglecting the physical and digital systems that determine who can actually show up. Roads, transit, booking platforms, coordinated stakeholder networks: these are the productivity tools of a modern visitor economy. I build the systems that make it real.
 
 ---
 
@@ -44,7 +44,7 @@ We've built a tourism industry obsessed with promotion and neglected the infrast
 
 **Label:** Looking ahead
 
-In five years, the destinations that win won't be the ones with the biggest marketing budgets. They'll be the ones that built the infrastructure: transportation access, seamless booking, coordinated stakeholder networks. The places that are as easy to visit as they are beautiful. That's the future I'm building, and it's already powering tourism in communities across the country.
+In five years, the destinations that win won't have the biggest marketing budgets. They'll have the infrastructure: transportation access, seamless booking, coordinated stakeholder networks. The places as easy to visit as they are beautiful. That's the visitor economy I'm building, and it's already powering tourism in communities across the country.
 
 ---
 
@@ -83,20 +83,22 @@ I build the packaged trips and overnight experiences that turn world-class outdo
 
 **Heading:** The Four Stakeholders That Make a *Destination* Work
 
-**Intro (repositioned as "lens for partnership," not core IP):**
-Every destination that actually works has four types of stakeholders behind it. Most communities have one or two. Almost none have all four working together. This is the lens I use to figure out who needs to be at the table for any destination-building project to actually succeed.
+**Intro (tightened — a working tool, not a philosophy lecture):**
+A working lens for any destination project: who's actually at the table? Most communities have one or two of these four. The ones that break through have all four.
 
 ### 1. The Pioneer
-Pioneers go first. They build something new, a lodge, a route, an experience, and prove there's demand before anyone else believes it. Every destination starts with someone willing to take the first risk.
+Goes first. Builds the lodge, the route, the experience, and proves demand before anyone else believes it.
 
 ### 2. The Local Leader
-Local Leaders legitimize. They're the mayor, the Indigenous council, the chamber president. Their endorsement turns a fringe experiment into a community project and unlocks doors, funding, and trust that no outsider can.
+Legitimizes. The mayor, the Indigenous council, the chamber president. Their endorsement unlocks doors, funding, and trust no outsider can.
 
 ### 3. The Innovator
-Innovators commercialize. They take what the Pioneer proved and build something scalable: a booking platform, a transportation service, a tourism product. They turn a good idea into a real economy.
+Commercializes. Takes what the Pioneer proved and builds something scalable: a booking platform, a transportation service, a real economy.
 
 ### 4. The Master Planner
-Master Planners coordinate. They see the whole system and make sure the growth serves the community, not just the visitor count. They're the ones who keep the destination sustainable as it scales.
+Coordinates. Sees the whole system and makes sure growth serves the community, not just the visitor count.
+
+**CTA:** Learn more → links to four-stakeholders.html
 
 ---
 
@@ -150,7 +152,7 @@ poweredbytourism.com
 
 **Contact items:**
 - **Speaking & Keynotes** I speak at tourism conferences and industry events across Canada on *"The Four Stakeholders That Make a Destination Work"* and *"Tourism Infrastructure: Why the best destinations are built, not marketed."*
-- **Building Together** Strategic infrastructure work with destinations and tourism businesses ready to move from overlooked to overbooked.
+- **Building Together** I don't advise. I build. If you're a destination, DMO, or operator ready to move from overlooked to overbooked, let's build the infrastructure together.
 - **Partnerships** Parks agencies, transportation operators, Indigenous tourism, regional destinations. If you're building tourism infrastructure, let's connect.
 - **Find Me** LinkedIn
 - **Based in** Canada, operating nationally from Vancouver to Halifax
@@ -166,4 +168,9 @@ poweredbytourism.com
 - [ ] Framework repositioned as partnership lens
 - [ ] "Active Ventures" renamed to "My Businesses"
 - [ ] Trusted by line styled larger, sentence case
+- [x] POV bleeds into nation-building, economic development, productivity language
+- [x] Macro moment line ("As Canada invests in nation-building infrastructure...") added to POV
+- [x] Four Stakeholders descriptions tightened ~30%, framed as a working tool
+- [x] "Learn more" CTA added below Framework grid → four-stakeholders.html
+- [x] Contact "Building Together" rewritten — committed to "I don't advise. I build."
 - [ ] Open: Strategic question — anchor to a single buyer (DMO/Gov/Parks) or stay broad as thought leadership wedge?
