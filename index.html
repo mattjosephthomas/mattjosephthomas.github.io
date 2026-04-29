@@ -3,912 +3,1472 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matthew Hardy Thomas — Building Canada's Tourism Infrastructure</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<title>Powered by Tourism — We run the systems behind your destination marketing.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #1A1A18;
-    --ink-light: #4A4A45;
-    --ink-faint: #8A8A82;
-    --paper: #FAF8F4;
-    --moss: #3A5A40;
-    --rust: #C4704B;
-    --mist: #8a9a8e;
-    --cream: #F5F0E8;
-    --gold: #c9a84c;
-    --rule: #D4CFC4;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-  ::selection {
-    background: var(--rust);
-    color: var(--paper);
-  }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --white: #FAFAF8;
+  --ink: #1D1D1F;
+  --ink-secondary: #494950;
+  --ink-muted: #86868B;
+  --border: #D5D3CE;
+  --border-dark: #1D1D1F;
+  --surface: #F3F2EF;
+  --grad-text: linear-gradient(135deg, #6B4CE6 0%, #E0528D 50%, #FF7D54 100%);
+  --grad-btn: linear-gradient(135deg, #6B4CE6 0%, #C24EBB 40%, #FF7D54 100%);
+  --grad-btn-shadow: #4A2FB0;
+  --grad-border: linear-gradient(135deg, #6B4CE6, #E0528D, #FF7D54);
+  --violet: #6B4CE6;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --font-display: 'Bricolage Grotesque', -apple-system, sans-serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--white); color: var(--ink); line-height: 1.7; font-size: 17px; -webkit-font-smoothing: antialiased; }
+.container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+.grad-text {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+@keyframes float-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-shadow {
+  0%, 100% { box-shadow: 0 6px 0 var(--grad-btn-shadow); }
+  50% { box-shadow: 0 6px 0 var(--grad-btn-shadow), 0 0 0 8px rgba(107,76,230,0.12); }
+}
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes nudge {
+  0%   { transform: translateY(0);   box-shadow: 0 6px 0 var(--grad-btn-shadow); }
+  40%  { transform: translateY(2px); box-shadow: 0 4px 0 var(--grad-btn-shadow); }
+  100% { transform: translateY(0);   box-shadow: 0 6px 0 var(--grad-btn-shadow); }
+}
+.btn-nudge.nudge-triggered { animation: nudge 1.4s ease forwards; }
+.btn-nudge:hover { animation: none !important; filter: brightness(1.08); }
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 50;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background: rgba(250,248,244,0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
-  }
-  nav.scrolled {
-    border-bottom-color: rgba(26,23,16,0.1);
-  }
-  .nav-mark {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--moss);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    opacity: 0.5;
-    transition: opacity 0.3s;
-  }
-  .nav-links a:hover { opacity: 1; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 5rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 2rem;
-  }
-  .hero-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 5.5vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--ink);
-    max-width: 700px;
-  }
-  .hero-headline em { font-style: italic; color: var(--moss); }
-  .hero-sub {
-    margin-top: 2.5rem;
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--ink);
-    opacity: 0.7;
-    max-width: 560px;
-  }
-  .hero-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-top: 3rem;
-    align-items: start;
-  }
-
-  /* CASE STUDY CALLOUT */
-  .hero-case {
-    padding: 1.5rem;
-    border-left: 3px solid var(--rust);
-    background: rgba(196,112,75,0.05);
-  }
-  .hero-case-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 0.6rem;
-  }
-  .hero-case p {
-    font-size: 0.9rem;
-    line-height: 1.75;
-    color: var(--ink);
-    opacity: 0.8;
-  }
-  .hero-case p em {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--moss);
-    opacity: 1;
-  }
-  .hero-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--rule);
-  }
-  .hero-trusted {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--ink);
-    opacity: 0.85;
-    line-height: 1.5;
-  }
-  .hero-trusted strong {
-    font-style: normal;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    color: var(--moss);
-  }
-  .algonquin-punchline {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(196,112,75,0.25);
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: var(--moss);
-  }
-  .btn-primary {
-    display: inline-block;
-    padding: 0.85rem 2.2rem;
-    background: var(--moss);
-    color: var(--paper);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.3s;
-  }
-  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
-  .hero-meta {
-    display: flex;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-  }
-  .hero-meta-item {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--mist);
-  }
-  .hero-meta-item strong {
-    display: block;
-    color: var(--ink);
-    font-weight: 500;
-    font-size: 0.88rem;
-    text-transform: none;
-    letter-spacing: 0;
-    margin-top: 0.2rem;
-  }
-
-  /* MANIFESTO */
-  .manifesto {
-    background: var(--moss);
-    color: var(--paper);
-    padding: 6rem 3rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .manifesto::before {
-    content: '\201C';
-    position: absolute;
-    top: -2rem; left: 2rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20rem;
-    color: var(--paper);
-    opacity: 0.04;
-    line-height: 1;
-    pointer-events: none;
-  }
-  .manifesto-inner { max-width: 900px; margin: 0 auto; }
-  .manifesto-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2.5rem;
-  }
-  .manifesto-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
-    font-weight: 300;
-    line-height: 1.45;
-    color: var(--paper);
-  }
-  .manifesto-text strong { font-weight: 600; font-style: italic; }
-
-  /* PREDICTION STRIP */
-  .prediction {
-    background: var(--ink);
-    padding: 4rem 3rem;
-  }
-  .prediction-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-  .prediction-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    white-space: nowrap;
-  }
-  .prediction-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.3rem, 2vw, 1.7rem);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--paper);
-    line-height: 1.5;
-    opacity: 0.9;
-  }
-
-  /* WHAT I DO */
-  .work { padding: 8rem 3rem; background: var(--cream); }
-  .work-inner { max-width: 1100px; margin: 0 auto; }
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 4rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .section-label::after {
-    content: '';
-    display: block;
-    height: 1px;
-    width: 60px;
-    background: var(--rust);
-    opacity: 0.4;
-  }
-  .work-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    border-top: 1px solid rgba(26,23,16,0.12);
-  }
-  .work-item {
-    padding: 3rem 2.5rem 3rem 0;
-    border-right: 1px solid rgba(26,23,16,0.12);
-  }
-  .work-item:last-child { border-right: none; padding-right: 0; }
-  .work-item:not(:first-child) { padding-left: 2.5rem; }
-  .work-problem {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--rust);
-    margin-bottom: 1rem;
-    line-height: 1.4;
-  }
-  .work-number {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: var(--mist);
-    margin-bottom: 1rem;
-  }
-  .work-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
-  .work-title em { font-style: italic; color: var(--moss); }
-  .work-desc { font-size: 0.9rem; line-height: 1.8; color: var(--ink); opacity: 0.65; }
-  .work-tag {
-    display: inline-block;
-    margin-top: 1.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--rust);
-    border-bottom: 1px solid var(--rust);
-    padding-bottom: 2px;
-    opacity: 0.7;
-  }
-
-  /* FRAMEWORK */
-  .framework { padding: 8rem 3rem; background: var(--paper); }
-  .framework-inner { max-width: 1100px; margin: 0 auto; }
-  .framework-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    margin-bottom: 5rem;
-    align-items: end;
-  }
-  .framework-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 300;
-    line-height: 1.1;
-  }
-  .framework-header h2 em { font-style: italic; color: var(--moss); }
-  .framework-header p { font-size: 0.9rem; line-height: 1.8; opacity: 0.6; }
-  .framework-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    border-top: 1px solid rgba(26,23,16,0.12);
-  }
-  .framework-item {
-    padding: 2.5rem 2rem 2.5rem 0;
-    border-right: 1px solid rgba(26,23,16,0.12);
-  }
-  .framework-item:last-child { border-right: none; padding-right: 0; }
-  .framework-item:not(:first-child) { padding-left: 2rem; }
-  .framework-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    font-weight: 300;
-    color: var(--ink);
-    opacity: 0.1;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-  .framework-type {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    font-style: italic;
-    color: var(--moss);
-    margin-bottom: 0.75rem;
-    line-height: 1.2;
-  }
-  .framework-desc { font-size: 0.85rem; line-height: 1.75; color: var(--ink); opacity: 0.6; }
-  .framework-cta { margin-top: 4rem; text-align: center; }
-
-  /* PROOF */
-  .proof { padding: 8rem 3rem; background: var(--cream); }
-  .proof-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 6rem;
-    align-items: start;
-  }
-  .proof-left h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 300;
-    line-height: 1.1;
-  }
-  .proof-left h2 em { font-style: italic; color: var(--moss); }
-  .proof-left p { margin-top: 1.5rem; font-size: 0.9rem; line-height: 1.8; opacity: 0.6; }
-  .proof-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .stat { border-top: 1px solid rgba(26,23,16,0.15); padding-top: 1.5rem; }
-  .stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    font-weight: 300;
-    line-height: 1;
-    color: var(--ink);
-  }
-  .stat-number span { font-size: 1.5rem; vertical-align: super; color: var(--rust); }
-  .stat-label {
-    margin-top: 0.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink);
-    opacity: 0.5;
-    line-height: 1.6;
-  }
-
-  /* VENTURES */
-  .ventures { background: var(--ink); color: var(--paper); padding: 8rem 3rem; }
-  .ventures-inner { max-width: 1100px; margin: 0 auto; }
-  .ventures-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 5rem;
-    align-items: end;
-  }
-  .ventures-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--paper);
-  }
-  .ventures-header h2 em { font-style: italic; color: var(--gold); }
-  .ventures-header p { font-size: 0.9rem; line-height: 1.8; color: var(--paper); opacity: 0.5; }
-  .ventures-list { display: flex; flex-direction: column; }
-  .venture-row {
-    display: grid;
-    grid-template-columns: 1fr 2fr auto;
-    align-items: start;
-    padding: 2.5rem 0;
-    border-top: 1px solid rgba(244,240,232,0.1);
-    text-decoration: none;
-    color: inherit;
-    gap: 4rem;
-    cursor: pointer;
-    transition: padding-left 0.3s;
-  }
-  .venture-row:last-child { border-bottom: 1px solid rgba(244,240,232,0.1); }
-  .venture-row:hover { padding-left: 0.5rem; }
-  .venture-row:hover .venture-name { color: var(--gold); }
-  .venture-row:hover .venture-arrow { opacity: 1; transform: translateX(6px); }
-  .venture-left {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .venture-infra-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-  }
-  .venture-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 400;
-    line-height: 1;
-    color: var(--paper);
-    transition: color 0.3s;
-  }
-  .venture-url {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    color: var(--paper);
-    opacity: 0.4;
-    margin-top: 0.4rem;
-  }
-  .venture-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding-top: 0.5rem;
-  }
-  .venture-desc {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--paper);
-    opacity: 0.6;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-  }
-  .venture-arrow {
-    font-size: 1.5rem;
-    color: var(--gold);
-    opacity: 0.3;
-    justify-self: end;
-    align-self: center;
-    transition: opacity 0.3s, transform 0.3s;
-  }
-
-  /* CONTACT */
-  .contact { background: var(--cream); padding: 8rem 3rem; position: relative; overflow: hidden; }
-  .contact::after {
-    content: "LET'S TALK";
-    position: absolute;
-    bottom: -3rem; right: -1rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14rem;
-    font-weight: 300;
-    color: var(--ink);
-    opacity: 0.03;
-    pointer-events: none;
-    white-space: nowrap;
-  }
-  .contact-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8rem;
-    align-items: start;
-  }
-  .contact-left h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.8rem, 5vw, 5rem);
-    font-weight: 300;
-    line-height: 1.05;
-  }
-  .contact-left h2 em { font-style: italic; color: var(--moss); }
-  .contact-left p { margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.8; opacity: 0.6; max-width: 380px; }
-  .contact-right { display: flex; flex-direction: column; padding-top: 0.5rem; }
-  .contact-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid rgba(26,23,16,0.1);
-  }
-  .contact-item:first-child { padding-top: 0; }
-  .contact-item:last-child { border-bottom: none; }
-  .contact-item-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--rust);
-  }
-  .contact-item-value { font-size: 0.9rem; line-height: 1.7; color: var(--ink); opacity: 0.75; }
-  .contact-item-value em {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--moss);
-  }
-
-  footer {
-    background: var(--ink);
-    padding: 2.5rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  footer p {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--paper);
-    opacity: 0.3;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-eyebrow { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
-  .hero-headline { opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
-  .hero-body { opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
-  .hero-bottom { opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .hero { padding: 7rem 1.5rem 4rem; }
-    .hero-body { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-    .work-grid, .framework-grid { grid-template-columns: 1fr; }
-    .work-item, .framework-item { border-right: none; border-bottom: 1px solid rgba(26,23,16,0.12); padding: 2.5rem 0; }
-    .work-item:not(:first-child), .framework-item:not(:first-child) { padding-left: 0; }
-    .proof-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .ventures-header, .framework-header { grid-template-columns: 1fr; gap: 1rem; }
-    .venture-row { grid-template-columns: 1fr auto; gap: 1.5rem; }
-    .venture-right { grid-column: 1 / -1; padding-top: 0; }
-    .venture-name { font-size: 1.8rem; }
-    .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
-    .prediction-inner { grid-template-columns: 1fr; gap: 1rem; }
-    nav { padding: 1.5rem; }
-    .nav-links { display: none; }
-    section, .work, .framework, .proof, .ventures, .contact, .manifesto, .prediction { padding-left: 1.5rem; padding-right: 1.5rem; }
-  }
+/* ===== REPORT STACK FAN ANIMATION ===== */
+.report-stack:not(.fanned) .report-page { opacity: 0; }
+@keyframes fan-in-left {
+  0%   { transform: rotate(0deg) translateX(30%) translateY(8px); opacity: 0; }
+  100% { transform: rotate(-6deg); opacity: 1; }
+}
+@keyframes fan-in-center {
+  0%   { transform: translateX(-50%) translateY(12px); opacity: 0; }
+  100% { transform: translateX(-50%) rotate(0deg); opacity: 1; }
+}
+@keyframes fan-in-right {
+  0%   { transform: rotate(0deg) translateX(-30%) translateY(8px); opacity: 0; }
+  100% { transform: rotate(6deg); opacity: 1; }
+}
+.report-stack.fanned .report-page:nth-child(1) {
+  animation: fan-in-left  0.55s cubic-bezier(0.34, 1.4, 0.64, 1) 0.05s both;
+}
+.report-stack.fanned .report-page:nth-child(2) {
+  animation: fan-in-center 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) 0.20s both;
+}
+.report-stack.fanned .report-page:nth-child(3) {
+  animation: fan-in-right  0.55s cubic-bezier(0.34, 1.4, 0.64, 1) 0.12s both;
+}
+.report-stack.fanned:hover .report-page:nth-child(1) { transform: rotate(-8deg) translateY(-4px); }
+.report-stack.fanned:hover .report-page:nth-child(2) { transform: translateX(-50%) translateY(-6px); }
+.report-stack.fanned:hover .report-page:nth-child(3) { transform: rotate(8deg) translateY(-4px); }
+@keyframes float-pages {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.anim { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.anim.visible { opacity: 1; transform: translateY(0); }
+/* ========== BUTTONS ========== */
+.btn {
+  display: inline-block; font-family: var(--font-display); font-weight: 700;
+  font-size: 17px; padding: 16px 36px; border-radius: var(--radius);
+  border: 3px solid var(--border-dark); cursor: pointer; text-decoration: none;
+  transition: all 0.12s ease; user-select: none;
+}
+.btn:active { transform: translateY(4px) !important; }
+.btn-grad {
+  background: var(--grad-btn); color: #fff;
+  box-shadow: 0 6px 0 var(--grad-btn-shadow);
+}
+.btn-grad:hover { filter: brightness(1.08); animation: pulse-shadow 2s ease infinite; }
+.btn-grad:active { box-shadow: 0 1px 0 var(--grad-btn-shadow) !important; }
+.btn-white {
+  background: var(--white); color: var(--ink);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 0 rgba(0,0,0,0.15); background: #F5F4F1; }
+.btn-white:active { box-shadow: 0 1px 0 rgba(0,0,0,0.15) !important; }
+/* ========== NAV ========== */
+nav {
+  padding: 18px 0; position: sticky; top: 0; z-index: 100;
+  background: rgba(250,250,248,0.88); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+nav .container-wide { display: flex; align-items: center; justify-content: space-between; }
+.logo {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+nav .btn { font-size: 13px; padding: 9px 16px; border-width: 2px; white-space: nowrap; }
+nav .btn-grad { box-shadow: 0 4px 0 var(--grad-btn-shadow); }
+@media (max-width: 480px) {
+  .logo { font-size: 14px; }
+  nav { padding: 12px 0; }
+  nav .btn { font-size: 12px; padding: 8px 14px; }
+}
+/* ========== REPORT MOCKUP PAGES ========== */
+.report-stack {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  height: 280px;
+  perspective: 800px;
+}
+.report-stack.small {
+  max-width: 440px;
+  height: 240px;
+}
+.report-page {
+  position: absolute;
+  width: 200px;
+  height: 260px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+.report-stack.small .report-page {
+  width: 170px;
+  height: 220px;
+}
+.report-page:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08);
+}
+/* Page positioning — fanned out */
+.report-page:nth-child(1) {
+  left: 8%;
+  top: 20px;
+  transform: rotate(-6deg);
+  z-index: 1;
+}
+.report-page:nth-child(2) {
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 3;
+}
+.report-page:nth-child(3) {
+  right: 8%;
+  top: 20px;
+  transform: rotate(6deg);
+  z-index: 2;
+}
+/* hover handled by .report-stack.fanned:hover rules below */
+/* Interior content of mockup pages */
+.rp-header {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid #EDECEA;
+}
+.rp-logo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.rp-logo-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--grad-btn);
+}
+.rp-date {
+  font-size: 7px;
+  color: var(--ink-muted);
+  font-family: var(--font-body);
+}
+.rp-title {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.rp-subtitle {
+  font-size: 7px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+.rp-body { padding: 10px 16px; }
+.rp-section-label {
+  font-size: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+.rp-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+.rp-bar {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  min-height: 4px;
+}
+.rp-bar:nth-child(1) { height: 55%; background: #6B4CE6; }
+.rp-bar:nth-child(2) { height: 70%; background: #8B6AF0; }
+.rp-bar:nth-child(3) { height: 45%; background: #C24EBB; }
+.rp-bar:nth-child(4) { height: 85%; background: #E0528D; }
+.rp-bar:nth-child(5) { height: 65%; background: #FF7D54; }
+.rp-bar:nth-child(6) { height: 90%; background: #6B4CE6; }
+.rp-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.rp-line {
+  height: 3px;
+  border-radius: 2px;
+  background: #EDECEA;
+}
+.rp-line.short { width: 60%; }
+.rp-line.med { width: 80%; }
+.rp-line.long { width: 100%; }
+.rp-line.accent { background: var(--grad-btn); height: 3px; }
+.rp-stat-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.rp-stat-box {
+  flex: 1;
+  background: var(--surface);
+  border-radius: 4px;
+  padding: 6px 5px;
+  text-align: center;
+}
+.rp-stat-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 11px;
+  line-height: 1;
+  color: var(--ink);
+}
+.rp-stat-lbl {
+  font-size: 5px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+.rp-checklist { padding: 0; }
+.rp-check-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 6.5px;
+  color: var(--ink-secondary);
+  padding: 3px 0;
+  border-bottom: 1px solid #EDEBE8;
+  font-family: var(--font-body);
+}
+.rp-check-item:last-child { border: none; }
+.rp-check-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  border: 1.5px solid var(--violet);
+  flex-shrink: 0;
+}
+.rp-check-dot.filled {
+  background: var(--violet);
+  border-color: var(--violet);
+}
+/* ========== HERO ========== */
+.hero { padding: 100px 0 40px; text-align: center; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.5vw, 56px);
+  font-weight: 800; line-height: 1.1;
+  max-width: 720px; margin: 0 auto 28px;
+  animation: float-in 0.6s ease 0.1s both;
+  letter-spacing: -0.02em;
+}
+.hero-sub {
+  font-size: 19px; color: var(--ink-secondary);
+  max-width: 520px; margin: 0 auto 14px;
+  animation: float-in 0.6s ease 0.2s both;
+}
+.hero-detail {
+  font-size: 16px; color: var(--ink-muted);
+  max-width: 440px; margin: 0 auto 8px;
+  animation: float-in 0.6s ease 0.25s both;
+}
+.hero-detail strong { color: var(--ink-secondary); }
+.hero-cta { margin-top: 40px; animation: float-in 0.6s ease 0.35s both; }
+.hero-cta .btn { font-size: 19px; padding: 18px 42px; }
+.hero-note { font-size: 14px; color: var(--ink-muted); margin-top: 16px; animation: float-in 0.6s ease 0.4s both; }
+.hero-reports {
+  margin-top: 52px;
+  animation: float-in 0.8s ease 0.5s both;
+}
+.divider { height: 1px; background: var(--border); margin: 0; border: none; }
+.divider-grad { height: 2px; background: var(--grad-text); margin: 0; border: none; opacity: 0.3; }
+/* ========== LETTER ========== */
+.letter { padding: 80px 0; background: linear-gradient(180deg, var(--white) 0%, #F5F3EF 100%); }
+.letter-card {
+  max-width: 680px; margin: 0 auto;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 20px; padding: 48px 44px 44px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04), 0 0 0 0.5px rgba(0,0,0,0.03);
+}
+@media (max-width: 640px) { .letter-card { padding: 32px 24px 28px; } }
+.letter-card p {
+  font-size: 18px; line-height: 1.75; color: var(--ink); margin-bottom: 24px;
+}
+.letter-card p:last-of-type { margin-bottom: 0; }
+.letter-card p.short { font-weight: 500; }
+.letter-card .standout {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 20px; line-height: 1.55; color: var(--ink); margin: 32px 0;
+}
+.letter-sign {
+  margin-top: 40px; display: flex; align-items: center; gap: 16px;
+}
+.letter-sign-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--grad-btn);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 20px; color: #fff; flex-shrink: 0;
+}
+.letter-sign-photo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); }
+.letter-sign-text p { margin: 0 !important; }
+.letter-sign-text .name { font-family: var(--font-display); font-weight: 700; font-size: 17px; }
+.letter-sign-text .title-role { font-size: 14px; color: var(--ink-muted); margin-top: 3px !important; }
+.audit-checklist { list-style: none; text-align: left; margin-top: 12px; }
+.audit-checklist li { font-size: 14px; color: var(--ink-secondary); padding: 6px 0 6px 22px; border-bottom: 1px solid var(--border); position: relative; line-height: 1.4; }
+.audit-checklist li:last-child { border: none; }
+.audit-checklist li::before { content: '\2713'; position: absolute; left: 0; color: var(--violet); font-weight: 700; font-size: 13px; top: 7px; }
+/* ===== STEP ACCORDIONS ===== */
+.step-accordion { margin-top: 14px; border-top: 1px solid var(--border); }
+.step-accordion summary {
+  cursor: pointer; list-style: none; display: flex; align-items: center;
+  justify-content: center; gap: 6px; padding: 10px 0 4px;
+  font-size: 13px; font-weight: 600; color: var(--violet);
+  user-select: none; outline: none;
+}
+.step-accordion summary::-webkit-details-marker { display: none; }
+.accordion-arrow { font-size: 9px; transition: transform 0.2s ease; display: inline-block; }
+details[open] .accordion-arrow { transform: rotate(180deg); }
+details[open] .step-accordion { border-top-color: transparent; }
+/* "What is it" definition */
+.why-define { text-align: center; font-size: 18px; color: rgba(255,255,255,0.75); max-width: 580px; margin: -20px auto 48px; line-height: 1.65; }
+.why-term { font-family: var(--font-display); font-weight: 800; font-size: 22px; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+/* ========== THE WINDOW ========== */
+.the-window { padding: 80px 0; background: var(--surface); }
+.the-window h2 {
+  font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800; text-align: center; margin-bottom: 28px; letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.window-intro {
+  max-width: 620px; margin: 0 auto 56px;
+  font-size: 18px; line-height: 1.75; color: var(--ink-secondary);
+  text-align: center;
+}
+.window-intro strong { color: var(--ink); }
+/* Interactive timeline */
+.timeline {
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 52px;
+}
+/* Vertical track (base) */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--border);
+  z-index: 0;
+}
+/* Gradient progress overlay on line */
+.timeline::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 8px;
+  width: 3px;
+  height: 0;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, var(--violet) 0%, #E0528D 60%, #FF7D54 100%);
+  transition: height 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+.timeline.active::after {
+  height: calc(100% - 16px);
+}
+.tl-item {
+  position: relative;
+  padding-bottom: 52px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Dot on the line */
+.tl-dot {
+  position: absolute;
+  left: -42px;
+  top: 2px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  border: none;
+  background: #D5D2CD;
+  z-index: 2;
+  box-shadow: 0 0 0 4px var(--surface);
+  transition: background 0.45s ease, box-shadow 0.45s ease, transform 0.45s ease;
+}
+.tl-item.visible .tl-dot {
+  background: var(--violet);
+  box-shadow: 0 0 0 4px var(--surface);
+  transform: scale(1.05);
+}
+.tl-item.tl-fork.visible .tl-dot,
+.tl-item.now.visible .tl-dot {
+  background: var(--violet);
+  box-shadow: 0 0 0 4px var(--surface), 0 0 0 7px rgba(107,76,230,0.2);
+  transform: scale(1.15);
+}
+.tl-item.future.visible .tl-dot {
+  background: #E0528D;
+  box-shadow: 0 0 0 4px var(--surface), 0 0 0 7px rgba(224,82,141,0.15);
+}
+.tl-item.payoff.visible .tl-dot {
+  background: #FF7D54;
+  box-shadow: 0 0 0 4px var(--surface), 0 0 0 7px rgba(255,125,84,0.2);
+  transform: scale(1.15);
+}
+.tl-date {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.tl-item.past .tl-date { color: var(--violet); }
+.tl-item.now .tl-date { color: var(--violet); }
+.tl-item.future .tl-date { color: #E0528D; }
+.tl-item.payoff .tl-date { color: #FF7D54; }
+.tl-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.tl-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-secondary);
+}
+.tl-body strong { color: var(--ink); }
+.tl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.tl-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--ink-muted);
+  background: var(--white);
+}
+.tl-tag.highlight {
+  border-color: var(--violet);
+  color: var(--violet);
+  background: rgba(107,76,230,0.05);
+}
+.tl-fork-paths { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.tl-path {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  padding: 12px 16px;
+  border-radius: 10px;
+  border-left: 3px solid var(--border);
+  background: var(--white);
+  transition: opacity 0.3s ease;
+}
+.tl-path strong { color: var(--ink); }
+.tl-path-lose {
+  border-left-color: #D5D3CE;
+  opacity: 0.5;
+}
+.tl-path-mid {
+  border-left-color: #C4C0BB;
+  opacity: 0.72;
+}
+.tl-path-win {
+  border-left-color: var(--violet);
+  background: rgba(107,76,230,0.03);
+  opacity: 1;
+}
+.tl-item.tl-fork .tl-dot {
+  border-color: var(--violet);
+  background: var(--violet);
+  box-shadow: 0 0 0 5px rgba(107,76,230,0.12), 0 2px 8px rgba(107,76,230,0.25);
+  transform: scale(1.15);
+}
+/* Bridge / conditional line between fork and outcomes */
+.tl-item.tl-bridge {
+  padding-bottom: 44px;
+}
+.tl-item.tl-bridge .tl-dot {
+  width: 11px;
+  height: 11px;
+  left: -39px;
+  top: 7px;
+}
+.tl-item.tl-bridge.visible .tl-dot {
+  background: var(--violet);
+  transform: scale(1);
+}
+.tl-bridge-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  font-style: italic;
+  padding: 14px 20px;
+  border-radius: 10px;
+  border: 1.5px dashed rgba(107,76,230,0.3);
+  background: rgba(107,76,230,0.03);
+}
+.window-close {
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 48px;
+  color: var(--ink);
+}
+/* Fix large headline line-height globally */
+.proof h2, .the-window h2, .hero h1, .systems > .container > h2, .final-cta h2 {
+  line-height: 1.15;
+}
+/* ========== WHAT WE DO ========== */
+.what-we-do { padding: 80px 0; background: var(--ink); color: #fff; }
+.what-we-do h2 {
+  font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800; text-align: center; margin-bottom: 10px; letter-spacing: -0.02em;
+}
+.what-we-do .subtitle {
+  text-align: center; font-size: 18px; opacity: 0.7;
+  max-width: 460px; margin: 0 auto 44px;
+}
+.what-we-do .subtitle strong {
+  opacity: 1; background: var(--grad-text);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.pain-intro {
+  text-align: center; font-size: 16px; opacity: 0.55;
+  letter-spacing: 0.02em; text-transform: uppercase; font-weight: 600;
+  margin-bottom: 24px; font-family: var(--font-display);
+}
+.pain-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px; max-width: 820px; margin: 0 auto;
+}
+@media (max-width: 760px) { .pain-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .pain-grid { grid-template-columns: 1fr; } }
+.pain-card {
+  padding: 18px 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.04);
+}
+.fix-note {
+  text-align: center; margin-top: 40px; font-family: var(--font-display);
+  font-style: italic; font-size: 17px; opacity: 0.6;
+}
+/* ========== DESTINATION OS ========== */
+.dest-os { padding: 80px 0; }
+.dest-os > .container > h2 {
+  font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800; text-align: center; margin-bottom: 10px; letter-spacing: -0.02em;
+}
+.dest-os-intro {
+  text-align: center; font-size: 18px; color: var(--ink-secondary); max-width: 620px;
+  margin: 0 auto 16px; line-height: 1.7;
+}
+.dest-os-built-for {
+  text-align: center; font-size: 15px; color: var(--ink-muted);
+  margin: 0 auto 52px; font-style: italic;
+}
+.dest-os-label {
+  font-family: var(--font-display); font-weight: 800; font-size: 14px;
+  text-transform: uppercase; letter-spacing: 0.06em; color: var(--violet);
+  text-align: center; margin-bottom: 28px;
+}
+.os-modules {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  max-width: 780px; margin: 0 auto;
+}
+@media (max-width: 640px) { .os-modules { grid-template-columns: 1fr; } }
+.os-module {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.os-module:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.06); }
+.os-module:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  max-width: calc(50% - 10px);
+  justify-self: center;
+}
+@media (max-width: 640px) { .os-module:last-child:nth-child(odd) { max-width: 100%; } }
+.os-module-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; margin-bottom: 14px; flex-shrink: 0;
+}
+.os-module:nth-child(1) .os-module-icon { background: rgba(107,76,230,0.1); color: var(--violet); }
+.os-module:nth-child(2) .os-module-icon { background: rgba(224,82,141,0.1); color: #E0528D; }
+.os-module:nth-child(3) .os-module-icon { background: rgba(255,125,84,0.1); color: #FF7D54; }
+.os-module:nth-child(4) .os-module-icon { background: rgba(107,76,230,0.1); color: var(--violet); }
+.os-module:nth-child(5) .os-module-icon { background: rgba(224,82,141,0.1); color: #E0528D; }
+.os-module:nth-child(6) .os-module-icon { background: rgba(255,125,84,0.1); color: #FF7D54; }
+.os-module h3 {
+  font-family: var(--font-display); font-size: 18px; font-weight: 800;
+  letter-spacing: -0.01em; margin-bottom: 4px;
+}
+.os-module .os-tagline {
+  font-size: 14px; color: var(--ink-muted); margin-bottom: 14px; line-height: 1.5;
+}
+.os-module ul { list-style: none; }
+.os-module ul li {
+  padding: 3px 0; font-size: 14px; color: var(--ink-secondary);
+  position: relative; padding-left: 18px; line-height: 1.5;
+}
+.os-module ul li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border);
+}
+/* ========== HOW IT WORKS ========== */
+.how-it-works { padding: 80px 0; background: var(--surface); }
+.how-it-works h2 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 800; text-align: center; margin-bottom: 6px; letter-spacing: -0.02em; }
+.how-it-works .section-sub { text-align: center; color: var(--ink-muted); margin-bottom: 52px; font-size: 18px; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 768px) { .steps { grid-template-columns: 1fr; } }
+.step-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px 28px; text-align: center; transition: transform 0.2s ease; }
+.step-card:hover { transform: translateY(-3px); }
+.step-num { font-family: var(--font-display); font-weight: 800; font-size: 44px; line-height: 1; margin-bottom: 12px; }
+.step-num .grad-text { display: inline; }
+.step-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 19px; margin-bottom: 4px; }
+.step-card .step-time { font-size: 13px; color: var(--ink-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; }
+.step-card p { font-size: 15px; color: var(--ink-secondary); }
+/* ========== PROOF ========== */
+.proof { padding: 80px 0; }
+.proof h2 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 800; text-align: center; margin-bottom: 10px; letter-spacing: -0.02em; }
+.proof .proof-intro { text-align: center; max-width: 560px; margin: 0 auto 28px; color: var(--ink-secondary); font-size: 18px; }
+.proof-badge { text-align: center; margin-bottom: 44px; }
+.proof-badge span { display: inline-block; font-size: 14px; font-weight: 600; color: var(--ink-muted); border: 1px solid var(--border); border-radius: 40px; padding: 8px 20px; background: var(--surface); }
+.proof-systems { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 44px; }
+@media (max-width: 640px) { .proof-systems { grid-template-columns: 1fr; } }
+.proof-sys-item { padding: 20px 24px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 15px; color: var(--ink-secondary); }
+.proof-sys-item .no { color: var(--ink-muted); font-weight: 600; text-decoration: line-through; }
+.proof-sys-item .yes { font-weight: 700; }
+.proof-sys-item .yes .grad-text { display: inline; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+.stat-card { text-align: center; padding: 28px 16px; border: 1px solid var(--border); border-radius: var(--radius); transition: transform 0.2s ease; }
+.stat-card:hover { transform: translateY(-2px); }
+.stat-card .stat-num { font-family: var(--font-display); font-weight: 800; font-size: 40px; line-height: 1; margin-bottom: 6px; }
+.stat-card .stat-num .grad-text { display: inline; }
+.stat-card .stat-label { font-size: 13px; color: var(--ink-muted); }
+.proof-close { text-align: center; margin-top: 44px; font-family: var(--font-display); font-size: 17px; color: var(--ink-secondary); max-width: 560px; margin-left: auto; margin-right: auto; }
+/* ========== PRICING ========== */
+.pricing { padding: 80px 0; background: var(--surface); }
+.pricing h2 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 800; text-align: center; margin-bottom: 48px; letter-spacing: -0.02em; }
+.pricing-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); max-width: 520px; margin: 0 auto; overflow: hidden; }
+.pricing-header { background: var(--ink); color: #fff; padding: 40px; text-align: center; }
+.pricing-header .price { font-family: var(--font-display); font-weight: 800; font-size: 56px; line-height: 1; }
+.pricing-header .price .grad-text { display: inline; }
+.pricing-header .price-sub { font-size: 16px; opacity: 0.7; margin-top: 6px; }
+.pricing-header .price-per { font-size: 13px; opacity: 0.5; margin-top: 2px; }
+.pricing-body { padding: 36px 40px; }
+.pricing-terms { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+.pricing-term { font-size: 13px; font-weight: 600; border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; color: var(--ink-secondary); background: var(--surface); }
+.pricing-compare { margin-bottom: 28px; }
+.pricing-compare h4 { font-family: var(--font-display); font-weight: 700; font-size: 15px; margin-bottom: 12px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.compare-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 15px; color: var(--ink-secondary); }
+.compare-row:last-child { border: none; }
+.compare-cost { font-weight: 600; color: var(--ink-muted); white-space: nowrap; text-decoration: line-through; font-size: 14px; flex-shrink: 0; }
+@media (max-width: 520px) {
+  .compare-row { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .compare-cost { font-size: 13px; }
+}
+.pricing-summary { text-align: center; font-family: var(--font-display); font-weight: 700; font-size: 17px; margin: 20px 0; }
+.pricing-guarantee { text-align: center; font-size: 14px; color: var(--ink-secondary); padding: 16px 20px; border-radius: var(--radius); background: var(--surface); }
+.pricing-guarantee strong { color: var(--ink); }
+/* ========== HOW IT WORKS (new) ========== */
+.how-section { padding: 80px 0; background: linear-gradient(160deg, rgba(107,76,230,0.04) 0%, var(--surface) 50%); }
+.how-section h2 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 800; text-align: center; margin-bottom: 44px; letter-spacing: -0.02em; }
+.how-steps {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  max-width: 780px; margin: 0 auto 64px;
+}
+@media (max-width: 640px) { .how-steps { grid-template-columns: 1fr; } }
+.how-step { text-align: center; }
+.how-step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  font-family: var(--font-display); font-weight: 800; font-size: 16px;
+  color: #fff; margin-bottom: 14px;
+}
+.how-step:nth-child(1) .how-step-num { background: var(--violet); }
+.how-step:nth-child(2) .how-step-num { background: #E0528D; }
+.how-step:nth-child(3) .how-step-num { background: #FF7D54; }
+.how-step h3 {
+  font-family: var(--font-display); font-weight: 800; font-size: 18px;
+  margin-bottom: 8px; letter-spacing: -0.01em;
+}
+.how-step p { font-size: 15px; color: var(--ink-secondary); line-height: 1.6; }
+/* Before / After comparison */
+.replaces-label {
+  font-family: var(--font-display); font-weight: 800; font-size: 14px;
+  text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted);
+  text-align: center; margin-bottom: 24px;
+}
+.replaces-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  max-width: 640px; margin: 0 auto;
+}
+@media (max-width: 640px) { .replaces-grid { grid-template-columns: 1fr; } }
+.replaces-col {
+  border-radius: var(--radius); padding: 28px 24px;
+  border: 1px solid var(--border);
+}
+.replaces-col.before { background: var(--white); }
+.replaces-col.after { background: rgba(107,76,230,0.04); border-color: rgba(107,76,230,0.2); }
+.replaces-col h4 {
+  font-family: var(--font-display); font-weight: 800; font-size: 15px;
+  margin-bottom: 14px;
+}
+.replaces-col.before h4 { color: var(--ink-muted); }
+.replaces-col.after h4 { color: var(--violet); }
+.replaces-col ul { list-style: none; }
+.replaces-col ul li {
+  padding: 4px 0; font-size: 15px; color: var(--ink-secondary);
+  position: relative; padding-left: 22px;
+}
+.replaces-col.before ul li::before { content: '\2717'; position: absolute; left: 0; color: var(--ink-muted); font-weight: 700; }
+.replaces-col.after ul li::before { content: '\2713'; position: absolute; left: 0; color: var(--violet); font-weight: 700; }
+/* ========== INFRASTRUCTURE ========== */
+.infrastructure { padding: 80px 0; }
+.infrastructure h2 { font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 32px); font-weight: 800; text-align: center; margin-bottom: 10px; letter-spacing: -0.02em; }
+.infrastructure .section-sub { text-align: center; color: var(--ink-muted); max-width: 480px; margin: 0 auto 36px; font-size: 17px; }
+.infra-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+@media (max-width: 640px) { .infra-pillars { grid-template-columns: repeat(2, 1fr); } }
+.infra-pillar { border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 16px; text-align: center; font-weight: 600; font-size: 14px; color: var(--ink-secondary); transition: transform 0.15s ease; }
+.infra-pillar:hover { transform: translateY(-2px); }
+.infra-pillar .pillar-icon { font-size: 22px; margin-bottom: 8px; }
+.infra-promise { text-align: center; font-size: 15px; color: var(--ink-muted); max-width: 440px; margin: 0 auto; font-style: italic; }
+/* ========== WHY ========== */
+.why { padding: 80px 0; background: var(--ink); color: #fff; }
+.why h2 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 800; text-align: center; margin-bottom: 10px; letter-spacing: -0.02em; }
+.why .section-sub { text-align: center; opacity: 0.5; margin-bottom: 52px; font-size: 17px; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
+.why-card .not { font-size: 14px; opacity: 0.35; margin-bottom: 6px; text-decoration: line-through; }
+.why-card .instead { font-family: var(--font-display); font-weight: 700; font-size: 19px; margin-bottom: 10px; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.why-card p { opacity: 0.65; font-size: 15px; line-height: 1.6; }
+/* ========== FIT ========== */
+.fit { padding: 80px 0; background: var(--surface); }
+.fit h2 { font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 34px); font-weight: 800; text-align: center; margin-bottom: 40px; letter-spacing: -0.02em; }
+.fit-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 640px; margin: 0 auto; }
+@media (max-width: 640px) { .fit-columns { grid-template-columns: 1fr; } }
+.fit-col { border-radius: var(--radius); padding: 28px; border: 1px solid var(--border); }
+.fit-col.good { background: rgba(107,76,230,0.04); border-color: rgba(107,76,230,0.2); }
+.fit-col.bad { background: var(--white); }
+.fit-col h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; margin-bottom: 16px; }
+.fit-col.good h3 { color: var(--violet); }
+.fit-col.bad h3 { color: var(--ink-muted); }
+.fit-col ul { list-style: none; }
+.fit-col ul li { padding: 5px 0; padding-left: 22px; position: relative; font-size: 15px; color: var(--ink-secondary); }
+.fit-col.good ul li::before { content: '\2713'; position: absolute; left: 0; color: var(--violet); font-weight: 700; }
+.fit-col.bad ul li::before { content: '\2717'; position: absolute; left: 0; color: var(--ink-muted); font-weight: 700; }
+/* ========== BLOG SECTION ========== */
+.blog-section { padding: 80px 0; background: var(--white); }
+.blog-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 34px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.blog-section .section-sub {
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 17px;
+  margin-bottom: 44px;
+}
+.blog-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+@media (max-width: 640px) { .blog-cards { grid-template-columns: 1fr; } }
+.blog-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--white);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.blog-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+}
+.blog-card-accent {
+  height: 4px;
+  background: var(--grad-btn);
+}
+.blog-card-body {
+  padding: 28px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.blog-card-tag {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--violet);
+  margin-bottom: 12px;
+}
+.blog-card-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.blog-card-excerpt {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+.blog-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.blog-card-footer img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.blog-card-footer .author { font-weight: 600; color: var(--ink-secondary); }
+.blog-card-footer .read-time { margin-left: auto; }
+.blog-card-coming {
+  border-style: dashed;
+  border-color: rgba(213,211,206,0.7);
+  background: var(--surface);
+}
+.blog-card-coming .blog-card-accent { background: var(--border); }
+.blog-card-coming .blog-card-title { color: var(--ink-muted); }
+.blog-card-coming .blog-card-tag { color: var(--ink-muted); }
+/* ========== FINAL CTA ========== */
+.final-cta { padding: 100px 0 60px; text-align: center; background: var(--ink); color: #fff; }
+.final-cta h2 { font-family: var(--font-display); font-size: clamp(34px, 5vw, 52px); font-weight: 800; margin-bottom: 20px; letter-spacing: -0.02em; }
+.final-cta h2 .grad-text { display: inline; }
+.final-cta .cta-details { font-size: 18px; opacity: 0.75; max-width: 480px; margin: 0 auto 12px; }
+.final-cta .cta-reassurance { font-size: 16px; opacity: 0.5; max-width: 440px; margin: 0 auto 40px; }
+.final-cta .btn-white { font-size: 19px; padding: 18px 42px; }
+.final-cta .cta-email { margin-top: 20px; font-size: 15px; opacity: 0.5; }
+.final-cta .cta-email a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.final-cta .cta-reports { margin-top: 60px; }
+/* Dark-mode report pages for CTA section */
+.report-stack.dark .report-page {
+  background: #2A2A2E;
+  border-color: #3A3A40;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.report-stack.dark .report-page:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.report-stack.dark .rp-header { border-color: #3A3A40; }
+.report-stack.dark .rp-title { color: #fff; }
+.report-stack.dark .rp-subtitle,
+.report-stack.dark .rp-date { color: #86868B; }
+.report-stack.dark .rp-section-label { color: #86868B; }
+.report-stack.dark .rp-line { background: #3A3A40; }
+.report-stack.dark .rp-stat-box { background: #333338; }
+.report-stack.dark .rp-stat-num { color: #fff; }
+.report-stack.dark .rp-stat-lbl { color: #86868B; }
+.report-stack.dark .rp-check-item { color: #A0A0A8; border-color: #3A3A40; }
+footer { padding: 36px 0; text-align: center; border-top: 1px solid var(--border); }
+.footer-brand { font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--ink); margin-bottom: 4px; }
+.footer-tagline { font-size: 14px; color: var(--ink-muted); }
 </style>
 </head>
 <body>
-
-<nav id="nav">
-  <a href="#" class="nav-mark">Matthew Hardy Thomas</a>
-  <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#framework">Framework</a></li>
-    <li><a href="#ventures">Businesses</a></li>
-    <li><a href="articles.html">Articles</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+<nav>
+  <div class="container-wide">
+    <a href="#" class="logo">Powered by Tourism</a>
+    <a href="https://calendar.app.google/XSAg23hX6PWDaGCt9" class="btn btn-grad">Book Your Free Audit</a>
+  </div>
 </nav>
-
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">Canadian Tourism Strategist &amp; Operator</p>
-  <h1 class="hero-headline">
-    Building Canada's<br>
-    <em>tourism</em> infrastructure.
-  </h1>
-  <div class="hero-body">
-    <div>
-      <p class="hero-sub">
-        I build the infrastructure that gets people to places worth visiting. The buses that bring travellers from cities into the wild. The booking platforms that power 30+ destinations. The trip packages that turn world-class outdoor spaces into places you can actually visit. <strong style="color: var(--moss); font-weight: 500;">I don't advise. I build.</strong>
-      </p>
+  <div class="container">
+    <h1>You built a great destination. <span class="grad-text">Now install the system that runs it.</span></h1>
+    <p class="hero-sub">Most DMOs are being asked to do more — more content, more campaigns, more reporting — with the same team size. We build and run the systems that make that possible.</p>
+    <div class="hero-cta">
+      <a href="https://calendar.app.google/XSAg23hX6PWDaGCt9" class="btn btn-grad btn-nudge">Book Your Free Audit &rarr;</a>
     </div>
-    <div class="hero-case">
-      <p class="hero-case-label">Case in point: Algonquin Park</p>
-      <p>Over 800,000 people visit Algonquin every year, making it Canada's most iconic provincial park. The outfitters, lodges, and experience providers are world-class. The problem was never the product. <em>It was the missing infrastructure connecting them to the people who wanted to come.</em> I built that infrastructure: the transportation routes, the booking systems, and the overnight trip packages that bring travellers from Toronto and beyond directly into Algonquin's economy.</p>
-      <p class="algonquin-punchline">Algonquin isn't unique. Most destinations don't have a demand problem. They have an access and coordination problem. That's the gap I close.</p>
-    </div>
+    <p class="hero-note">45 minutes. Free. No strings.</p>
   </div>
-  <div class="hero-bottom">
-    <p class="hero-trusted">Trusted by <strong>Parks Canada</strong>, <strong>Via Rail</strong>, and tourism boards across the country.</p>
-    <a href="#contact" class="btn-primary">Start a Conversation</a>
-  </div>
-</section>
-
-<!-- MANIFESTO -->
-<section class="manifesto">
-  <div class="manifesto-inner">
-    <p class="manifesto-label reveal">Point of View</p>
-    <p class="manifesto-text reveal">
-      As Canada invests in nation-building infrastructure, tourism is still treated as marketing. <strong>Marketing without infrastructure is theatre.</strong> Tourism is one of the country's largest economic engines, but we keep funding promotion while neglecting the physical and digital systems that determine who can actually show up. Roads, transit, booking platforms, coordinated stakeholder networks: these are the productivity tools of a modern visitor economy. I build the systems that make it real.
-    </p>
-  </div>
-</section>
-
-<!-- PREDICTION STRIP -->
-<section class="prediction">
-  <div class="prediction-inner reveal">
-    <span class="prediction-tag">Looking ahead</span>
-    <p class="prediction-text">In five years, the destinations that win won't have the biggest marketing budgets. They'll have the infrastructure: transportation access, seamless booking, coordinated stakeholder networks. The places as easy to visit as they are beautiful. That's the visitor economy I'm building, and it's already powering tourism in communities across the country.</p>
-  </div>
-</section>
-
-<!-- WHAT I BUILD -->
-<section class="work" id="work">
-  <div class="work-inner">
-    <p class="section-label reveal">What I Build</p>
-    <div class="work-grid">
-      <div class="work-item reveal">
-        <p class="work-problem">"People can't visit what they can't reach."</p>
-        <p class="work-number">01</p>
-        <h3 class="work-title">Transportation<br><em>Infrastructure</em></h3>
-        <p class="work-desc">I build the buses, routes, and access systems that physically move travellers from cities to destinations. Through Parkbus, that's now over 100 destinations across Canada, served by the country's largest outdoor transportation network.</p>
-        <span class="work-tag">Parkbus</span>
+  <!-- Report mockup pages -->
+  <div class="hero-reports">
+    <div class="report-stack">
+      <!-- Page 1: Overview / Executive Summary -->
+      <div class="report-page">
+        <div class="rp-header">
+          <div class="rp-logo-bar"><div class="rp-logo-dot"></div><div class="rp-date">March 2026</div></div>
+          <div class="rp-title">Operations Audit</div>
+          <div class="rp-subtitle">Destination Overview &amp; Findings</div>
+        </div>
+        <div class="rp-body">
+          <div class="rp-section-label">Time Allocation</div>
+          <div class="rp-bar-chart">
+            <div class="rp-bar"></div><div class="rp-bar"></div><div class="rp-bar"></div>
+            <div class="rp-bar"></div><div class="rp-bar"></div><div class="rp-bar"></div>
+          </div>
+          <div class="rp-lines">
+            <div class="rp-line long"></div>
+            <div class="rp-line med"></div>
+            <div class="rp-line short"></div>
+            <div class="rp-line long"></div>
+            <div class="rp-line med"></div>
+          </div>
+        </div>
       </div>
-      <div class="work-item reveal">
-        <p class="work-problem">"A destination needs a system, not a website."</p>
-        <p class="work-number">02</p>
-        <h3 class="work-title">Digital<br><em>Infrastructure</em></h3>
-        <p class="work-desc">I build the booking platforms, destination management software, and operational systems that power tourism behind the scenes. Through Whereabouts, our technology powers 30+ destinations across North America. Tourism Innovator of the Year.</p>
-        <span class="work-tag">Whereabouts</span>
+      <!-- Page 2: Key Metrics -->
+      <div class="report-page">
+        <div class="rp-header">
+          <div class="rp-logo-bar"><div class="rp-logo-dot"></div><div class="rp-date">Audit Report</div></div>
+          <div class="rp-title">Capacity Analysis</div>
+          <div class="rp-subtitle">Where your team's time goes</div>
+        </div>
+        <div class="rp-body">
+          <div class="rp-stat-row">
+            <div class="rp-stat-box"><div class="rp-stat-num">62%</div><div class="rp-stat-lbl">Admin tasks</div></div>
+            <div class="rp-stat-box"><div class="rp-stat-num">23%</div><div class="rp-stat-lbl">Strategy</div></div>
+            <div class="rp-stat-box"><div class="rp-stat-num">15%</div><div class="rp-stat-lbl">Growth</div></div>
+          </div>
+          <div class="rp-section-label">Opportunity Score</div>
+          <div class="rp-lines">
+            <div class="rp-line accent" style="width:85%"></div>
+          </div>
+          <div style="height:6px"></div>
+          <div class="rp-lines">
+            <div class="rp-line long"></div>
+            <div class="rp-line med"></div>
+            <div class="rp-line long"></div>
+            <div class="rp-line short"></div>
+          </div>
+        </div>
       </div>
-      <div class="work-item reveal">
-        <p class="work-problem">"A destination is only as good as the trip you can buy."</p>
-        <p class="work-number">03</p>
-        <h3 class="work-title">Experience<br><em>Infrastructure</em></h3>
-        <p class="work-desc">I build the packaged trips and overnight experiences that turn world-class outdoor spaces into places you can actually visit. Through Visit Canada Parks, in partnership with Parks Canada and Via Rail.</p>
-        <span class="work-tag">Visit Canada Parks</span>
+      <!-- Page 3: Recommendations -->
+      <div class="report-page">
+        <div class="rp-header">
+          <div class="rp-logo-bar"><div class="rp-logo-dot"></div><div class="rp-date">Action Plan</div></div>
+          <div class="rp-title">Recommendations</div>
+          <div class="rp-subtitle">90-day system roadmap</div>
+        </div>
+        <div class="rp-body">
+          <div class="rp-section-label">Priority Systems</div>
+          <div class="rp-checklist">
+            <div class="rp-check-item"><div class="rp-check-dot filled"></div>Board reporting automation</div>
+            <div class="rp-check-item"><div class="rp-check-dot filled"></div>Partner newsletter system</div>
+            <div class="rp-check-item"><div class="rp-check-dot"></div>Content calendar &amp; delivery</div>
+            <div class="rp-check-item"><div class="rp-check-dot"></div>AI search visibility audit</div>
+            <div class="rp-check-item"><div class="rp-check-dot"></div>Data consolidation layer</div>
+            <div class="rp-check-item"><div class="rp-check-dot"></div>Visitor email reactivation</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- FRAMEWORK -->
-<section class="framework" id="framework">
-  <div class="framework-inner">
-    <div class="framework-header">
-      <div class="reveal">
-        <p class="section-label">How Destinations Get Built</p>
-        <h2>The Four Stakeholders That Make a <em>Destination</em> Work</h2>
-      </div>
-      <p class="reveal">A working lens for any destination project: who's actually at the table? Most communities have one or two of these four. The ones that break through have all four.</p>
-    </div>
-    <div class="framework-grid">
-      <div class="framework-item reveal">
-        <div class="framework-number">1</div>
-        <div class="framework-type">The Pioneer</div>
-        <p class="framework-desc">Goes first. Builds the lodge, the route, the experience, and proves demand before anyone else believes it.</p>
-      </div>
-      <div class="framework-item reveal">
-        <div class="framework-number">2</div>
-        <div class="framework-type">The Local Leader</div>
-        <p class="framework-desc">Legitimizes. The mayor, the Indigenous council, the chamber president. Their endorsement unlocks doors, funding, and trust no outsider can.</p>
-      </div>
-      <div class="framework-item reveal">
-        <div class="framework-number">3</div>
-        <div class="framework-type">The Innovator</div>
-        <p class="framework-desc">Commercializes. Takes what the Pioneer proved and builds something scalable: a booking platform, a transportation service, a real economy.</p>
-      </div>
-      <div class="framework-item reveal">
-        <div class="framework-number">4</div>
-        <div class="framework-type">The Master Planner</div>
-        <p class="framework-desc">Coordinates. Sees the whole system and makes sure growth serves the community, not just the visitor count.</p>
-      </div>
-    </div>
-    <div class="framework-cta reveal">
-      <a href="four-stakeholders.html" class="btn-primary">Learn more →</a>
     </div>
   </div>
 </section>
-
-<!-- PROOF -->
+<hr class="divider-grad">
+<!-- LETTER -->
+<section class="letter">
+  <div class="container">
+    <div class="letter-card anim">
+      <p>Hey, I'm Matthew. I run Powered by Tourism.</p>
+      <p>I've spent 15 years inside destination organizations across North America — boardrooms, strategic planning sessions, levy conversations, grant reviews. From Destination Ontario and Indigenous Tourism Ontario to municipalities from the Maritimes to the Rockies. I also run Parkbus, a national tourism transportation company operating across Canada.</p>
+      <p class="short">Every single one has the same problem.</p>
+      <p>Big ambitions. Real talent. Not enough capacity to execute. Teams buried under the operational load: pulling stats from four platforms for a board report, copy-pasting partner listings at 9 PM, building PowerPoints the week they're due.</p>
+      <p class="standout">Your destination has an ambitious plan. It just doesn't have a process. We're going to bring that process to life.</p>
+      <p>I hold a master's degree in strategic foresight and innovation. I've never been more optimistic about the future of destination organizations than I am right now. The tools available today are going to help some destinations leap ahead in ways that simply weren't possible two years ago. Others will be left behind — not because they lack strategy, but because they never built the systems to actually run it.</p>
+      <p>I built Powered by Tourism to change that. Not another tool to log into. Someone who builds the systems and runs them, so your team gets back to the work that actually grows the destination.</p>
+      <p class="standout">Your team isn't underperforming. Your systems aren't set up yet. We're here to fix that.</p>
+      <div class="letter-sign">
+        <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f219675811d1fa145bf292_matthew-hardy-thomas-crop.jpg" alt="Matthew Hardy Thomas" class="letter-sign-photo">
+        <div class="letter-sign-text">
+          <p class="name">Matthew Hardy Thomas</p>
+          <p class="title-role">CEO, Powered by Tourism</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- THE WINDOW -->
+<section class="the-window">
+  <div class="container">
+    <h2 class="anim">There's a <span class="grad-text">12&ndash;18 month window</span> right now.</h2>
+    <p class="window-intro anim">AI is moving fast, but adoption inside tourism is still slow. That creates an opportunity. <strong>The organizations that build systems now will get further ahead every month.</strong> Late movers will spend years trying to catch up.</p>
+    <div class="timeline" id="timeline">
+      <div class="tl-item past">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Late 2025</div>
+        <div class="tl-title">AI stopped being a demo.</div>
+        <div class="tl-body">For years, AI tools were impressive in demos and frustrating in practice. Then the models crossed a real threshold. Reliable enough to run production workflows without supervision — on-brand content, automated reports, repetitive communications at scale. AI search changed where visitors start researching destinations. A small team could suddenly produce the output of a much larger one.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Claude Sonnet 4.6</span>
+          <span class="tl-tag">AI search emerges</span>
+          <span class="tl-tag">Production-ready tools</span>
+        </div>
+      </div>
+      <div class="tl-item tl-fork">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Right now &mdash; Spring 2026</div>
+        <div class="tl-title">Three paths are forming.</div>
+        <div class="tl-fork-paths">
+          <div class="tl-path tl-path-lose"><strong>Most DMOs</strong> will wait too long and fall behind.</div>
+          <div class="tl-path tl-path-mid"><strong>Others</strong> will experiment without direction and get little real value.</div>
+          <div class="tl-path tl-path-win"><strong>Some</strong> will quietly build internal systems and move faster than everyone else. If you start building now, here's what the next two years look like.</div>
+        </div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Spring &ndash; Summer 2026</div>
+        <div class="tl-title">Your systems come online.</div>
+        <div class="tl-body">Within 6&ndash;8 weeks of starting, your core workflows are running. Content goes out on schedule. Reports are automated. Partner communication stops slipping. Your team isn't scrambling to produce the basics anymore &mdash; what used to take three days now takes three hours, and most of it runs without anyone touching it.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Systems live</span>
+          <span class="tl-tag">Content on schedule</span>
+          <span class="tl-tag">Team unblocked</span>
+        </div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Late 2026</div>
+        <div class="tl-title">The compounding begins.</div>
+        <div class="tl-body">Six months of consistent content and outreach starts showing up in the numbers. Your destination appears in AI search results where competitors aren't showing up at all. Stakeholders receive regular updates without anyone manually pulling data. You're producing more than you ever have &mdash; with the same team.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">AI visibility building</span>
+          <span class="tl-tag">Content compounding</span>
+          <span class="tl-tag">Stakeholders informed</span>
+        </div>
+      </div>
+      <div class="tl-item payoff">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2027 &mdash; 2028</div>
+        <div class="tl-title">You're far ahead. And others are asking how you did it.</div>
+        <div class="tl-body">By 2027, your team has headspace again. You're going to conferences instead of skipping them. You're presenting results stakeholders didn't think were possible at your budget level — with 12 months of data to back it up. By 2028, other destinations are only now starting to build what you finished two years ago. They're looking to you for advice on what the future of a destination actually looks like.</div>
+        <div class="tl-tags">
+          <span class="tl-tag highlight">Further ahead every month</span>
+          <span class="tl-tag">Industry reference point</span>
+          <span class="tl-tag">Two years ahead</span>
+        </div>
+      </div>
+    </div>
+    <p class="window-close anim">AI is not a trend to watch. It is a tool that improves your work.</p>
+  </div>
+</section>
+<section class="what-we-do">
+  <div class="container">
+    <h2 class="anim">Most destination teams don't have a strategy problem. They have a <strong>capacity problem.</strong></h2>
+    <p class="pain-intro anim">Without the proper systems in place, your work week looks like this:</p>
+    <div class="pain-grid anim">
+      <div class="pain-card">Social content goes out when someone has time — which lately means it doesn't go out.</div>
+      <div class="pain-card">Visitors are asking AI where to go. Your destination isn't showing up in the answer.</div>
+      <div class="pain-card">Your team is talented and committed. They're also completely underwater.</div>
+    </div>
+    <p class="fix-note anim">We build the <em>systems</em> that fix this.</p>
+  </div>
+</section>
+<section class="dest-os">
+  <div class="container">
+    <h2 class="anim">The <span class="grad-text">Destination Operating System</span></h2>
+    <p class="dest-os-intro anim">A complete, installed system that runs your core marketing and operational workflows.</p>
+    <p class="dest-os-built-for anim">Built for small, stretched DMO teams that need to produce more &mdash; without hiring.</p>
+    <p class="dest-os-label anim">What gets installed</p>
+    <div class="os-modules anim">
+      <div class="os-module">
+        <div class="os-module-icon">&#9881;</div>
+        <h3>Content Engine</h3>
+        <p class="os-tagline">A system that plans, generates, and schedules your content.</p>
+        <ul>
+          <li>Social posts, blogs, and campaigns produced consistently</li>
+          <li>Always-on content without last-minute scrambling</li>
+          <li>Aligned to your seasons, priorities, and brand</li>
+        </ul>
+      </div>
+      <div class="os-module">
+        <div class="os-module-icon">&#128202;</div>
+        <h3>Reporting System</h3>
+        <p class="os-tagline">Board-ready reports generated automatically from live data.</p>
+        <ul>
+          <li>No more pulling from 4&ndash;5 platforms</li>
+          <li>Stakeholder updates ready when you need them</li>
+          <li>Clear visibility into what's working</li>
+        </ul>
+      </div>
+      <div class="os-module">
+        <div class="os-module-icon">&#128236;</div>
+        <h3>Partner Communication System</h3>
+        <p class="os-tagline">Ongoing communication that runs without manual effort.</p>
+        <ul>
+          <li>Automated partner newsletters and updates</li>
+          <li>Keeps operators informed and engaged</li>
+          <li>No more last-minute sends or missed touchpoints</li>
+        </ul>
+      </div>
+      <div class="os-module">
+        <div class="os-module-icon">&#128269;</div>
+        <h3>AI Search Visibility Layer</h3>
+        <p class="os-tagline">Your destination shows up when visitors ask AI where to go.</p>
+        <ul>
+          <li>Structured content designed for AI discovery</li>
+          <li>Visibility in tools like ChatGPT and Perplexity</li>
+          <li>Early advantage while competitors are invisible</li>
+        </ul>
+      </div>
+      <div class="os-module">
+        <div class="os-module-icon">&#128200;</div>
+        <h3>Data Layer</h3>
+        <p class="os-tagline">A simple, connected view of your destination's performance.</p>
+        <ul>
+          <li>Key tools and data sources brought together</li>
+          <li>Less time jumping between platforms</li>
+          <li>Better decisions, faster</li>
+        </ul>
+      </div>
+      <div class="os-module">
+        <div class="os-module-icon">&#128101;</div>
+        <h3>Stakeholder Management System</h3>
+        <p class="os-tagline">Your destination's people, listings, and events. Organized and always current.</p>
+        <ul>
+          <li>Operator and attraction listings that stay accurate without constant editing</li>
+          <li>An event calendar that populates from submissions, not staff chasing details</li>
+          <li>A living directory of the people behind the businesses, not just company names</li>
+          <li>Stakeholder activity tracked so you know who's active, who's drifting, and who needs a check-in</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="proof">
-  <div class="proof-inner">
-    <div class="proof-left reveal">
-      <p class="section-label">By the Numbers</p>
-      <h2>Fifteen years<br>building from <em>inside</em><br>the system.</h2>
-      <p>Not consulting from the sidelines. Building the buses, the booking systems, and the partnerships from inside the industry.</p>
+  <div class="container">
+    <h2 class="anim">We built this inside <span class="grad-text">a real tourism business</span> first.</h2>
+    <p class="proof-intro anim">Everything we offer was built and pressure-tested running Parkbus &mdash; a national tourism transportation company operating across six Canadian cities with two people, no office, and no marketing department.</p>
+    <div class="proof-systems anim">
+      <div class="proof-sys-item"><span class="no">No content team.</span><br>A <span class="yes"><span class="grad-text">content system</span></span> that produces campaigns every week.</div>
+      <div class="proof-sys-item"><span class="no">No CRM manager.</span><br>An <span class="yes"><span class="grad-text">automated partner sequence</span></span> that keeps everyone informed.</div>
+      <div class="proof-sys-item"><span class="no">No data analyst.</span><br>A <span class="yes"><span class="grad-text">dashboard</span></span> that shows what's working before anyone asks.</div>
+      <div class="proof-sys-item"><span class="no">No reporting coordinator.</span><br>A <span class="yes"><span class="grad-text">system</span></span> that builds stakeholder-ready reports from live data.</div>
     </div>
-    <div class="proof-stats">
-      <div class="stat reveal">
-        <div class="stat-number">100<span>+</span></div>
-        <div class="stat-label">Destinations served by Parkbus across Canada</div>
+    <div class="stats-grid anim">
+      <div class="stat-card"><div class="stat-num"><span class="grad-text">30%</span></div><div class="stat-label">Revenue growth YoY</div></div>
+      <div class="stat-card"><div class="stat-num"><span class="grad-text">36%</span></div><div class="stat-label">Profit growth YoY</div></div>
+      <div class="stat-card"><div class="stat-num"><span class="grad-text">6</span></div><div class="stat-label">Cities across Canada</div></div>
+      <div class="stat-card"><div class="stat-num"><span class="grad-text">2</span></div><div class="stat-label">Full-time team</div></div>
+    </div>
+    <p class="proof-close anim">We didn't grow by hiring more people. We grew by building systems that actually run the work.</p>
+  </div>
+</section>
+<section class="how-section">
+  <div class="container">
+    <h2 class="anim">How it works</h2>
+    <div class="how-steps anim">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <h3>Diagnose</h3>
+        <p>We map your current workflows and identify the highest-impact systems to install first.</p>
       </div>
-      <div class="stat reveal">
-        <div class="stat-number">30<span>+</span></div>
-        <div class="stat-label">Destinations across North America powered by Whereabouts technology</div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <h3>Install</h3>
+        <p>We build and deploy your Destination Operating System &mdash; tailored to your organization, but based on proven modules.</p>
       </div>
-      <div class="stat reveal">
-        <div class="stat-number">15<span>+</span></div>
-        <div class="stat-label">Years of national park tourism operations across Canada</div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <h3>Run &amp; Improve</h3>
+        <p>We refine and maintain the system as your needs evolve and the tools improve.</p>
       </div>
-      <div class="stat reveal">
-        <div class="stat-number">2</div>
-        <div class="stat-label">Signed MOUs with Parks Canada and Via Rail</div>
+    </div>
+    <p class="replaces-label anim">What this replaces</p>
+    <div class="replaces-grid anim">
+      <div class="replaces-col before">
+        <h4>Before:</h4>
+        <ul>
+          <li>Manual content creation</li>
+          <li>Last-minute reporting</li>
+          <li>Inconsistent communication</li>
+          <li>Constant backlog</li>
+        </ul>
+      </div>
+      <div class="replaces-col after">
+        <h4>After:</h4>
+        <ul>
+          <li>Content runs on schedule</li>
+          <li>Reports generate automatically</li>
+          <li>Partners stay informed</li>
+          <li>Your team has time to think again</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
-
-<!-- MY BUSINESSES -->
-<section class="ventures" id="ventures">
-  <div class="ventures-inner">
-    <div class="ventures-header">
-      <h2 class="reveal">My<br><em>Businesses</em></h2>
-      <p class="reveal">Not ideas or proposals. Operating systems already in market, serving real travellers and real destinations every day.</p>
-    </div>
-    <div class="ventures-list">
-      <a href="https://www.parkbus.ca" target="_blank" class="venture-row reveal">
-        <div class="venture-left">
-          <span class="venture-infra-tag">Transportation infrastructure</span>
-          <span class="venture-name">Parkbus</span>
-          <span class="venture-url">parkbus.ca</span>
-        </div>
-        <div class="venture-right">
-          <span class="venture-desc">Getting Canadians out of the city and into the wild since 2010.</span>
-        </div>
-        <span class="venture-arrow">→</span>
-      </a>
-      <a href="https://www.whereabouts.tech" target="_blank" class="venture-row reveal">
-        <div class="venture-left">
-          <span class="venture-infra-tag">Digital infrastructure</span>
-          <span class="venture-name">Whereabouts</span>
-          <span class="venture-url">whereabouts.tech</span>
-        </div>
-        <div class="venture-right">
-          <span class="venture-desc">Destination management software. Tourism Innovator of the Year.</span>
-        </div>
-        <span class="venture-arrow">→</span>
-      </a>
-      <a href="#" class="venture-row reveal">
-        <div class="venture-left">
-          <span class="venture-infra-tag">Experience infrastructure</span>
-          <span class="venture-name">Visit Canada Parks</span>
-          <span class="venture-url">visitcanadaparks.com</span>
-        </div>
-        <div class="venture-right">
-          <span class="venture-desc">Curated overnight experiences in partnership with Parks Canada and Via Rail.</span>
-        </div>
-        <span class="venture-arrow">→</span>
-      </a>
-      <a href="https://www.poweredbytourism.com" target="_blank" class="venture-row reveal">
-        <div class="venture-left">
-          <span class="venture-infra-tag">Tools for tourism teams</span>
-          <span class="venture-name">Powered by Tourism</span>
-          <span class="venture-url">poweredbytourism.com</span>
-        </div>
-        <div class="venture-right">
-          <span class="venture-desc">Practical AI systems for the people running tourism operations.</span>
-        </div>
-        <span class="venture-arrow">→</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-inner">
-    <div class="contact-left reveal">
-      <p class="section-label">Get in Touch</p>
-      <h2>Let's build<br>something<br><em>worth visiting.</em></h2>
-      <p>I work with destinations, DMOs, tourism businesses, and government partners who understand that marketing alone isn't enough. You need the infrastructure to back it up. Let's talk about what we can build together.</p>
-      <a href="mailto:matthew@poweredbytourism.com" class="btn-primary" style="display:inline-block; margin-top:2.5rem;">matthew@poweredbytourism.com</a>
-    </div>
-    <div class="contact-right reveal">
-      <div class="contact-item">
-        <span class="contact-item-label">Speaking &amp; Keynotes</span>
-        <span class="contact-item-value">I speak at tourism conferences and industry events across Canada on <em>"The Four Stakeholders That Make a Destination Work"</em> and <em>"Tourism Infrastructure: Why the best destinations are built, not marketed."</em></span>
+<section class="fit">
+  <div class="container">
+    <h2 class="anim">Is this right for you?</h2>
+    <div class="fit-columns anim">
+      <div class="fit-col good">
+        <h3>This works great if&hellip;</h3>
+        <ul>
+          <li>Your team is small or stretched thin</li>
+          <li>You're being asked to increase output without increasing budget</li>
+          <li>You want practical systems, not theory</li>
+          <li>You know AI matters but need a clear way forward</li>
+          <li>Things fall behind because there's never enough time</li>
+        </ul>
       </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Building Together</span>
-        <span class="contact-item-value">I don't advise. I build. If you're a destination, DMO, or operator ready to move from overlooked to overbooked, let's build the infrastructure together.</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Partnerships</span>
-        <span class="contact-item-value">Parks agencies, transportation operators, Indigenous tourism, regional destinations. If you're building tourism infrastructure, let's connect.</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Find Me</span>
-        <span class="contact-item-value"><a href="https://www.linkedin.com/in/matthewhardythomas/" style="color: var(--moss); text-decoration: none; border-bottom: 1px solid var(--moss);">LinkedIn</a></span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Based in</span>
-        <span class="contact-item-value">Canada, operating nationally from Vancouver to Halifax</span>
+      <div class="fit-col bad">
+        <h3>Probably not the fit if&hellip;</h3>
+        <ul>
+          <li>You think AI is a trend</li>
+          <li>You're starting from zero (no data, no channels)</li>
+          <li>You're not open to changing how work gets done</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
-
+<hr class="divider">
+<!-- FINAL CTA -->
+<section class="final-cta" id="audit">
+  <div class="container">
+    <h2 class="anim"><span class="grad-text">Start with the audit.</span></h2>
+    <p class="cta-details anim">45 minutes. We map where your time is going, identify the biggest opportunity, and give you a clear plan.</p>
+    <p class="cta-reassurance anim">If it makes sense to work together, we'll build the first system. If not, you still leave with something useful.</p>
+    <div class="anim">
+      <a href="https://calendar.app.google/XSAg23hX6PWDaGCt9" class="btn btn-white">Book Your Free Audit &rarr;</a>
+    </div>
+    <p class="cta-email anim">or email: <a href="mailto:Matthew@PoweredByTourism.com">Matthew@PoweredByTourism.com</a></p>
+    <!-- Dark report pages -->
+    <div class="cta-reports anim">
+      <div class="report-stack small dark">
+        <div class="report-page">
+          <div class="rp-header">
+            <div class="rp-logo-bar"><div class="rp-logo-dot"></div><div class="rp-date">March 2026</div></div>
+            <div class="rp-title">Operations Audit</div>
+            <div class="rp-subtitle">Destination Overview &amp; Findings</div>
+          </div>
+          <div class="rp-body">
+            <div class="rp-section-label">Time Allocation</div>
+            <div class="rp-bar-chart" style="height:32px">
+              <div class="rp-bar"></div><div class="rp-bar"></div><div class="rp-bar"></div>
+              <div class="rp-bar"></div><div class="rp-bar"></div><div class="rp-bar"></div>
+            </div>
+            <div class="rp-lines">
+              <div class="rp-line long"></div>
+              <div class="rp-line med"></div>
+              <div class="rp-line short"></div>
+            </div>
+          </div>
+        </div>
+        <div class="report-page">
+          <div class="rp-header">
+            <div class="rp-logo-bar"><div class="rp-logo-dot"></div><div class="rp-date">Audit Report</div></div>
+            <div class="rp-title">Capacity Analysis</div>
+            <div class="rp-subtitle">Where your time goes</div>
+          </div>
+          <div class="rp-body">
+            <div class="rp-stat-row">
+              <div class="rp-stat-box"><div class="rp-stat-num">62%</div><div class="rp-stat-lbl">Admin</div></div>
+              <div class="rp-stat-box"><div class="rp-stat-num">23%</div><div class="rp-stat-lbl">Strategy</div></div>
+              <div class="rp-stat-box"><div class="rp-stat-num">15%</div><div class="rp-stat-lbl">Growth</div></div>
+            </div>
+            <div class="rp-lines">
+              <div class="rp-line accent" style="width:85%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="report-page">
+          <div class="rp-header">
+            <div class="rp-logo-bar"><div class="rp-logo-dot"></div><div class="rp-date">Action Plan</div></div>
+            <div class="rp-title">Recommendations</div>
+            <div class="rp-subtitle">90-day roadmap</div>
+          </div>
+          <div class="rp-body">
+            <div class="rp-section-label">Priority Systems</div>
+            <div class="rp-checklist">
+              <div class="rp-check-item"><div class="rp-check-dot filled"></div>Board reporting</div>
+              <div class="rp-check-item"><div class="rp-check-dot filled"></div>Partner newsletter</div>
+              <div class="rp-check-item"><div class="rp-check-dot"></div>Content calendar</div>
+              <div class="rp-check-item"><div class="rp-check-dot"></div>AI search audit</div>
+              <div class="rp-check-item"><div class="rp-check-dot"></div>Data consolidation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="blog-section">
+  <div class="container-wide">
+    <h2 class="anim">From the blog</h2>
+    <p class="section-sub anim">Thinking about AI, operations, and destination marketing.</p>
+    <div class="blog-cards anim">
+      <a href="/blog/reporting.html" class="blog-card">
+        <div class="blog-card-accent"></div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Reporting</div>
+          <h3 class="blog-card-title">I Used to Write Those 40-Page Reports. Here's What I'd Build Instead.</h3>
+          <p class="blog-card-excerpt">DMO reporting doesn't have to be a quarterly fire drill. There's a way to get the same result in a fraction of the time.</p>
+        </div>
+        <div class="blog-card-footer">
+          <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f219675811d1fa145bf292_matthew-hardy-thomas-crop.jpg" alt="">
+          <span class="author">Matthew Hardy Thomas</span>
+          <span class="read-time">12 min read</span>
+        </div>
+      </a>
+      <a href="/blog/strategy-needs-a-system" class="blog-card">
+        <div class="blog-card-accent"></div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Strategy &amp; Systems</div>
+          <h3 class="blog-card-title">Your Destination Has a Strategy. Now It Needs a System.</h3>
+          <p class="blog-card-excerpt">Most destination marketing plans are thorough, well-researched, and sitting in a drawer. Here is how to turn strategy into something that actually runs.</p>
+        </div>
+        <div class="blog-card-footer">
+          <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f219675811d1fa145bf292_matthew-hardy-thomas-crop.jpg" alt="">
+          <span class="author">Matthew Hardy Thomas</span>
+          <span class="read-time">8 min read</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
 <footer>
-  <p>&copy; 2026 Matthew Hardy Thomas</p>
-  <p>Access &times; Design &times; Operations</p>
+  <div class="container">
+    <p class="footer-brand">Powered by Tourism</p>
+    <p class="footer-tagline">Practical AI for destination marketing teams</p>
+  </div>
 </footer>
-
 <script>
-  // Nav scroll effect
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
-
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
+// Standard scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+// Timeline staggered animation
+const timelineEl = document.getElementById('timeline');
+const tlItems = document.querySelectorAll('.tl-item');
+let timelineTriggered = false;
+const tlObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !timelineTriggered) {
+      timelineTriggered = true;
+      // Activate the gradient line
+      timelineEl.classList.add('active');
+      // Stagger each item
+      tlItems.forEach((item, i) => {
         setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 100);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
-</script>
+          item.classList.add('visible');
+        }, 300 + (i * 400));
+      });
+    }
+  });
+}, { threshold: 0.15 });
+if (timelineEl) tlObserver.observe(timelineEl);
+// Fan animation for report stacks — triggers once on scroll into view
+const stackObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('fanned');
+      stackObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.report-stack').forEach(s => stackObserver.observe(s));
 
+// One-time nudge when CTA button scrolls into view
+const nudgeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('nudge-triggered'), 700);
+      nudgeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.8 });
+document.querySelectorAll('.btn-nudge').forEach(b => nudgeObserver.observe(b));
+
+// Smooth scroll for internal anchor links
+document.querySelectorAll('a[href="#audit"]').forEach(link => {
+  link.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('audit').scrollIntoView({ behavior: 'smooth' }); });
+});
+</script>
 </body>
 </html>
