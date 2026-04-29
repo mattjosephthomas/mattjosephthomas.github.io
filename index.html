@@ -82,6 +82,12 @@
     margin: 0 auto;
     position: relative;
   }
+  .hero-top {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 4rem;
+    align-items: end;
+  }
   .hero-eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
@@ -598,6 +604,56 @@
     opacity: 0.3;
   }
 
+  /* HERO PORTRAIT */
+  .hero-portrait img {
+    width: 100%;
+    display: block;
+    filter: grayscale(15%);
+    border-radius: 2px;
+  }
+  .hero-portrait {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  /* PROOF PHOTO */
+  .proof-photo {
+    grid-column: 1 / -1;
+    margin-top: 4rem;
+    border-top: 1px solid rgba(26,23,16,0.12);
+    padding-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .proof-photo img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+  }
+  .proof-photo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+  .proof-photo-caption {
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+  }
+
+  @media (max-width: 900px) {
+    .proof-photo { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+
   /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
@@ -621,6 +677,8 @@
   /* RESPONSIVE */
   @media (max-width: 900px) {
     .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-top { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-portrait { max-width: 260px; }
     .hero-body { grid-template-columns: 1fr; gap: 2rem; }
     .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
     .work-grid, .framework-grid { grid-template-columns: 1fr; }
@@ -655,22 +713,25 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">Canadian Tourism Strategist &amp; Operator</p>
-  <h1 class="hero-headline">
-    Building Canada's<br>
-    <em>tourism</em> infrastructure.
-  </h1>
-  <div class="hero-body">
+  <div class="hero-top">
     <div>
+      <p class="hero-eyebrow">Canadian Tourism Strategist &amp; Operator</p>
+      <h1 class="hero-headline">
+        Building Canada's<br>
+        <em>tourism</em> infrastructure.
+      </h1>
       <p class="hero-sub">
         I build the infrastructure that gets people to places worth visiting. The buses that bring travellers from cities into the wild. The booking platforms that power 30+ destinations. The trip packages that turn world-class outdoor spaces into places you can actually visit. <strong style="color: var(--moss); font-weight: 500;">I don't advise. I build.</strong>
       </p>
     </div>
-    <div class="hero-case">
-      <p class="hero-case-label">Case in point: Algonquin Park</p>
-      <p>Over 800,000 people visit Algonquin every year, making it Canada's most iconic provincial park. The outfitters, lodges, and experience providers are world-class. The problem was never the product. <em>It was the missing infrastructure connecting them to the people who wanted to come.</em> I built that infrastructure: the transportation routes, the booking systems, and the overnight trip packages that bring travellers from Toronto and beyond directly into Algonquin's economy.</p>
-      <p class="algonquin-punchline">Algonquin isn't unique. Most destinations don't have a demand problem. They have an access and coordination problem. That's the gap I close.</p>
+    <div class="hero-portrait">
+      <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f219e896f9f5a6efef8c8c_matthew-hardy-thomaspng.png" alt="Matthew Hardy Thomas">
     </div>
+  </div>
+  <div class="hero-case" style="margin-top: 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s;">
+    <p class="hero-case-label">Case in point: Algonquin Park</p>
+    <p>Over 800,000 people visit Algonquin every year, making it Canada's most iconic provincial park. The outfitters, lodges, and experience providers are world-class. The problem was never the product. <em>It was the missing infrastructure connecting them to the people who wanted to come.</em> I built that infrastructure: the transportation routes, the booking systems, and the overnight trip packages that bring travellers from Toronto and beyond directly into Algonquin's economy.</p>
+    <p class="algonquin-punchline">Algonquin isn't unique. Most destinations don't have a demand problem. They have an access and coordination problem. That's the gap I close.</p>
   </div>
   <div class="hero-bottom">
     <p class="hero-trusted">Trusted by <strong>Parks Canada</strong>, <strong>Via Rail</strong>, and tourism boards across the country.</p>
@@ -788,6 +849,13 @@
       <div class="stat reveal">
         <div class="stat-number">2</div>
         <div class="stat-label">Signed MOUs with Parks Canada and Via Rail</div>
+      </div>
+    </div>
+    <div class="proof-photo reveal">
+      <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f21a540c638edb1fee2d9e_matthew-thomas-web.jpeg" alt="Whereabouts team receiving Tourism Innovator of the Year award">
+      <div>
+        <p class="proof-photo-text">Receiving the Tourism Innovator of the Year award for Whereabouts — destination management software now powering 30+ communities across North America.</p>
+        <p class="proof-photo-caption">Tourism Innovator of the Year</p>
       </div>
     </div>
   </div>
