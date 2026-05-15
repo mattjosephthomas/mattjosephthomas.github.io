@@ -1,971 +1,1232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matthew Hardy Thomas — Building Canada's Tourism Infrastructure</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1A1A18;
-    --ink-light: #4A4A45;
-    --ink-faint: #8A8A82;
-    --paper: #FAF8F4;
-    --moss: #3A5A40;
-    --rust: #C4704B;
-    --mist: #8a9a8e;
-    --cream: #F5F0E8;
-    --gold: #c9a84c;
-    --rule: #D4CFC4;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-  ::selection {
-    background: var(--rust);
-    color: var(--paper);
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matthew Hardy Thomas — Building Canada's Tourism Infrastructure</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1A1A18;
+      --ink-light: #4A4A45;
+      --ink-faint: #8A8A82;
+      --paper: #FAF8F4;
+      --moss: #3A5A40;
+      --rust: #C4704B;
+      --mist: #8a9a8e;
+      --cream: #F5F0E8;
+      --gold: #c9a84c;
+      --rule: #D4CFC4;
+    }
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 50;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background: rgba(250,248,244,0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
-  }
-  nav.scrolled {
-    border-bottom-color: rgba(26,23,16,0.1);
-  }
-  .nav-mark {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--moss);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    opacity: 0.5;
-    transition: opacity 0.3s;
-  }
-  .nav-links a:hover { opacity: 1; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 5rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .hero-top {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 4rem;
-    align-items: end;
-  }
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 2rem;
-  }
-  .hero-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 5.5vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--ink);
-    max-width: 700px;
-  }
-  .hero-headline em { font-style: italic; color: var(--moss); }
-  .hero-sub {
-    margin-top: 2.5rem;
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--ink);
-    opacity: 0.7;
-    max-width: 560px;
-  }
-  .hero-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-top: 3rem;
-    align-items: start;
-  }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
 
-  /* CASE STUDY CALLOUT */
-  .hero-case {
-    padding: 1.5rem;
-    border-left: 3px solid var(--rust);
-    background: rgba(196,112,75,0.05);
-  }
-  .hero-case-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 0.6rem;
-  }
-  .hero-case p {
-    font-size: 0.9rem;
-    line-height: 1.75;
-    color: var(--ink);
-    opacity: 0.8;
-  }
-  .hero-case p em {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--moss);
-    opacity: 1;
-  }
-  .hero-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--rule);
-  }
-  .hero-trusted {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--ink);
-    opacity: 0.85;
-    line-height: 1.5;
-  }
-  .hero-trusted strong {
-    font-style: normal;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    color: var(--moss);
-  }
-  .algonquin-punchline {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(196,112,75,0.25);
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: var(--moss);
-  }
-  .btn-primary {
-    display: inline-block;
-    padding: 0.85rem 2.2rem;
-    background: var(--moss);
-    color: var(--paper);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.3s;
-  }
-  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
-  .hero-meta {
-    display: flex;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-  }
-  .hero-meta-item {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--mist);
-  }
-  .hero-meta-item strong {
-    display: block;
-    color: var(--ink);
-    font-weight: 500;
-    font-size: 0.88rem;
-    text-transform: none;
-    letter-spacing: 0;
-    margin-top: 0.2rem;
-  }
+    ::selection {
+      background: var(--rust);
+      color: var(--paper);
+    }
 
-  /* MANIFESTO */
-  .manifesto {
-    background: var(--moss);
-    color: var(--paper);
-    padding: 6rem 3rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .manifesto::before {
-    content: '\201C';
-    position: absolute;
-    top: -2rem; left: 2rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20rem;
-    color: var(--paper);
-    opacity: 0.04;
-    line-height: 1;
-    pointer-events: none;
-  }
-  .manifesto-inner { max-width: 900px; margin: 0 auto; }
-  .manifesto-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2.5rem;
-  }
-  .manifesto-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
-    font-weight: 300;
-    line-height: 1.45;
-    color: var(--paper);
-  }
-  .manifesto-text strong { font-weight: 600; font-style: italic; }
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: rgba(250,248,244,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
 
-  /* PREDICTION STRIP */
-  .prediction {
-    background: var(--ink);
-    padding: 4rem 3rem;
-  }
-  .prediction-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-  .prediction-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    white-space: nowrap;
-  }
-  .prediction-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.3rem, 2vw, 1.7rem);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--paper);
-    line-height: 1.5;
-    opacity: 0.9;
-  }
+    nav.scrolled {
+      border-bottom-color: rgba(26,23,16,0.1);
+    }
 
-  /* WHAT I DO */
-  .work { padding: 8rem 3rem; background: var(--cream); }
-  .work-inner { max-width: 1100px; margin: 0 auto; }
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 4rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .section-label::after {
-    content: '';
-    display: block;
-    height: 1px;
-    width: 60px;
-    background: var(--rust);
-    opacity: 0.4;
-  }
-  .work-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    border-top: 1px solid rgba(26,23,16,0.12);
-  }
-  .work-item {
-    padding: 3rem 2.5rem 3rem 0;
-    border-right: 1px solid rgba(26,23,16,0.12);
-  }
-  .work-item:last-child { border-right: none; padding-right: 0; }
-  .work-item:not(:first-child) { padding-left: 2.5rem; }
-  .work-problem {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--rust);
-    margin-bottom: 1rem;
-    line-height: 1.4;
-  }
-  .work-number {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: var(--mist);
-    margin-bottom: 1rem;
-  }
-  .work-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
-  .work-title em { font-style: italic; color: var(--moss); }
-  .work-desc { font-size: 0.9rem; line-height: 1.8; color: var(--ink); opacity: 0.65; }
-  .work-tag {
-    display: inline-block;
-    margin-top: 1.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--rust);
-    border-bottom: 1px solid var(--rust);
-    padding-bottom: 2px;
-    opacity: 0.7;
-  }
+    .nav-mark {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--moss);
+      text-decoration: none;
+    }
 
-  /* FRAMEWORK */
-  .framework { padding: 8rem 3rem; background: var(--paper); }
-  .framework-inner { max-width: 1100px; margin: 0 auto; }
-  .framework-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    margin-bottom: 5rem;
-    align-items: end;
-  }
-  .framework-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 300;
-    line-height: 1.1;
-  }
-  .framework-header h2 em { font-style: italic; color: var(--moss); }
-  .framework-header p { font-size: 0.9rem; line-height: 1.8; opacity: 0.6; }
-  .framework-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    border-top: 1px solid rgba(26,23,16,0.12);
-  }
-  .framework-item {
-    padding: 2.5rem 2rem 2.5rem 0;
-    border-right: 1px solid rgba(26,23,16,0.12);
-  }
-  .framework-item:last-child { border-right: none; padding-right: 0; }
-  .framework-item:not(:first-child) { padding-left: 2rem; }
-  .framework-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    font-weight: 300;
-    color: var(--ink);
-    opacity: 0.1;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-  .framework-type {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    font-style: italic;
-    color: var(--moss);
-    margin-bottom: 0.75rem;
-    line-height: 1.2;
-  }
-  .framework-desc { font-size: 0.85rem; line-height: 1.75; color: var(--ink); opacity: 0.6; }
-  .framework-cta { margin-top: 4rem; text-align: center; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 
-  /* PROOF */
-  .proof { padding: 8rem 3rem; background: var(--cream); }
-  .proof-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 6rem;
-    align-items: start;
-  }
-  .proof-left h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 300;
-    line-height: 1.1;
-  }
-  .proof-left h2 em { font-style: italic; color: var(--moss); }
-  .proof-left p { margin-top: 1.5rem; font-size: 0.9rem; line-height: 1.8; opacity: 0.6; }
-  .proof-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .stat { border-top: 1px solid rgba(26,23,16,0.15); padding-top: 1.5rem; }
-  .stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    font-weight: 300;
-    line-height: 1;
-    color: var(--ink);
-  }
-  .stat-number span { font-size: 1.5rem; vertical-align: super; color: var(--rust); }
-  .stat-label {
-    margin-top: 0.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink);
-    opacity: 0.5;
-    line-height: 1.6;
-  }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
 
-  /* VENTURES */
-  .ventures { background: var(--ink); color: var(--paper); padding: 8rem 3rem; }
-  .ventures-inner { max-width: 1100px; margin: 0 auto; }
-  .ventures-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 5rem;
-    align-items: end;
-  }
-  .ventures-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--paper);
-  }
-  .ventures-header h2 em { font-style: italic; color: var(--gold); }
-  .ventures-header p { font-size: 0.9rem; line-height: 1.8; color: var(--paper); opacity: 0.5; }
-  .ventures-list { display: flex; flex-direction: column; }
-  .venture-row {
-    display: grid;
-    grid-template-columns: 1fr 2fr auto;
-    align-items: start;
-    padding: 2.5rem 0;
-    border-top: 1px solid rgba(244,240,232,0.1);
-    text-decoration: none;
-    color: inherit;
-    gap: 4rem;
-    cursor: pointer;
-    transition: padding-left 0.3s;
-  }
-  .venture-row:last-child { border-bottom: 1px solid rgba(244,240,232,0.1); }
-  .venture-row:hover { padding-left: 0.5rem; }
-  .venture-row:hover .venture-name { color: var(--gold); }
-  .venture-row:hover .venture-arrow { opacity: 1; transform: translateX(6px); }
-  .venture-left {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .venture-infra-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-  }
-  .venture-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 400;
-    line-height: 1;
-    color: var(--paper);
-    transition: color 0.3s;
-  }
-  .venture-url {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    color: var(--paper);
-    opacity: 0.4;
-    margin-top: 0.4rem;
-  }
-  .venture-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding-top: 0.5rem;
-  }
-  .venture-desc {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--paper);
-    opacity: 0.6;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-  }
-  .venture-arrow {
-    font-size: 1.5rem;
-    color: var(--gold);
-    opacity: 0.3;
-    justify-self: end;
-    align-self: center;
-    transition: opacity 0.3s, transform 0.3s;
-  }
+    .nav-links a:hover { opacity: 1; }
 
-  /* CONTACT */
-  .contact { background: var(--cream); padding: 8rem 3rem; position: relative; overflow: hidden; }
-  .contact::after {
-    content: "LET'S TALK";
-    position: absolute;
-    bottom: -3rem; right: -1rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14rem;
-    font-weight: 300;
-    color: var(--ink);
-    opacity: 0.03;
-    pointer-events: none;
-    white-space: nowrap;
-  }
-  .contact-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8rem;
-    align-items: start;
-  }
-  .contact-left h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.8rem, 5vw, 5rem);
-    font-weight: 300;
-    line-height: 1.05;
-  }
-  .contact-left h2 em { font-style: italic; color: var(--moss); }
-  .contact-left p { margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.8; opacity: 0.6; max-width: 380px; }
-  .contact-right { display: flex; flex-direction: column; padding-top: 0.5rem; }
-  .contact-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid rgba(26,23,16,0.1);
-  }
-  .contact-item:first-child { padding-top: 0; }
-  .contact-item:last-child { border-bottom: none; }
-  .contact-item-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--rust);
-  }
-  .contact-item-value { font-size: 0.9rem; line-height: 1.7; color: var(--ink); opacity: 0.75; }
-  .contact-item-value em {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--moss);
-  }
+    /* HAMBURGER BUTTON */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      z-index: 60;
+      background: none;
+      border: none;
+      padding: 0;
+    }
 
-  footer {
-    background: var(--ink);
-    padding: 2.5rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  footer p {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--paper);
-    opacity: 0.3;
-  }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      margin: 3px 0;
+    }
 
-  /* HERO PORTRAIT */
-  .hero-portrait img {
-    width: 100%;
-    display: block;
-    filter: grayscale(15%);
-    border-radius: 2px;
-  }
-  .hero-portrait {
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.5s;
-  }
+    .nav-hamburger.active span:nth-child(1) {
+      transform: translateY(4.5px) rotate(45deg);
+    }
 
-  /* PROOF PHOTO */
-  .proof-photo {
-    grid-column: 1 / -1;
-    margin-top: 4rem;
-    border-top: 1px solid rgba(26,23,16,0.12);
-    padding-top: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-  .proof-photo img {
-    width: 100%;
-    display: block;
-    border-radius: 2px;
-  }
-  .proof-photo-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.5;
-    color: var(--ink);
-    opacity: 0.7;
-  }
-  .proof-photo-caption {
-    margin-top: 1rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--mist);
-  }
+    .nav-hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
 
-  @media (max-width: 900px) {
-    .proof-photo { grid-template-columns: 1fr; gap: 1.5rem; }
-  }
+    .nav-hamburger.active span:nth-child(3) {
+      transform: translateY(-4.5px) rotate(-45deg);
+    }
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-eyebrow { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
-  .hero-headline { opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
-  .hero-body { opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
-  .hero-bottom { opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+    /* MOBILE SLIDE-IN MENU */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--paper);
+      z-index: 55;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 6rem 2rem 3rem;
+      box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+    }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .hero { padding: 7rem 1.5rem 4rem; }
-    .hero-top { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-portrait { max-width: 260px; }
-    .hero-body { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-    .work-grid, .framework-grid { grid-template-columns: 1fr; }
-    .work-item, .framework-item { border-right: none; border-bottom: 1px solid rgba(26,23,16,0.12); padding: 2.5rem 0; }
-    .work-item:not(:first-child), .framework-item:not(:first-child) { padding-left: 0; }
-    .proof-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .ventures-header, .framework-header { grid-template-columns: 1fr; gap: 1rem; }
-    .venture-row { grid-template-columns: 1fr auto; gap: 1.5rem; }
-    .venture-right { grid-column: 1 / -1; padding-top: 0; }
-    .venture-name { font-size: 1.8rem; }
-    .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
-    .prediction-inner { grid-template-columns: 1fr; gap: 1rem; }
-    nav { padding: 1.5rem; }
-    .nav-links { display: none; }
-    section, .work, .framework, .proof, .ventures, .contact, .manifesto, .prediction { padding-left: 1.5rem; padding-right: 1.5rem; }
-  }
-</style>
+    .mobile-menu a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(26,23,16,0.08);
+      opacity: 0.6;
+      transition: opacity 0.3s, padding-left 0.3s;
+    }
+
+    .mobile-menu a:first-child {
+      border-top: 1px solid rgba(26,23,16,0.08);
+    }
+
+    .mobile-menu a:hover {
+      opacity: 1;
+      padding-left: 0.5rem;
+    }
+
+    /* OVERLAY */
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(26,23,16,0.3);
+      z-index: 52;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-top {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 2rem;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--ink);
+      max-width: 700px;
+    }
+
+    .hero-headline em { font-style: italic; color: var(--moss); }
+
+    .hero-sub {
+      margin-top: 2.5rem;
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--ink);
+      opacity: 0.7;
+      max-width: 560px;
+    }
+
+    .hero-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    /* CASE STUDY CALLOUT */
+    .hero-case {
+      padding: 1.5rem;
+      border-left: 3px solid var(--rust);
+      background: rgba(196,112,75,0.05);
+    }
+
+    .hero-case-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-case p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--ink);
+      opacity: 0.8;
+    }
+
+    .hero-case p em {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--moss);
+      opacity: 1;
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .hero-trusted {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--ink);
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+
+    .hero-trusted strong {
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      color: var(--moss);
+    }
+
+    .algonquin-punchline {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(196,112,75,0.25);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: var(--moss);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      background: var(--moss);
+      color: var(--paper);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
+
+    .hero-meta {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mist);
+    }
+
+    .hero-meta-item strong {
+      display: block;
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 0.88rem;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-top: 0.2rem;
+    }
+
+    /* MANIFESTO */
+    .manifesto {
+      background: var(--moss);
+      color: var(--paper);
+      padding: 6rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manifesto::before {
+      content: '\201C';
+      position: absolute;
+      top: -2rem; left: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20rem;
+      color: var(--paper);
+      opacity: 0.04;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .manifesto-inner { max-width: 900px; margin: 0 auto; }
+
+    .manifesto-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2.5rem;
+    }
+
+    .manifesto-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.45;
+      color: var(--paper);
+    }
+
+    .manifesto-text strong { font-weight: 600; font-style: italic; }
+
+    /* PREDICTION STRIP */
+    .prediction {
+      background: var(--ink);
+      padding: 4rem 3rem;
+    }
+
+    .prediction-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .prediction-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .prediction-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--paper);
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    /* WHAT I DO */
+    .work { padding: 8rem 3rem; background: var(--cream); }
+    .work-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 60px;
+      background: var(--rust);
+      opacity: 0.4;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-top: 1px solid rgba(26,23,16,0.12);
+    }
+
+    .work-item {
+      padding: 3rem 2.5rem 3rem 0;
+      border-right: 1px solid rgba(26,23,16,0.12);
+    }
+
+    .work-item:last-child { border-right: none; padding-right: 0; }
+    .work-item:not(:first-child) { padding-left: 2.5rem; }
+
+    .work-problem {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--rust);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .work-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--mist);
+      margin-bottom: 1rem;
+    }
+
+    .work-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .work-title em { font-style: italic; color: var(--moss); }
+
+    .work-desc { font-size: 0.9rem; line-height: 1.8; color: var(--ink); opacity: 0.65; }
+
+    .work-tag {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rust);
+      border-bottom: 1px solid var(--rust);
+      padding-bottom: 2px;
+      opacity: 0.7;
+    }
+
+    /* FRAMEWORK */
+    .framework { padding: 8rem 3rem; background: var(--paper); }
+    .framework-inner { max-width: 1100px; margin: 0 auto; }
+
+    .framework-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      margin-bottom: 5rem;
+      align-items: end;
+    }
+
+    .framework-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .framework-header h2 em { font-style: italic; color: var(--moss); }
+    .framework-header p { font-size: 0.9rem; line-height: 1.8; opacity: 0.6; }
+
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid rgba(26,23,16,0.12);
+    }
+
+    .framework-item {
+      padding: 2.5rem 2rem 2.5rem 0;
+      border-right: 1px solid rgba(26,23,16,0.12);
+    }
+
+    .framework-item:last-child { border-right: none; padding-right: 0; }
+    .framework-item:not(:first-child) { padding-left: 2rem; }
+
+    .framework-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--ink);
+      opacity: 0.1;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .framework-type {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--moss);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .framework-desc { font-size: 0.85rem; line-height: 1.75; color: var(--ink); opacity: 0.6; }
+
+    .framework-cta { margin-top: 4rem; text-align: center; }
+
+    /* PROOF */
+    .proof { padding: 8rem 3rem; background: var(--cream); }
+
+    .proof-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .proof-left h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .proof-left h2 em { font-style: italic; color: var(--moss); }
+    .proof-left p { margin-top: 1.5rem; font-size: 0.9rem; line-height: 1.8; opacity: 0.6; }
+
+    .proof-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+
+    .stat { border-top: 1px solid rgba(26,23,16,0.15); padding-top: 1.5rem; }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .stat-number span { font-size: 1.5rem; vertical-align: super; color: var(--rust); }
+
+    .stat-label {
+      margin-top: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.5;
+      line-height: 1.6;
+    }
+
+    /* VENTURES */
+    .ventures { background: var(--ink); color: var(--paper); padding: 8rem 3rem; }
+    .ventures-inner { max-width: 1100px; margin: 0 auto; }
+
+    .ventures-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: end;
+    }
+
+    .ventures-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--paper);
+    }
+
+    .ventures-header h2 em { font-style: italic; color: var(--gold); }
+    .ventures-header p { font-size: 0.9rem; line-height: 1.8; color: var(--paper); opacity: 0.5; }
+
+    .ventures-list { display: flex; flex-direction: column; }
+
+    .venture-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr auto;
+      align-items: start;
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(244,240,232,0.1);
+      text-decoration: none;
+      color: inherit;
+      gap: 4rem;
+      cursor: pointer;
+      transition: padding-left 0.3s;
+    }
+
+    .venture-row:last-child { border-bottom: 1px solid rgba(244,240,232,0.1); }
+    .venture-row:hover { padding-left: 0.5rem; }
+    .venture-row:hover .venture-name { color: var(--gold); }
+    .venture-row:hover .venture-arrow { opacity: 1; transform: translateX(6px); }
+
+    .venture-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .venture-infra-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    .venture-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--paper);
+      transition: color 0.3s;
+    }
+
+    .venture-url {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--paper);
+      opacity: 0.4;
+      margin-top: 0.4rem;
+    }
+
+    .venture-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding-top: 0.5rem;
+    }
+
+    .venture-desc {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--paper);
+      opacity: 0.6;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
+
+    .venture-arrow {
+      font-size: 1.5rem;
+      color: var(--gold);
+      opacity: 0.3;
+      justify-self: end;
+      align-self: center;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    /* CONTACT */
+    .contact { background: var(--cream); padding: 8rem 3rem; position: relative; overflow: hidden; }
+
+    .contact::after {
+      content: "LET'S TALK";
+      position: absolute;
+      bottom: -3rem; right: -1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14rem;
+      font-weight: 300;
+      color: var(--ink);
+      opacity: 0.03;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+    }
+
+    .contact-left h2 em { font-style: italic; color: var(--moss); }
+    .contact-left p { margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.8; opacity: 0.6; max-width: 380px; }
+
+    .contact-right { display: flex; flex-direction: column; padding-top: 0.5rem; }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(26,23,16,0.1);
+    }
+
+    .contact-item:first-child { padding-top: 0; }
+    .contact-item:last-child { border-bottom: none; }
+
+    .contact-item-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+
+    .contact-item-value { font-size: 0.9rem; line-height: 1.7; color: var(--ink); opacity: 0.75; }
+
+    .contact-item-value em {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--moss);
+    }
+
+    footer {
+      background: var(--ink);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--paper);
+      opacity: 0.3;
+    }
+
+    /* HERO PORTRAIT */
+    .hero-portrait img {
+      width: 100%;
+      display: block;
+      filter: grayscale(15%);
+      border-radius: 2px;
+    }
+
+    .hero-portrait {
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+
+    /* PROOF PHOTO */
+    .proof-photo {
+      grid-column: 1 / -1;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(26,23,16,0.12);
+      padding-top: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .proof-photo img {
+      width: 100%;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .proof-photo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--ink);
+      opacity: 0.7;
+    }
+
+    .proof-photo-caption {
+      margin-top: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+
+    @media (max-width: 900px) {
+      .proof-photo { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+    .hero-headline { opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+    .hero-body { opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+    .hero-bottom { opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .hero-top { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-portrait { max-width: 260px; }
+      .hero-body { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .work-grid, .framework-grid { grid-template-columns: 1fr; }
+      .work-item, .framework-item { border-right: none; border-bottom: 1px solid rgba(26,23,16,0.12); padding: 2.5rem 0; }
+      .work-item:not(:first-child), .framework-item:not(:first-child) { padding-left: 0; }
+      .proof-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .ventures-header, .framework-header { grid-template-columns: 1fr; gap: 1rem; }
+      .venture-row { grid-template-columns: 1fr auto; gap: 1.5rem; }
+      .venture-right { grid-column: 1 / -1; padding-top: 0; }
+      .venture-name { font-size: 1.8rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
+      .prediction-inner { grid-template-columns: 1fr; gap: 1rem; }
+      nav { padding: 1.5rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      section, .work, .framework, .proof, .ventures, .contact, .manifesto, .prediction { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
 
-<nav id="nav">
-  <a href="#" class="nav-mark">Matthew Hardy Thomas</a>
-  <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#framework">Framework</a></li>
-    <li><a href="#ventures">Businesses</a></li>
-    <li><a href="articles.html">Articles</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+  <nav id="nav">
+    <a href="#" class="nav-mark">Matthew Hardy Thomas</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#framework">Framework</a></li>
+      <li><a href="#ventures">Businesses</a></li>
+      <li><a href="articles.html">Articles</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-top">
-    <div>
-      <p class="hero-eyebrow">Canadian Tourism Strategist &amp; Operator</p>
-      <h1 class="hero-headline">
-        Building Canada's<br>
-        <em>tourism</em> infrastructure.
-      </h1>
-      <p class="hero-sub">
-        I build the infrastructure that gets people to places worth visiting. The buses that bring travellers from cities into the wild. The booking platforms that power 30+ destinations. The trip packages that turn world-class outdoor spaces into places you can actually visit. <strong style="color: var(--moss); font-weight: 500;">I don't advise. I build.</strong>
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Mobile Slide-in Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#work">Work</a>
+    <a href="#framework">Framework</a>
+    <a href="#ventures">Businesses</a>
+    <a href="articles.html">Articles</a>
+    <a href="about.html">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-top">
+      <div>
+        <p class="hero-eyebrow">Canadian Tourism Strategist &amp; Operator</p>
+        <h1 class="hero-headline">
+          Building Canada's<br>
+          <em>tourism</em> infrastructure.
+        </h1>
+        <p class="hero-sub">
+          I build the infrastructure that gets people to places worth visiting. The buses that bring travellers from cities into the wild. The booking platforms that power 30+ destinations. The trip packages that turn world-class outdoor spaces into places you can actually visit. <strong style="color: var(--moss); font-weight: 500;">I don't advise. I build.</strong>
+        </p>
+      </div>
+      <div class="hero-portrait">
+        <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f219e896f9f5a6efef8c8c_matthew-hardy-thomaspng.png" alt="Matthew Hardy Thomas">
+      </div>
+    </div>
+
+    <div class="hero-case" style="margin-top: 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s;">
+      <p class="hero-case-label">Case in point: Algonquin Park</p>
+      <p>Over 800,000 people visit Algonquin every year, making it Canada's most iconic provincial park. The outfitters, lodges, and experience providers are world-class. The problem was never the product. <em>It was the missing infrastructure connecting them to the people who wanted to come.</em> I built that infrastructure: the transportation routes, the booking systems, and the overnight trip packages that bring travellers from Toronto and beyond directly into Algonquin's economy.</p>
+      <p class="algonquin-punchline">Algonquin isn't unique. Most destinations don't have a demand problem. They have an access and coordination problem. That's the gap I close.</p>
+    </div>
+
+    <div class="hero-bottom">
+      <p class="hero-trusted">Trusted by <strong>Parks Canada</strong>, <strong>Via Rail</strong>, and tourism boards across the country.</p>
+      <a href="#contact" class="btn-primary">Start a Conversation</a>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="manifesto-inner">
+      <p class="manifesto-label reveal">Point of View</p>
+      <p class="manifesto-text reveal">
+        As Canada invests in nation-building infrastructure, tourism is still treated as marketing. <strong>Marketing without infrastructure is theatre.</strong> Tourism is one of the country's largest economic engines, but we keep funding promotion while neglecting the physical and digital systems that determine who can actually show up. Roads, transit, booking platforms, coordinated stakeholder networks: these are the productivity tools of a modern visitor economy. I build the systems that make it real.
       </p>
     </div>
-    <div class="hero-portrait">
-      <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f219e896f9f5a6efef8c8c_matthew-hardy-thomaspng.png" alt="Matthew Hardy Thomas">
-    </div>
-  </div>
-  <div class="hero-case" style="margin-top: 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s;">
-    <p class="hero-case-label">Case in point: Algonquin Park</p>
-    <p>Over 800,000 people visit Algonquin every year, making it Canada's most iconic provincial park. The outfitters, lodges, and experience providers are world-class. The problem was never the product. <em>It was the missing infrastructure connecting them to the people who wanted to come.</em> I built that infrastructure: the transportation routes, the booking systems, and the overnight trip packages that bring travellers from Toronto and beyond directly into Algonquin's economy.</p>
-    <p class="algonquin-punchline">Algonquin isn't unique. Most destinations don't have a demand problem. They have an access and coordination problem. That's the gap I close.</p>
-  </div>
-  <div class="hero-bottom">
-    <p class="hero-trusted">Trusted by <strong>Parks Canada</strong>, <strong>Via Rail</strong>, and tourism boards across the country.</p>
-    <a href="#contact" class="btn-primary">Start a Conversation</a>
-  </div>
-</section>
+  </section>
 
-<!-- MANIFESTO -->
-<section class="manifesto">
-  <div class="manifesto-inner">
-    <p class="manifesto-label reveal">Point of View</p>
-    <p class="manifesto-text reveal">
-      As Canada invests in nation-building infrastructure, tourism is still treated as marketing. <strong>Marketing without infrastructure is theatre.</strong> Tourism is one of the country's largest economic engines, but we keep funding promotion while neglecting the physical and digital systems that determine who can actually show up. Roads, transit, booking platforms, coordinated stakeholder networks: these are the productivity tools of a modern visitor economy. I build the systems that make it real.
-    </p>
-  </div>
-</section>
+  <!-- PREDICTION STRIP -->
+  <section class="prediction">
+    <div class="prediction-inner reveal">
+      <span class="prediction-tag">Looking ahead</span>
+      <p class="prediction-text">In five years, the destinations that win won't have the biggest marketing budgets. They'll have the infrastructure: transportation access, seamless booking, coordinated stakeholder networks. The places as easy to visit as they are beautiful. That's the visitor economy I'm building, and it's already powering tourism in communities across the country.</p>
+    </div>
+  </section>
 
-<!-- PREDICTION STRIP -->
-<section class="prediction">
-  <div class="prediction-inner reveal">
-    <span class="prediction-tag">Looking ahead</span>
-    <p class="prediction-text">In five years, the destinations that win won't have the biggest marketing budgets. They'll have the infrastructure: transportation access, seamless booking, coordinated stakeholder networks. The places as easy to visit as they are beautiful. That's the visitor economy I'm building, and it's already powering tourism in communities across the country.</p>
-  </div>
-</section>
-
-<!-- WHAT I BUILD -->
-<section class="work" id="work">
-  <div class="work-inner">
-    <p class="section-label reveal">What I Build</p>
-    <div class="work-grid">
-      <div class="work-item reveal">
-        <p class="work-problem">"People can't visit what they can't reach."</p>
-        <p class="work-number">01</p>
-        <h3 class="work-title">Transportation<br><em>Infrastructure</em></h3>
-        <p class="work-desc">I build the buses, routes, and access systems that physically move travellers from cities to destinations. Through Parkbus, that's now over 100 destinations across Canada, served by the country's largest outdoor transportation network.</p>
-        <span class="work-tag">Parkbus</span>
-      </div>
-      <div class="work-item reveal">
-        <p class="work-problem">"A destination needs a system, not a website."</p>
-        <p class="work-number">02</p>
-        <h3 class="work-title">Digital<br><em>Infrastructure</em></h3>
-        <p class="work-desc">I build the booking platforms, destination management software, and operational systems that power tourism behind the scenes. Through Whereabouts, our technology powers 30+ destinations across North America. Tourism Innovator of the Year.</p>
-        <span class="work-tag">Whereabouts</span>
-      </div>
-      <div class="work-item reveal">
-        <p class="work-problem">"A destination is only as good as the trip you can buy."</p>
-        <p class="work-number">03</p>
-        <h3 class="work-title">Experience<br><em>Infrastructure</em></h3>
-        <p class="work-desc">I build the packaged trips and overnight experiences that turn world-class outdoor spaces into places you can actually visit. Through Visit Canada Parks, in partnership with Parks Canada and Via Rail.</p>
-        <span class="work-tag">Visit Canada Parks</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FRAMEWORK -->
-<section class="framework" id="framework">
-  <div class="framework-inner">
-    <div class="framework-header">
-      <div class="reveal">
-        <p class="section-label">How Destinations Get Built</p>
-        <h2>The Four Stakeholders That Make a <em>Destination</em> Work</h2>
-      </div>
-      <p class="reveal">A working lens for any destination project: who's actually at the table? Most communities have one or two of these four. The ones that break through have all four.</p>
-    </div>
-    <div class="framework-grid">
-      <div class="framework-item reveal">
-        <div class="framework-number">1</div>
-        <div class="framework-type">The Pioneer</div>
-        <p class="framework-desc">Goes first. Builds the lodge, the route, the experience, and proves demand before anyone else believes it.</p>
-      </div>
-      <div class="framework-item reveal">
-        <div class="framework-number">2</div>
-        <div class="framework-type">The Local Leader</div>
-        <p class="framework-desc">Legitimizes. The mayor, the Indigenous council, the chamber president. Their endorsement unlocks doors, funding, and trust no outsider can.</p>
-      </div>
-      <div class="framework-item reveal">
-        <div class="framework-number">3</div>
-        <div class="framework-type">The Innovator</div>
-        <p class="framework-desc">Commercializes. Takes what the Pioneer proved and builds something scalable: a booking platform, a transportation service, a real economy.</p>
-      </div>
-      <div class="framework-item reveal">
-        <div class="framework-number">4</div>
-        <div class="framework-type">The Master Planner</div>
-        <p class="framework-desc">Coordinates. Sees the whole system and makes sure growth serves the community, not just the visitor count.</p>
-      </div>
-    </div>
-    <div class="framework-cta reveal">
-      <a href="four-stakeholders.html" class="btn-primary">Learn more →</a>
-    </div>
-  </div>
-</section>
-
-<!-- PROOF -->
-<section class="proof">
-  <div class="proof-inner">
-    <div class="proof-left reveal">
-      <p class="section-label">By the Numbers</p>
-      <h2>Fifteen years<br>building from <em>inside</em><br>the system.</h2>
-      <p>Not consulting from the sidelines. Building the buses, the booking systems, and the partnerships from inside the industry.</p>
-    </div>
-    <div class="proof-stats">
-      <div class="stat reveal">
-        <div class="stat-number">100<span>+</span></div>
-        <div class="stat-label">Destinations served by Parkbus across Canada</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-number">30<span>+</span></div>
-        <div class="stat-label">Destinations across North America powered by Whereabouts technology</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-number">15<span>+</span></div>
-        <div class="stat-label">Years of national park tourism operations across Canada</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-number">2</div>
-        <div class="stat-label">Signed MOUs with Parks Canada and Via Rail</div>
-      </div>
-    </div>
-    <div class="proof-photo reveal">
-      <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f21a540c638edb1fee2d9e_matthew-thomas-web.jpeg" alt="Whereabouts team receiving Tourism Innovator of the Year award">
-      <div>
-        <p class="proof-photo-text">Receiving the Tourism Innovator of the Year award for Whereabouts — destination management software now powering 30+ communities across North America.</p>
-        <p class="proof-photo-caption">Tourism Innovator of the Year</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MY BUSINESSES -->
-<section class="ventures" id="ventures">
-  <div class="ventures-inner">
-    <div class="ventures-header">
-      <h2 class="reveal">My<br><em>Businesses</em></h2>
-      <p class="reveal">Not ideas or proposals. Operating systems already in market, serving real travellers and real destinations every day.</p>
-    </div>
-    <div class="ventures-list">
-      <a href="https://www.parkbus.ca" target="_blank" class="venture-row reveal">
-        <div class="venture-left">
-          <span class="venture-infra-tag">Transportation infrastructure</span>
-          <span class="venture-name">Parkbus</span>
-          <span class="venture-url">parkbus.ca</span>
+  <!-- WHAT I BUILD -->
+  <section class="work" id="work">
+    <div class="work-inner">
+      <p class="section-label reveal">What I Build</p>
+      <div class="work-grid">
+        <div class="work-item reveal">
+          <p class="work-problem">"People can't visit what they can't reach."</p>
+          <p class="work-number">01</p>
+          <h3 class="work-title">Transportation<br><em>Infrastructure</em></h3>
+          <p class="work-desc">I build the buses, routes, and access systems that physically move travellers from cities to destinations. Through Parkbus, that's now over 100 destinations across Canada, served by the country's largest outdoor transportation network.</p>
+          <span class="work-tag">Parkbus</span>
         </div>
-        <div class="venture-right">
-          <span class="venture-desc">Getting Canadians out of the city and into the wild since 2010.</span>
+        <div class="work-item reveal">
+          <p class="work-problem">"A destination needs a system, not a website."</p>
+          <p class="work-number">02</p>
+          <h3 class="work-title">Digital<br><em>Infrastructure</em></h3>
+          <p class="work-desc">I build the booking platforms, destination management software, and operational systems that power tourism behind the scenes. Through Whereabouts, our technology powers 30+ destinations across North America. Tourism Innovator of the Year.</p>
+          <span class="work-tag">Whereabouts</span>
         </div>
-        <span class="venture-arrow">→</span>
-      </a>
-      <a href="https://www.whereabouts.tech" target="_blank" class="venture-row reveal">
-        <div class="venture-left">
-          <span class="venture-infra-tag">Digital infrastructure</span>
-          <span class="venture-name">Whereabouts</span>
-          <span class="venture-url">whereabouts.tech</span>
+        <div class="work-item reveal">
+          <p class="work-problem">"A destination is only as good as the trip you can buy."</p>
+          <p class="work-number">03</p>
+          <h3 class="work-title">Experience<br><em>Infrastructure</em></h3>
+          <p class="work-desc">I build the packaged trips and overnight experiences that turn world-class outdoor spaces into places you can actually visit. Through Visit Canada Parks, in partnership with Parks Canada and Via Rail.</p>
+          <span class="work-tag">Visit Canada Parks</span>
         </div>
-        <div class="venture-right">
-          <span class="venture-desc">Destination management software. Tourism Innovator of the Year.</span>
-        </div>
-        <span class="venture-arrow">→</span>
-      </a>
-      <a href="#" class="venture-row reveal">
-        <div class="venture-left">
-          <span class="venture-infra-tag">Experience infrastructure</span>
-          <span class="venture-name">Visit Canada Parks</span>
-          <span class="venture-url">visitcanadaparks.com</span>
-        </div>
-        <div class="venture-right">
-          <span class="venture-desc">Curated overnight experiences in partnership with Parks Canada and Via Rail.</span>
-        </div>
-        <span class="venture-arrow">→</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-inner">
-    <div class="contact-left reveal">
-      <p class="section-label">Get in Touch</p>
-      <h2>Let's build<br>something<br><em>worth visiting.</em></h2>
-      <p>I work with destinations, DMOs, tourism businesses, and government partners who understand that marketing alone isn't enough. You need the infrastructure to back it up. Let's talk about what we can build together.</p>
-      <a href="mailto:matthew@poweredbytourism.com" class="btn-primary" style="display:inline-block; margin-top:2.5rem;">matthew@poweredbytourism.com</a>
-    </div>
-    <div class="contact-right reveal">
-      <div class="contact-item">
-        <span class="contact-item-label">Speaking &amp; Keynotes</span>
-        <span class="contact-item-value">I speak at tourism conferences and industry events across Canada on <em>"The Four Stakeholders That Make a Destination Work"</em> and <em>"Tourism Infrastructure: Why the best destinations are built, not marketed."</em></span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Building Together</span>
-        <span class="contact-item-value">I don't advise. I build. If you're a destination, DMO, or operator ready to move from overlooked to overbooked, let's build the infrastructure together.</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Partnerships</span>
-        <span class="contact-item-value">Parks agencies, transportation operators, Indigenous tourism, regional destinations. If you're building tourism infrastructure, let's connect.</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Find Me</span>
-        <span class="contact-item-value"><a href="https://www.linkedin.com/in/matthewhardythomas/" style="color: var(--moss); text-decoration: none; border-bottom: 1px solid var(--moss);">LinkedIn</a></span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Based in</span>
-        <span class="contact-item-value">Canada, operating nationally from Vancouver to Halifax</span>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <p>&copy; 2026 Matthew Hardy Thomas</p>
-  <p>Access &times; Design &times; Operations</p>
-</footer>
+  <!-- FRAMEWORK -->
+  <section class="framework" id="framework">
+    <div class="framework-inner">
+      <div class="framework-header">
+        <div class="reveal">
+          <p class="section-label">How Destinations Get Built</p>
+          <h2>The Four Stakeholders That Make a <em>Destination</em> Work</h2>
+        </div>
+        <p class="reveal">A working lens for any destination project: who's actually at the table? Most communities have one or two of these four. The ones that break through have all four.</p>
+      </div>
+      <div class="framework-grid">
+        <div class="framework-item reveal">
+          <div class="framework-number">1</div>
+          <div class="framework-type">The Pioneer</div>
+          <p class="framework-desc">Goes first. Builds the lodge, the route, the experience, and proves demand before anyone else believes it.</p>
+        </div>
+        <div class="framework-item reveal">
+          <div class="framework-number">2</div>
+          <div class="framework-type">The Local Leader</div>
+          <p class="framework-desc">Legitimizes. The mayor, the Indigenous council, the chamber president. Their endorsement unlocks doors, funding, and trust no outsider can.</p>
+        </div>
+        <div class="framework-item reveal">
+          <div class="framework-number">3</div>
+          <div class="framework-type">The Innovator</div>
+          <p class="framework-desc">Commercializes. Takes what the Pioneer proved and builds something scalable: a booking platform, a transportation service, a real economy.</p>
+        </div>
+        <div class="framework-item reveal">
+          <div class="framework-number">4</div>
+          <div class="framework-type">The Master Planner</div>
+          <p class="framework-desc">Coordinates. Sees the whole system and makes sure growth serves the community, not just the visitor count.</p>
+        </div>
+      </div>
+      <div class="framework-cta reveal">
+        <a href="four-stakeholders.html" class="btn-primary">Learn more →</a>
+      </div>
+    </div>
+  </section>
 
-<script>
-  // Nav scroll effect
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
+  <!-- PROOF -->
+  <section class="proof">
+    <div class="proof-inner">
+      <div class="proof-left reveal">
+        <p class="section-label">By the Numbers</p>
+        <h2>Fifteen years<br>building from <em>inside</em><br>the system.</h2>
+        <p>Not consulting from the sidelines. Building the buses, the booking systems, and the partnerships from inside the industry.</p>
+      </div>
+      <div class="proof-stats">
+        <div class="stat reveal">
+          <div class="stat-number">100<span>+</span></div>
+          <div class="stat-label">Destinations served by Parkbus across Canada</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-number">30<span>+</span></div>
+          <div class="stat-label">Destinations across North America powered by Whereabouts technology</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-number">15<span>+</span></div>
+          <div class="stat-label">Years of national park tourism operations across Canada</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-number">2</div>
+          <div class="stat-label">Signed MOUs with Parks Canada and Via Rail</div>
+        </div>
+      </div>
+      <div class="proof-photo reveal">
+        <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f21a540c638edb1fee2d9e_matthew-thomas-web.jpeg" alt="Whereabouts team receiving Tourism Innovator of the Year award">
+        <div>
+          <p class="proof-photo-text">Receiving the Tourism Innovator of the Year award for Whereabouts — destination management software now powering 30+ communities across North America.</p>
+          <p class="proof-photo-caption">Tourism Innovator of the Year</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 100);
-        observer.unobserve(entry.target);
+  <!-- MY BUSINESSES -->
+  <section class="ventures" id="ventures">
+    <div class="ventures-inner">
+      <div class="ventures-header">
+        <h2 class="reveal">My<br><em>Businesses</em></h2>
+        <p class="reveal">Not ideas or proposals. Operating systems already in market, serving real travellers and real destinations every day.</p>
+      </div>
+      <div class="ventures-list">
+        <a href="https://www.parkbus.ca" target="_blank" class="venture-row reveal">
+          <div class="venture-left">
+            <span class="venture-infra-tag">Transportation infrastructure</span>
+            <span class="venture-name">Parkbus</span>
+            <span class="venture-url">parkbus.ca</span>
+          </div>
+          <div class="venture-right">
+            <span class="venture-desc">Getting Canadians out of the city and into the wild since 2010.</span>
+          </div>
+          <span class="venture-arrow">→</span>
+        </a>
+        <a href="https://www.whereabouts.tech" target="_blank" class="venture-row reveal">
+          <div class="venture-left">
+            <span class="venture-infra-tag">Digital infrastructure</span>
+            <span class="venture-name">Whereabouts</span>
+            <span class="venture-url">whereabouts.tech</span>
+          </div>
+          <div class="venture-right">
+            <span class="venture-desc">Destination management software. Tourism Innovator of the Year.</span>
+          </div>
+          <span class="venture-arrow">→</span>
+        </a>
+        <a href="#" class="venture-row reveal">
+          <div class="venture-left">
+            <span class="venture-infra-tag">Experience infrastructure</span>
+            <span class="venture-name">Visit Canada Parks</span>
+            <span class="venture-url">visitcanadaparks.com</span>
+          </div>
+          <div class="venture-right">
+            <span class="venture-desc">Curated overnight experiences in partnership with Parks Canada and Via Rail.</span>
+          </div>
+          <span class="venture-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-left reveal">
+        <p class="section-label">Get in Touch</p>
+        <h2>Let's build<br>something<br><em>worth visiting.</em></h2>
+        <p>I work with destinations, DMOs, tourism businesses, and government partners who understand that marketing alone isn't enough. You need the infrastructure to back it up. Let's talk about what we can build together.</p>
+        <a href="mailto:matthew@poweredbytourism.com" class="btn-primary" style="display:inline-block; margin-top:2.5rem;">matthew@poweredbytourism.com</a>
+      </div>
+      <div class="contact-right reveal">
+        <div class="contact-item">
+          <span class="contact-item-label">Speaking &amp; Keynotes</span>
+          <span class="contact-item-value">I speak at tourism conferences and industry events across Canada on <em>"The Four Stakeholders That Make a Destination Work"</em> and <em>"Tourism Infrastructure: Why the best destinations are built, not marketed."</em></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Building Together</span>
+          <span class="contact-item-value">I don't advise. I build. If you're a destination, DMO, or operator ready to move from overlooked to overbooked, let's build the infrastructure together.</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Partnerships</span>
+          <span class="contact-item-value">Parks agencies, transportation operators, Indigenous tourism, regional destinations. If you're building tourism infrastructure, let's connect.</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Find Me</span>
+          <span class="contact-item-value"><a href="https://www.linkedin.com/in/matthewhardythomas/" style="color: var(--moss); text-decoration: none; border-bottom: 1px solid var(--moss);">LinkedIn</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Based in</span>
+          <span class="contact-item-value">Canada, operating nationally from Vancouver to Halifax</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Matthew Hardy Thomas</p>
+    <p>Access &times; Design &times; Operations</p>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    function openMenu() {
+      hamburger.classList.add('active');
+      mobileMenu.classList.add('open');
+      mobileOverlay.classList.add('active');
+      document.body.classList.add('menu-open');
+      hamburger.setAttribute('aria-label', 'Close menu');
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      hamburger.setAttribute('aria-label', 'Open menu');
+    }
+
+    hamburger.addEventListener('click', () => {
+      if (mobileMenu.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
       }
     });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
-</script>
 
+    // Close on overlay click
+    mobileOverlay.addEventListener('click', closeMenu);
+
+    // Close on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
