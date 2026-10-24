@@ -1,1232 +1,285 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matthew Hardy Thomas — Building Canada's Tourism Infrastructure</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ink: #1A1A18;
-      --ink-light: #4A4A45;
-      --ink-faint: #8A8A82;
-      --paper: #FAF8F4;
-      --moss: #3A5A40;
-      --rust: #C4704B;
-      --mist: #8a9a8e;
-      --cream: #F5F0E8;
-      --gold: #c9a84c;
-      --rule: #D4CFC4;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
-
-    ::selection {
-      background: var(--rust);
-      color: var(--paper);
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 50;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 3rem;
-      background: rgba(250,248,244,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-    }
-
-    nav.scrolled {
-      border-bottom-color: rgba(26,23,16,0.1);
-    }
-
-    .nav-mark {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--moss);
-      text-decoration: none;
-    }
-
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-
-    .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.5;
-      transition: opacity 0.3s;
-    }
-
-    .nav-links a:hover { opacity: 1; }
-
-    /* HAMBURGER BUTTON */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 36px;
-      height: 36px;
-      cursor: pointer;
-      z-index: 60;
-      background: none;
-      border: none;
-      padding: 0;
-    }
-
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--ink);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      margin: 3px 0;
-    }
-
-    .nav-hamburger.active span:nth-child(1) {
-      transform: translateY(4.5px) rotate(45deg);
-    }
-
-    .nav-hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .nav-hamburger.active span:nth-child(3) {
-      transform: translateY(-4.5px) rotate(-45deg);
-    }
-
-    /* MOBILE SLIDE-IN MENU */
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 280px;
-      height: 100vh;
-      height: 100dvh;
-      background: var(--paper);
-      z-index: 55;
-      transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      padding: 6rem 2rem 3rem;
-      box-shadow: -4px 0 24px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .mobile-menu.open {
-      transform: translateX(0);
-    }
-
-    .mobile-menu a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      padding: 1.2rem 0;
-      border-bottom: 1px solid rgba(26,23,16,0.08);
-      opacity: 0.6;
-      transition: opacity 0.3s, padding-left 0.3s;
-    }
-
-    .mobile-menu a:first-child {
-      border-top: 1px solid rgba(26,23,16,0.08);
-    }
-
-    .mobile-menu a:hover {
-      opacity: 1;
-      padding-left: 0.5rem;
-    }
-
-    /* OVERLAY */
-    .mobile-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(26,23,16,0.3);
-      z-index: 52;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s ease;
-    }
-
-    .mobile-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    body.menu-open {
-      overflow: hidden;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8rem 3rem 5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .hero-top {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 4rem;
-      align-items: end;
-    }
-
-    .hero-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 2rem;
-    }
-
-    .hero-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 5.5vw, 5.5rem);
-      font-weight: 300;
-      line-height: 1.05;
-      color: var(--ink);
-      max-width: 700px;
-    }
-
-    .hero-headline em { font-style: italic; color: var(--moss); }
-
-    .hero-sub {
-      margin-top: 2.5rem;
-      font-size: 1.05rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--ink);
-      opacity: 0.7;
-      max-width: 560px;
-    }
-
-    .hero-body {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      margin-top: 3rem;
-      align-items: start;
-    }
-
-    /* CASE STUDY CALLOUT */
-    .hero-case {
-      padding: 1.5rem;
-      border-left: 3px solid var(--rust);
-      background: rgba(196,112,75,0.05);
-    }
-
-    .hero-case-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 0.6rem;
-    }
-
-    .hero-case p {
-      font-size: 0.9rem;
-      line-height: 1.75;
-      color: var(--ink);
-      opacity: 0.8;
-    }
-
-    .hero-case p em {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--moss);
-      opacity: 1;
-    }
-
-    .hero-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-    }
-
-    .hero-trusted {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: var(--ink);
-      opacity: 0.85;
-      line-height: 1.5;
-    }
-
-    .hero-trusted strong {
-      font-style: normal;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      color: var(--moss);
-    }
-
-    .algonquin-punchline {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(196,112,75,0.25);
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      color: var(--moss);
-    }
-
-    .btn-primary {
-      display: inline-block;
-      padding: 0.85rem 2.2rem;
-      background: var(--moss);
-      color: var(--paper);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
-
-    .hero-meta {
-      display: flex;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-meta-item {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--mist);
-    }
-
-    .hero-meta-item strong {
-      display: block;
-      color: var(--ink);
-      font-weight: 500;
-      font-size: 0.88rem;
-      text-transform: none;
-      letter-spacing: 0;
-      margin-top: 0.2rem;
-    }
-
-    /* MANIFESTO */
-    .manifesto {
-      background: var(--moss);
-      color: var(--paper);
-      padding: 6rem 3rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .manifesto::before {
-      content: '\201C';
-      position: absolute;
-      top: -2rem; left: 2rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20rem;
-      color: var(--paper);
-      opacity: 0.04;
-      line-height: 1;
-      pointer-events: none;
-    }
-
-    .manifesto-inner { max-width: 900px; margin: 0 auto; }
-
-    .manifesto-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 2.5rem;
-    }
-
-    .manifesto-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
-      font-weight: 300;
-      line-height: 1.45;
-      color: var(--paper);
-    }
-
-    .manifesto-text strong { font-weight: 600; font-style: italic; }
-
-    /* PREDICTION STRIP */
-    .prediction {
-      background: var(--ink);
-      padding: 4rem 3rem;
-    }
-
-    .prediction-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .prediction-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      white-space: nowrap;
-    }
-
-    .prediction-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.3rem, 2vw, 1.7rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--paper);
-      line-height: 1.5;
-      opacity: 0.9;
-    }
-
-    /* WHAT I DO */
-    .work { padding: 8rem 3rem; background: var(--cream); }
-    .work-inner { max-width: 1100px; margin: 0 auto; }
-
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 4rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .section-label::after {
-      content: '';
-      display: block;
-      height: 1px;
-      width: 60px;
-      background: var(--rust);
-      opacity: 0.4;
-    }
-
-    .work-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      border-top: 1px solid rgba(26,23,16,0.12);
-    }
-
-    .work-item {
-      padding: 3rem 2.5rem 3rem 0;
-      border-right: 1px solid rgba(26,23,16,0.12);
-    }
-
-    .work-item:last-child { border-right: none; padding-right: 0; }
-    .work-item:not(:first-child) { padding-left: 2.5rem; }
-
-    .work-problem {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-style: italic;
-      color: var(--rust);
-      margin-bottom: 1rem;
-      line-height: 1.4;
-    }
-
-    .work-number {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      color: var(--mist);
-      margin-bottom: 1rem;
-    }
-
-    .work-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--ink);
-      margin-bottom: 1rem;
-    }
-
-    .work-title em { font-style: italic; color: var(--moss); }
-
-    .work-desc { font-size: 0.9rem; line-height: 1.8; color: var(--ink); opacity: 0.65; }
-
-    .work-tag {
-      display: inline-block;
-      margin-top: 1.5rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--rust);
-      border-bottom: 1px solid var(--rust);
-      padding-bottom: 2px;
-      opacity: 0.7;
-    }
-
-    /* FRAMEWORK */
-    .framework { padding: 8rem 3rem; background: var(--paper); }
-    .framework-inner { max-width: 1100px; margin: 0 auto; }
-
-    .framework-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      margin-bottom: 5rem;
-      align-items: end;
-    }
-
-    .framework-header h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 4vw, 4rem);
-      font-weight: 300;
-      line-height: 1.1;
-    }
-
-    .framework-header h2 em { font-style: italic; color: var(--moss); }
-    .framework-header p { font-size: 0.9rem; line-height: 1.8; opacity: 0.6; }
-
-    .framework-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border-top: 1px solid rgba(26,23,16,0.12);
-    }
-
-    .framework-item {
-      padding: 2.5rem 2rem 2.5rem 0;
-      border-right: 1px solid rgba(26,23,16,0.12);
-    }
-
-    .framework-item:last-child { border-right: none; padding-right: 0; }
-    .framework-item:not(:first-child) { padding-left: 2rem; }
-
-    .framework-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--ink);
-      opacity: 0.1;
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    .framework-type {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      font-style: italic;
-      color: var(--moss);
-      margin-bottom: 0.75rem;
-      line-height: 1.2;
-    }
-
-    .framework-desc { font-size: 0.85rem; line-height: 1.75; color: var(--ink); opacity: 0.6; }
-
-    .framework-cta { margin-top: 4rem; text-align: center; }
-
-    /* PROOF */
-    .proof { padding: 8rem 3rem; background: var(--cream); }
-
-    .proof-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 6rem;
-      align-items: start;
-    }
-
-    .proof-left h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 4vw, 4rem);
-      font-weight: 300;
-      line-height: 1.1;
-    }
-
-    .proof-left h2 em { font-style: italic; color: var(--moss); }
-    .proof-left p { margin-top: 1.5rem; font-size: 0.9rem; line-height: 1.8; opacity: 0.6; }
-
-    .proof-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-
-    .stat { border-top: 1px solid rgba(26,23,16,0.15); padding-top: 1.5rem; }
-
-    .stat-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      font-weight: 300;
-      line-height: 1;
-      color: var(--ink);
-    }
-
-    .stat-number span { font-size: 1.5rem; vertical-align: super; color: var(--rust); }
-
-    .stat-label {
-      margin-top: 0.5rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--ink);
-      opacity: 0.5;
-      line-height: 1.6;
-    }
-
-    /* VENTURES */
-    .ventures { background: var(--ink); color: var(--paper); padding: 8rem 3rem; }
-    .ventures-inner { max-width: 1100px; margin: 0 auto; }
-
-    .ventures-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      margin-bottom: 5rem;
-      align-items: end;
-    }
-
-    .ventures-header h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 4vw, 4rem);
-      font-weight: 300;
-      line-height: 1.1;
-      color: var(--paper);
-    }
-
-    .ventures-header h2 em { font-style: italic; color: var(--gold); }
-    .ventures-header p { font-size: 0.9rem; line-height: 1.8; color: var(--paper); opacity: 0.5; }
-
-    .ventures-list { display: flex; flex-direction: column; }
-
-    .venture-row {
-      display: grid;
-      grid-template-columns: 1fr 2fr auto;
-      align-items: start;
-      padding: 2.5rem 0;
-      border-top: 1px solid rgba(244,240,232,0.1);
-      text-decoration: none;
-      color: inherit;
-      gap: 4rem;
-      cursor: pointer;
-      transition: padding-left 0.3s;
-    }
-
-    .venture-row:last-child { border-bottom: 1px solid rgba(244,240,232,0.1); }
-    .venture-row:hover { padding-left: 0.5rem; }
-    .venture-row:hover .venture-name { color: var(--gold); }
-    .venture-row:hover .venture-arrow { opacity: 1; transform: translateX(6px); }
-
-    .venture-left {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .venture-infra-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.7;
-    }
-
-    .venture-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
-      font-weight: 400;
-      line-height: 1;
-      color: var(--paper);
-      transition: color 0.3s;
-    }
-
-    .venture-url {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      color: var(--paper);
-      opacity: 0.4;
-      margin-top: 0.4rem;
-    }
-
-    .venture-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100%;
-      padding-top: 0.5rem;
-    }
-
-    .venture-desc {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--paper);
-      opacity: 0.6;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-    }
-
-    .venture-arrow {
-      font-size: 1.5rem;
-      color: var(--gold);
-      opacity: 0.3;
-      justify-self: end;
-      align-self: center;
-      transition: opacity 0.3s, transform 0.3s;
-    }
-
-    /* CONTACT */
-    .contact { background: var(--cream); padding: 8rem 3rem; position: relative; overflow: hidden; }
-
-    .contact::after {
-      content: "LET'S TALK";
-      position: absolute;
-      bottom: -3rem; right: -1rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 14rem;
-      font-weight: 300;
-      color: var(--ink);
-      opacity: 0.03;
-      pointer-events: none;
-      white-space: nowrap;
-    }
-
-    .contact-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8rem;
-      align-items: start;
-    }
-
-    .contact-left h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 5vw, 5rem);
-      font-weight: 300;
-      line-height: 1.05;
-    }
-
-    .contact-left h2 em { font-style: italic; color: var(--moss); }
-    .contact-left p { margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.8; opacity: 0.6; max-width: 380px; }
-
-    .contact-right { display: flex; flex-direction: column; padding-top: 0.5rem; }
-
-    .contact-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid rgba(26,23,16,0.1);
-    }
-
-    .contact-item:first-child { padding-top: 0; }
-    .contact-item:last-child { border-bottom: none; }
-
-    .contact-item-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--rust);
-    }
-
-    .contact-item-value { font-size: 0.9rem; line-height: 1.7; color: var(--ink); opacity: 0.75; }
-
-    .contact-item-value em {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--moss);
-    }
-
-    footer {
-      background: var(--ink);
-      padding: 2.5rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    footer p {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--paper);
-      opacity: 0.3;
-    }
-
-    /* HERO PORTRAIT */
-    .hero-portrait img {
-      width: 100%;
-      display: block;
-      filter: grayscale(15%);
-      border-radius: 2px;
-    }
-
-    .hero-portrait {
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.5s;
-    }
-
-    /* PROOF PHOTO */
-    .proof-photo {
-      grid-column: 1 / -1;
-      margin-top: 4rem;
-      border-top: 1px solid rgba(26,23,16,0.12);
-      padding-top: 3rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .proof-photo img {
-      width: 100%;
-      display: block;
-      border-radius: 2px;
-    }
-
-    .proof-photo-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.5;
-      color: var(--ink);
-      opacity: 0.7;
-    }
-
-    .proof-photo-caption {
-      margin-top: 1rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--mist);
-    }
-
-    @media (max-width: 900px) {
-      .proof-photo { grid-template-columns: 1fr; gap: 1.5rem; }
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-eyebrow { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
-    .hero-headline { opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
-    .hero-body { opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
-    .hero-bottom { opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .hero { padding: 7rem 1.5rem 4rem; }
-      .hero-top { grid-template-columns: 1fr; gap: 2rem; }
-      .hero-portrait { max-width: 260px; }
-      .hero-body { grid-template-columns: 1fr; gap: 2rem; }
-      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-      .work-grid, .framework-grid { grid-template-columns: 1fr; }
-      .work-item, .framework-item { border-right: none; border-bottom: 1px solid rgba(26,23,16,0.12); padding: 2.5rem 0; }
-      .work-item:not(:first-child), .framework-item:not(:first-child) { padding-left: 0; }
-      .proof-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .ventures-header, .framework-header { grid-template-columns: 1fr; gap: 1rem; }
-      .venture-row { grid-template-columns: 1fr auto; gap: 1.5rem; }
-      .venture-right { grid-column: 1 / -1; padding-top: 0; }
-      .venture-name { font-size: 1.8rem; }
-      .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
-      .prediction-inner { grid-template-columns: 1fr; gap: 1rem; }
-      nav { padding: 1.5rem; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-      section, .work, .framework, .proof, .ventures, .contact, .manifesto, .prediction { padding-left: 1.5rem; padding-right: 1.5rem; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Matthew Hardy Thomas invests in, advises and runs tourism experience companies. CEO of Parkbus.">
+<title>Matthew Hardy Thomas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap">
+<style>
+/* Layout: airy cream page with near-black ink, very heavy Figtree headlines and italic Lora asides (after follypartners.com). Whitespace and tone changes separate sections; only the closing ink band is cut on a slant. */
+:root {
+  --cream: #F4EFE3;
+  --cream-2: #EAE3D0;
+  --ink: #1F1B17;
+  --ink-2: #4A433A;
+  --on-ink: #F4EFE3;
+  --sans: "Figtree", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --serif: "Lora", Georgia, "Times New Roman", serif;
+  --wrap: 1120px;
+  --cut: clamp(1.5rem, 4.5vw, 4rem);
+  --pad: clamp(4rem, 9vw, 7.5rem);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+body {
+  margin: 0; background: var(--cream); color: var(--ink);
+  font-family: var(--serif); font-size: 1.1875rem; line-height: 1.65;
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--sans); text-wrap: balance; margin: 0; line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; }
+p { margin: 0; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.label { font-family: var(--sans); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); }
+.ital { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+
+/* header */
+.top { position: absolute; inset: 0 0 auto; z-index: 5; }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.4rem; }
+.mark { font-family: var(--sans); font-size: 1.1rem; letter-spacing: -0.01em; text-decoration: none; font-weight: 400; }
+.nav { display: flex; align-items: center; gap: 1.8rem; font-family: var(--sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.nav a { text-decoration: none; }
+.nav a:hover { text-decoration: underline; text-underline-offset: 5px; }
+@media (max-width: 760px) { .nav a:not(.last) { display: none; } }
+
+/* hero: misty photo fading into the cream */
+.hero { position: relative; overflow: hidden; padding-block: clamp(7rem, 14vw, 10rem) calc(var(--pad) + 1rem); }
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.32; filter: grayscale(0.55) contrast(0.9); }
+.hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--cream) 0%, rgba(244, 239, 227, 0.1) 30%, rgba(244, 239, 227, 0.2) 55%, var(--cream) 100%); }
+.hero .wrap { position: relative; z-index: 1; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.5fr); gap: clamp(2rem, 5vw, 4rem); align-items: end; }
+.hero h1 { font-size: clamp(2.6rem, 7.4vw, 6.4rem); }
+.lede { margin-top: 2rem; max-width: 33em; font-size: clamp(1.2rem, 2vw, 1.4rem); line-height: 1.55; }
+.lede b { font-family: var(--sans); font-weight: 800; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; margin-top: 2.25rem; font-family: var(--sans); }
+.btn { display: inline-block; text-decoration: none; font-weight: 700; font-size: 0.95rem; padding: 1rem 1.6rem; background: var(--ink); color: var(--on-ink); border: 2px solid var(--ink); }
+.btn:hover { background: transparent; color: var(--ink); }
+.arrow { font-weight: 700; font-size: 0.95rem; text-underline-offset: 5px; }
+.portrait { aspect-ratio: 4 / 5; overflow: hidden; background: #121C16; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
+@media (max-width: 800px) { .portrait img { object-position: 50% 52%; } }
+
+.proof { list-style: none; margin: clamp(3rem, 6vw, 4.5rem) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 2.5rem); }
+.proof li { font-family: var(--sans); font-size: 0.98rem; line-height: 1.45; font-weight: 600; }
+.proof li::before { content: ""; display: block; width: 2.5rem; height: 3px; background: var(--ink); margin-bottom: 0.9rem; }
+@media (max-width: 800px) {
+  .hero-grid { grid-template-columns: 1fr; align-items: start; }
+  .portrait { max-width: 300px; order: -1; aspect-ratio: 1 / 1; }
+  .proof { grid-template-columns: 1fr; }
+}
+
+/* about: centred text, no headline */
+.about { padding-block: var(--pad); }
+.about .prose { max-width: 36em; margin-inline: auto; text-align: center; display: grid; gap: 1.6em; }
+.about .prose p:first-child { font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.4; }
+
+/* how I work */
+.how { background: var(--cream-2); padding-block: var(--pad); }
+.h2 { font-size: clamp(2.4rem, 6vw, 4.75rem); }
+.lead { margin-top: 1.25rem; max-width: 34em; color: var(--ink-2); }
+.steps { list-style: none; margin: clamp(2.5rem, 5vw, 4rem) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); counter-reset: s; }
+.steps li { counter-increment: s; font-size: 1.0625rem; line-height: 1.55; }
+.steps li::before { content: counter(s); display: block; font-family: var(--sans); font-weight: 800; font-size: 3.5rem; line-height: 1; letter-spacing: -0.04em; margin-bottom: 0.75rem; }
+.steps h3 { font-size: 1.6rem; margin-bottom: 0.6rem; }
+.method-end { margin-top: clamp(2.5rem, 5vw, 4rem); max-width: 24em; font-family: var(--sans); font-weight: 600; font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.3; letter-spacing: -0.02em; }
+@media (max-width: 960px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+/* businesses */
+.biz { padding-block: var(--pad); }
+.items { margin-top: clamp(2.5rem, 5vw, 4rem); display: grid; gap: clamp(3.5rem, 8vw, 6.5rem); }
+.item { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(1.5rem, 5vw, 4.5rem); align-items: center; }
+.item:nth-child(even) .shot { order: 2; }
+.item > * { min-width: 0; }
+.shot { margin: 0; overflow: hidden; background: #121C16; aspect-ratio: 4 / 3; }
+.shot img { width: 100%; height: 100%; object-fit: cover; }
+.shot.ui { display: grid; place-items: center; padding: clamp(1rem, 3vw, 2rem); background: var(--cream-2); }
+.shot.ui img { height: auto; object-fit: contain; box-shadow: 0 10px 28px rgba(31, 27, 23, 0.22); }
+
+.app { width: 100%; max-width: 440px; background: #fff; border: 1px solid #DAD6EE; box-shadow: 0 10px 28px rgba(31, 27, 23, 0.22); font-family: var(--sans); color: #1B1850; font-size: 12.5px; line-height: 1.4; text-align: left; }
+.app-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; background: #F6F5FD; border-bottom: 1px solid #E4E1F4; }
+.app-title { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; }
+.app-title img { width: 22px; height: 22px; border-radius: 50%; }
+.app-on { font-size: 10.5px; font-weight: 600; color: #6C6894; border: 1px solid #DAD6EE; border-radius: 99px; padding: 2px 8px; white-space: nowrap; }
+.app-body { display: grid; grid-template-columns: 38% 1fr; }
+.app-side { background: #F6F5FD; border-right: 1px solid #E4E1F4; padding: 10px 8px; min-width: 0; }
+.app-side-h { font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6C6894; margin: 0 4px 8px; }
+.app-side ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.app-side li { display: flex; align-items: center; gap: 5px; padding: 4px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; color: #4B4777; min-width: 0; }
+.app-side li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app-side li.on { background: #FFD36B; color: #1B1850; font-weight: 700; border-radius: 4px; }
+.doc { flex: none; width: 11px; height: 11px; }
+.app-chat { padding: 12px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.a-me { justify-self: end; max-width: 92%; background: #2D2A7A; color: #fff; padding: 8px 11px; border-radius: 10px 10px 0 10px; }
+.a-sc { display: flex; gap: 6px; align-items: flex-start; }
+.a-sc > img { flex: none; width: 24px; height: 24px; border-radius: 50%; }
+.a-bub { background: #F1EFFB; padding: 8px 11px; border-radius: 0 10px 10px 10px; min-width: 0; }
+.src { display: inline-flex; align-items: center; gap: 4px; margin-top: 7px; padding: 3px 7px; background: #fff; border: 1px solid #DAD6EE; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; color: #6C6894; max-width: 100%; }
+.copy h3 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
+.tag { margin: 0.7rem 0 1.25rem; font-family: var(--sans); font-weight: 500; font-size: 1.05rem; color: var(--ink-2); }
+.copy p:not(.tag) { max-width: 30em; }
+.visit { display: inline-block; margin-top: 1.25rem; font-family: var(--sans); font-weight: 700; font-size: 0.95rem; text-underline-offset: 5px; }
+@media (max-width: 800px) { .item { grid-template-columns: 1fr; } .item:nth-child(even) .shot { order: 0; } }
+
+/* contact: ink band cut on a slant */
+.contact { position: relative; z-index: 1; background: var(--ink); color: var(--on-ink); margin-top: calc(var(--cut) * -1); padding-block: calc(var(--pad) + var(--cut)) calc(var(--pad) + var(--cut)); clip-path: polygon(0 var(--cut), 100% 0, 100% calc(100% - var(--cut)), 0 100%); margin-bottom: calc(var(--cut) * -1); }
+.contact .label { color: #B9B0A0; }
+.contact h2 { font-size: clamp(2.4rem, 6vw, 4.75rem); max-width: 14em; }
+.contact .intro { margin-top: 1.75rem; max-width: 32em; color: #D8D0C0; }
+.ways { list-style: none; margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.ways li { color: #D8D0C0; font-size: 1.0625rem; line-height: 1.55; }
+.ways strong { display: block; font-family: var(--sans); font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; color: var(--on-ink); margin-bottom: 0.4rem; }
+.contact .actions { margin-top: 3rem; }
+.contact .btn { background: var(--on-ink); color: var(--ink); border-color: var(--on-ink); }
+.contact .btn:hover { background: transparent; color: var(--on-ink); }
+.contact-line { margin-top: 1.5rem; font-family: var(--sans); font-size: 1rem; color: #D8D0C0; }
+.contact-line span { user-select: all; font-weight: 700; color: var(--on-ink); }
+@media (max-width: 800px) { .ways { grid-template-columns: 1fr; } }
+
+footer { background: var(--ink); color: #B9B0A0; padding-block: calc(2rem + var(--cut)) 2.5rem; font-family: var(--sans); font-size: 0.9rem; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
 </head>
 <body>
 
-  <nav id="nav">
-    <a href="#" class="nav-mark">Matthew Hardy Thomas</a>
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#framework">Framework</a></li>
-      <li><a href="#ventures">Businesses</a></li>
-      <li><a href="articles.html">Articles</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </nav>
-
-  <!-- Mobile Menu Overlay -->
-  <div class="mobile-overlay" id="mobileOverlay"></div>
-
-  <!-- Mobile Slide-in Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#work">Work</a>
-    <a href="#framework">Framework</a>
-    <a href="#ventures">Businesses</a>
-    <a href="articles.html">Articles</a>
-    <a href="about.html">About</a>
-    <a href="#contact">Contact</a>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">Matthew Thomas</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#how">How I work</a>
+      <a href="#businesses">Businesses</a>
+      <a href="articles.html">Articles</a>
+      <a class="last" href="#contact">Contact</a>
+    </nav>
   </div>
+</header>
 
-  <!-- HERO -->
+<main id="top">
   <section class="hero">
-    <div class="hero-top">
-      <div>
-        <p class="hero-eyebrow">Canadian Tourism Strategist &amp; Operator</p>
-        <h1 class="hero-headline">
-          Building Canada's<br>
-          <em>tourism</em> infrastructure.
-        </h1>
-        <p class="hero-sub">
-          I build the infrastructure that gets people to places worth visiting. The buses that bring travellers from cities into the wild. The booking platforms that power 30+ destinations. The trip packages that turn world-class outdoor spaces into places you can actually visit. <strong style="color: var(--moss); font-weight: 500;">I don't advise. I build.</strong>
-        </p>
-      </div>
-      <div class="hero-portrait">
-        <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f219e896f9f5a6efef8c8c_matthew-hardy-thomaspng.png" alt="Matthew Hardy Thomas">
-      </div>
-    </div>
-
-    <div class="hero-case" style="margin-top: 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s;">
-      <p class="hero-case-label">Case in point: Algonquin Park</p>
-      <p>Over 800,000 people visit Algonquin every year, making it Canada's most iconic provincial park. The outfitters, lodges, and experience providers are world-class. The problem was never the product. <em>It was the missing infrastructure connecting them to the people who wanted to come.</em> I built that infrastructure: the transportation routes, the booking systems, and the overnight trip packages that bring travellers from Toronto and beyond directly into Algonquin's economy.</p>
-      <p class="algonquin-punchline">Algonquin isn't unique. Most destinations don't have a demand problem. They have an access and coordination problem. That's the gap I close.</p>
-    </div>
-
-    <div class="hero-bottom">
-      <p class="hero-trusted">Trusted by <strong>Parks Canada</strong>, <strong>Via Rail</strong>, and tourism boards across the country.</p>
-      <a href="#contact" class="btn-primary">Start a Conversation</a>
-    </div>
-  </section>
-
-  <!-- MANIFESTO -->
-  <section class="manifesto">
-    <div class="manifesto-inner">
-      <p class="manifesto-label reveal">Point of View</p>
-      <p class="manifesto-text reveal">
-        As Canada invests in nation-building infrastructure, tourism is still treated as marketing. <strong>Marketing without infrastructure is theatre.</strong> Tourism is one of the country's largest economic engines, but we keep funding promotion while neglecting the physical and digital systems that determine who can actually show up. Roads, transit, booking platforms, coordinated stakeholder networks: these are the productivity tools of a modern visitor economy. I build the systems that make it real.
-      </p>
-    </div>
-  </section>
-
-  <!-- PREDICTION STRIP -->
-  <section class="prediction">
-    <div class="prediction-inner reveal">
-      <span class="prediction-tag">Looking ahead</span>
-      <p class="prediction-text">In five years, the destinations that win won't have the biggest marketing budgets. They'll have the infrastructure: transportation access, seamless booking, coordinated stakeholder networks. The places as easy to visit as they are beautiful. That's the visitor economy I'm building, and it's already powering tourism in communities across the country.</p>
-    </div>
-  </section>
-
-  <!-- WHAT I BUILD -->
-  <section class="work" id="work">
-    <div class="work-inner">
-      <p class="section-label reveal">What I Build</p>
-      <div class="work-grid">
-        <div class="work-item reveal">
-          <p class="work-problem">"People can't visit what they can't reach."</p>
-          <p class="work-number">01</p>
-          <h3 class="work-title">Transportation<br><em>Infrastructure</em></h3>
-          <p class="work-desc">I build the buses, routes, and access systems that physically move travellers from cities to destinations. Through Parkbus, that's now over 100 destinations across Canada, served by the country's largest outdoor transportation network.</p>
-          <span class="work-tag">Parkbus</span>
-        </div>
-        <div class="work-item reveal">
-          <p class="work-problem">"A destination needs a system, not a website."</p>
-          <p class="work-number">02</p>
-          <h3 class="work-title">Digital<br><em>Infrastructure</em></h3>
-          <p class="work-desc">I build the booking platforms, destination management software, and operational systems that power tourism behind the scenes. Through Whereabouts, our technology powers 30+ destinations across North America. Tourism Innovator of the Year.</p>
-          <span class="work-tag">Whereabouts</span>
-        </div>
-        <div class="work-item reveal">
-          <p class="work-problem">"A destination is only as good as the trip you can buy."</p>
-          <p class="work-number">03</p>
-          <h3 class="work-title">Experience<br><em>Infrastructure</em></h3>
-          <p class="work-desc">I build the packaged trips and overnight experiences that turn world-class outdoor spaces into places you can actually visit. Through Visit Canada Parks, in partnership with Parks Canada and Via Rail.</p>
-          <span class="work-tag">Visit Canada Parks</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FRAMEWORK -->
-  <section class="framework" id="framework">
-    <div class="framework-inner">
-      <div class="framework-header">
-        <div class="reveal">
-          <p class="section-label">How Destinations Get Built</p>
-          <h2>The Four Stakeholders That Make a <em>Destination</em> Work</h2>
-        </div>
-        <p class="reveal">A working lens for any destination project: who's actually at the table? Most communities have one or two of these four. The ones that break through have all four.</p>
-      </div>
-      <div class="framework-grid">
-        <div class="framework-item reveal">
-          <div class="framework-number">1</div>
-          <div class="framework-type">The Pioneer</div>
-          <p class="framework-desc">Goes first. Builds the lodge, the route, the experience, and proves demand before anyone else believes it.</p>
-        </div>
-        <div class="framework-item reveal">
-          <div class="framework-number">2</div>
-          <div class="framework-type">The Local Leader</div>
-          <p class="framework-desc">Legitimizes. The mayor, the Indigenous council, the chamber president. Their endorsement unlocks doors, funding, and trust no outsider can.</p>
-        </div>
-        <div class="framework-item reveal">
-          <div class="framework-number">3</div>
-          <div class="framework-type">The Innovator</div>
-          <p class="framework-desc">Commercializes. Takes what the Pioneer proved and builds something scalable: a booking platform, a transportation service, a real economy.</p>
-        </div>
-        <div class="framework-item reveal">
-          <div class="framework-number">4</div>
-          <div class="framework-type">The Master Planner</div>
-          <p class="framework-desc">Coordinates. Sees the whole system and makes sure growth serves the community, not just the visitor count.</p>
-        </div>
-      </div>
-      <div class="framework-cta reveal">
-        <a href="four-stakeholders.html" class="btn-primary">Learn more →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROOF -->
-  <section class="proof">
-    <div class="proof-inner">
-      <div class="proof-left reveal">
-        <p class="section-label">By the Numbers</p>
-        <h2>Fifteen years<br>building from <em>inside</em><br>the system.</h2>
-        <p>Not consulting from the sidelines. Building the buses, the booking systems, and the partnerships from inside the industry.</p>
-      </div>
-      <div class="proof-stats">
-        <div class="stat reveal">
-          <div class="stat-number">100<span>+</span></div>
-          <div class="stat-label">Destinations served by Parkbus across Canada</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat-number">30<span>+</span></div>
-          <div class="stat-label">Destinations across North America powered by Whereabouts technology</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat-number">15<span>+</span></div>
-          <div class="stat-label">Years of national park tourism operations across Canada</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat-number">2</div>
-          <div class="stat-label">Signed MOUs with Parks Canada and Via Rail</div>
-        </div>
-      </div>
-      <div class="proof-photo reveal">
-        <img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f21a540c638edb1fee2d9e_matthew-thomas-web.jpeg" alt="Whereabouts team receiving Tourism Innovator of the Year award">
+    <div class="hero-bg" aria-hidden="true"><img src="https://www.parkbus.ca/img/algonquin-sept26-lookout-couple.jpg" alt=""></div>
+    <div class="wrap">
+      <div class="hero-grid">
         <div>
-          <p class="proof-photo-text">Receiving the Tourism Innovator of the Year award for Whereabouts — destination management software now powering 30+ communities across North America.</p>
-          <p class="proof-photo-caption">Tourism Innovator of the Year</p>
+          <h1>I help good tourism businesses go from overlooked to overbooked.</h1>
+          <p class="lede">I invest in, advise and run tourism experience companies. Right now that means <b>Parkbus</b>, where I'm CEO, plus a handful of projects built on what it taught me.</p>
+          <div class="actions">
+            <a class="btn" href="#contact">Let's get a coffee</a>
+            <a class="arrow" href="#businesses">See the businesses →</a>
+          </div>
         </div>
+        <div class="portrait"><img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f219e896f9f5a6efef8c8c_matthew-hardy-thomaspng.png" alt="Matthew Hardy Thomas" width="1023" height="1537"></div>
+      </div>
+      <ul class="proof">
+        <li>CEO of Parkbus, getting Canadians to their parks since 2010, with revenue and profit up about 30% two years running</li>
+        <li>Signed partnerships with Parks Canada and VIA Rail</li>
+        <li>Part of the team behind TIAO's Tourism Innovator of the Year</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="wrap">
+      <div class="prose">
+        <p>Most tourism businesses I meet are good. The place is beautiful, the people care, the product works. And they're still stuck with a few strong months, too many hours, too much admin and not enough profit.</p>
+        <p>I learned why running Parkbus. The buses were never the point. The point was the system around them: how people find out, how they book, how they get there, and who else has to say yes. Change the system and the same product makes more money. Over the past two years we've grown Parkbus about 30% a year, with a very small team, running routes coast to coast.</p>
+        <p>I also co-founded Whereabouts, software that helps destination organizations work with their local businesses. It started as my thesis project, and it's still going: more than 30 destinations across North America use it.</p>
+        <p>The pattern was the same both times. I find the bottleneck, design a better system, and bring the right people together to build it. So that's what I do now: for the companies I run, the companies I invest in, and the occasional business that just needs a good conversation.</p>
       </div>
     </div>
   </section>
 
-  <!-- MY BUSINESSES -->
-  <section class="ventures" id="ventures">
-    <div class="ventures-inner">
-      <div class="ventures-header">
-        <h2 class="reveal">My<br><em>Businesses</em></h2>
-        <p class="reveal">Not ideas or proposals. Operating systems already in market, serving real travellers and real destinations every day.</p>
-      </div>
-      <div class="ventures-list">
-        <a href="https://www.parkbus.ca" target="_blank" class="venture-row reveal">
-          <div class="venture-left">
-            <span class="venture-infra-tag">Transportation infrastructure</span>
-            <span class="venture-name">Parkbus</span>
-            <span class="venture-url">parkbus.ca</span>
+  <section id="how" class="how">
+    <div class="wrap">
+      <h2 class="h2">How I work</h2>
+      <p class="lead">Four steps, every time. Whether I'm running the company, investing in it or advising it.</p>
+      <ol class="steps">
+        <li><h3>Diagnose</h3>Where does this business leave money on the table? I look for the bottlenecks: the empty seats, the slow replies, the products priced too low, the work that eats the owner's week.</li>
+        <li><h3>Design</h3>I draw the better system. Who the customer is, what they buy, how they find it, how it gets delivered, and what it should cost.</li>
+        <li><h3>Assemble</h3>I bring the right people and the right partners together. The team, the tourism board, the park, the rail line, the supplier. Most good ideas stall because the right people never sat at one table.</li>
+        <li><h3>Improve</h3>Then I stay with it. Small fixes, month after month, until the gains compound.</li>
+      </ol>
+      <p class="method-end">The goal is simple: more profit, less scramble, and a business that doesn't depend on the owner doing everything.</p>
+    </div>
+  </section>
+
+  <section id="businesses" class="biz">
+    <div class="wrap">
+      <h2 class="h2">Businesses I'm part of</h2>
+      <div class="items">
+        <article class="item">
+          <figure class="shot"><img src="https://www.parkbus.ca/img/parkbus-group-on-the-bus.jpg" alt="Passengers on a Parkbus coach waving at the camera" loading="lazy"></figure>
+          <div class="copy">
+            <h3>Parkbus</h3><p class="tag">CEO</p>
+            <p>Parkbus gets people to Canada's parks and outdoor places without a car. We run out of cities across the country, and we hold signed partnerships with Parks Canada and VIA Rail, the kind of relationships that take years to earn and are hard to copy. Next, we're moving beyond the bus ticket into guided, multi-day trips that people pay more for and remember longer.</p>
+            <a class="visit" href="https://www.parkbus.ca" target="_blank" rel="noopener">Visit parkbus.ca →</a>
           </div>
-          <div class="venture-right">
-            <span class="venture-desc">Getting Canadians out of the city and into the wild since 2010.</span>
+        </article>
+        <article class="item">
+          <figure class="shot"><img src="https://www.parkbus.ca/img/algonquin-sept26-lookout-couple.jpg" alt="Two hikers looking out over autumn forest from a lookout in Algonquin Park" loading="lazy"></figure>
+          <div class="copy">
+            <h3>Visit Canada Parks</h3><p class="tag">The fun way to experience Canada's parks</p>
+            <p>Official park sites are good at telling you the rules. Visit Canada Parks tells you what you can do: the best lookouts, the best time to go, where to jump into cold clear water, where the leaves are turning right now. It's also a way for destinations near a park to put their hotels, restaurants and guides in front of people who are already planning a trip.</p>
+            <a class="visit" href="https://visitcanadaparks.ca" target="_blank" rel="noopener">Visit visitcanadaparks.ca →</a>
           </div>
-          <span class="venture-arrow">→</span>
-        </a>
-        <a href="https://www.whereabouts.tech" target="_blank" class="venture-row reveal">
-          <div class="venture-left">
-            <span class="venture-infra-tag">Digital infrastructure</span>
-            <span class="venture-name">Whereabouts</span>
-            <span class="venture-url">whereabouts.tech</span>
+        </article>
+        <article class="item">
+          <figure class="shot"><img src="https://visitcanadaparks.ca/img/nh-campfire-stars.jpg" alt="A group gathered around a campfire under a night sky full of stars" loading="lazy"></figure>
+          <div class="copy">
+            <h3>Nature Hack</h3><p class="tag">Museum Hack, but for the outdoors</p>
+            <p>A hike is better with the right person leading it, and that person isn't always a biologist. Nature Hack puts storytellers, comedians and performers on the trail so a day outside feels like a good night out. Small groups, a bus from the city, and a guide people want to spend the day with.</p>
           </div>
-          <div class="venture-right">
-            <span class="venture-desc">Destination management software. Tourism Innovator of the Year.</span>
+        </article>
+        <article class="item">
+          <figure class="shot ui" role="img" aria-label="A Bookahead Scout answering a question about a package price, with the business's files listed beside the chat"><div class="app" aria-hidden="true"><div class="app-bar"><span class="app-title"><img src="https://bookahead.ai/img/scout-head.webp" alt="">Scout &middot; Pine Lake Outfitters</span><span class="app-on">Runs on Claude</span></div><div class="app-body"><aside class="app-side"><div class="app-side-h">Your business</div><ul><li><svg class="doc" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h6.5L13 5v9.5H3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 1.5V5H13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span>about-us.md</span></li><li class="on"><svg class="doc" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h6.5L13 5v9.5H3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 1.5V5H13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span>products-and-prices.md</span></li><li><svg class="doc" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h6.5L13 5v9.5H3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 1.5V5H13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span>voice-and-brand.md</span></li><li><svg class="doc" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h6.5L13 5v9.5H3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 1.5V5H13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span>house-rules.md</span></li><li><svg class="doc" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5h5l1.5 1.5h6.5v8.5h-13z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span>templates</span></li></ul></aside><div class="app-chat"><div class="a-me">What's in the Day on the Lake package, and what do we charge?</div><div class="a-sc"><img src="https://bookahead.ai/img/scout-head.webp" alt=""><div class="a-bub">Half-day canoe, a packed lunch and a guided hour with Sam. <b>$189 per person</b>, two-person minimum. On long weekends it needs a two-night stay.<div class="src"><svg class="doc" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h6.5L13 5v9.5H3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 1.5V5H13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>from products-and-prices.md</div></div></div></div></div></div></figure>
+          <div class="copy">
+            <h3>Bookahead</h3><p class="tag">The back office, handled</p>
+            <p>The back office of a small tourism business eats the owner's life: replies, bookings, content, pricing. Bookahead is how I've been cutting that down. In 14 days I set up a "Scout" for an operator: a set of files about their business that teaches an AI assistant to work like a trained staff member. It answers, writes and prepares, so the owner can get back to what they're best at. One price, no subscription.</p>
+            <a class="visit" href="https://bookahead.ai" target="_blank" rel="noopener">Visit bookahead.ai →</a>
           </div>
-          <span class="venture-arrow">→</span>
-        </a>
-        <a href="#" class="venture-row reveal">
-          <div class="venture-left">
-            <span class="venture-infra-tag">Experience infrastructure</span>
-            <span class="venture-name">Visit Canada Parks</span>
-            <span class="venture-url">visitcanadaparks.com</span>
+        </article>
+        <article class="item">
+          <figure class="shot"><img src="https://cdn.prod.website-files.com/682513f5b15a80758dd87582/69f21a540c638edb1fee2d9e_matthew-thomas-web.jpeg" alt="Matthew holding the Tourism Innovator of the Year trophy on stage with three colleagues" loading="lazy"></figure>
+          <div class="copy">
+            <h3>Whereabouts</h3><p class="tag">Co-founder · Tourism Innovator of the Year</p>
+            <p>Software that helps destination organizations work with their local businesses. I co-founded it as my master's thesis at OCAD University, built the first version and started talking to customers. Today it supports more than 30 destinations across North America, and the team behind it was named TIAO's Tourism Innovator of the Year.</p>
+            <a class="visit" href="https://www.whereabouts.tech" target="_blank" rel="noopener">Visit whereabouts.tech →</a>
           </div>
-          <div class="venture-right">
-            <span class="venture-desc">Curated overnight experiences in partnership with Parks Canada and Via Rail.</span>
-          </div>
-          <span class="venture-arrow">→</span>
-        </a>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="contact-inner">
-      <div class="contact-left reveal">
-        <p class="section-label">Get in Touch</p>
-        <h2>Let's build<br>something<br><em>worth visiting.</em></h2>
-        <p>I work with destinations, DMOs, tourism businesses, and government partners who understand that marketing alone isn't enough. You need the infrastructure to back it up. Let's talk about what we can build together.</p>
-        <a href="mailto:matthew@poweredbytourism.com" class="btn-primary" style="display:inline-block; margin-top:2.5rem;">matthew@poweredbytourism.com</a>
-      </div>
-      <div class="contact-right reveal">
-        <div class="contact-item">
-          <span class="contact-item-label">Speaking &amp; Keynotes</span>
-          <span class="contact-item-value">I speak at tourism conferences and industry events across Canada on <em>"The Four Stakeholders That Make a Destination Work"</em> and <em>"Tourism Infrastructure: Why the best destinations are built, not marketed."</em></span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Building Together</span>
-          <span class="contact-item-value">I don't advise. I build. If you're a destination, DMO, or operator ready to move from overlooked to overbooked, let's build the infrastructure together.</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Partnerships</span>
-          <span class="contact-item-value">Parks agencies, transportation operators, Indigenous tourism, regional destinations. If you're building tourism infrastructure, let's connect.</span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Find Me</span>
-          <span class="contact-item-value"><a href="https://www.linkedin.com/in/matthewhardythomas/" style="color: var(--moss); text-decoration: none; border-bottom: 1px solid var(--moss);">LinkedIn</a></span>
-        </div>
-        <div class="contact-item">
-          <span class="contact-item-label">Based in</span>
-          <span class="contact-item-value">Canada, operating nationally from Vancouver to Halifax</span>
-        </div>
-      </div>
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>If there's more profit hiding in your business, let's find it.</h2>
+      <p class="intro">I like working with people who run tourism businesses, and I'm easy to start with.</p>
+      <ul class="ways">
+        <li><strong>Have a coffee</strong>Tell me what's hard right now. I'll tell you where I'd look first. No pitch.</li>
+        <li><strong>Fix one thing</strong>A short, focused project: a diagnosis, a better offer, a cleaner booking flow, an introduction that unlocks something.</li>
+        <li><strong>Build it together</strong>For the right company, I'll take a bigger role: as an advisor, an operator, or a partner who puts money in.</li>
+      </ul>
+      <div class="actions"><a class="btn" href="mailto:matthew@poweredbytourism.com?subject=Coffee%3F">Let's get a coffee</a></div>
+      <p class="contact-line"><span>matthew@poweredbytourism.com</span> · <a href="https://www.linkedin.com/in/matthewhardythomas/" target="_blank" rel="noopener">LinkedIn</a> · <a href="mailto:matthew@poweredbytourism.com?subject=Speaking">Speaking and keynotes</a></p>
     </div>
   </section>
+</main>
 
-  <footer>
-    <p>&copy; 2026 Matthew Hardy Thomas</p>
-    <p>Access &times; Design &times; Operations</p>
-  </footer>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Matthew Hardy Thomas</span>
+    <span>Based in London, Ontario. Working across Canada.</span>
+  </div>
+</footer>
 
-  <script>
-    // Nav scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-
-    function openMenu() {
-      hamburger.classList.add('active');
-      mobileMenu.classList.add('open');
-      mobileOverlay.classList.add('active');
-      document.body.classList.add('menu-open');
-      hamburger.setAttribute('aria-label', 'Close menu');
-    }
-
-    function closeMenu() {
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('open');
-      mobileOverlay.classList.remove('active');
-      document.body.classList.remove('menu-open');
-      hamburger.setAttribute('aria-label', 'Open menu');
-    }
-
-    hamburger.addEventListener('click', () => {
-      if (mobileMenu.classList.contains('open')) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
-    // Close on overlay click
-    mobileOverlay.addEventListener('click', closeMenu);
-
-    // Close on link click
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        closeMenu();
-      }
-    });
-
-    // Reveal on scroll
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 100);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    reveals.forEach(el => observer.observe(el));
-  </script>
 </body>
 </html>
